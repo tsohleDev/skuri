@@ -73,3 +73,13 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+gem "devise", "~> 4.9"
+
+gem "tailwindcss-rails", "~> 2.3"
+
+gem "letter_opener", "~> 1.8"
+
+gem "cancancan", "~> 3.5"
+
+gem "font-awesome-sass", "~> 6.5"
