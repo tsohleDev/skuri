@@ -1,0 +1,36 @@
+# Load Rails environment
+require_relative '../config/environment'
+
+# Category data
+categories_data = [
+{
+name: 'Hair Products',
+description: 'High-quality hair products for all hair types, from curly to straight.',
+image_url: 'https://d2cbg94ubxgsnp.cloudfront.net/Pictures/1024x536/4/4/2/527442_gettyimages554999647_138537_crop.jpg'
+},
+{
+name: 'Accessories',
+description: 'Stylish accessories to complement your look, from head to toe.',
+image_url:
+'https://imageengine.victorinox.com/medias/?context=bWFzdGVyfHJvb3R8MTAyMTY1fGltYWdlL2pwZWd8aDZlL2g4My8xMzYwMjg3NjI5MzE1MC9zYWstcG91Y2hlc181MC1yZWN0LVMtNjQweDMyMC5qcGd8NmYyMDhiZDEwNTE1OGU2NDZhOGFmYWUyOTQzMTRmYjViYzg2NzUwNjQwNGVjMmY5NGYzOGNmMmJmZTViYTZhMg'
+},
+{
+name: 'Supplements',
+description: 'Nutritional supplements to support a healthy lifestyle.',
+image_url:
+'https://media.allure.com/photos/5bae64165f58e72d02829668/16:9/w_2560%2Cc_limit/Bright-young-things-supplements.png'
+},
+{
+name: 'Shoes',
+description: 'Comfortable shoes for all occasions and seasons, from heels to sneakers and everything in between.',
+image_url:
+'https://hips.hearstapps.com/netdoctor.cdnds.net/16/49/4000x2000/landscape-1480936823-partyshoes.jpg?resize=640:*'
+}
+]
+
+# Create categories
+# categories_data.each do |category|
+# Category.create!(category)
+# end
+
+puts 'Categories created successfully'

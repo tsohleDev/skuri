@@ -4,10 +4,31 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+
+    hash = {
+      "accessories" => 1,
+      "hair" => 2,
+      "medication" => 3,
+      "shoes" => 4}
+    
+    if params[:category].nil?
+      @products = Product.all
+      @category = Category.first
+    else
+      puts "HERE"
+      id = hash[params[:category]]
+      puts "ID: #{id}"
+      @category = Category.find(hash[params[:category]])
+      puts @category.id
+      @products =  Product.where(category_id: @category.id)
+    end
+
+    puts "PARAMS: #{params[:category]}"
   end
 
   # GET /products/1 or /products/1.json
   def show
+    @product = Product.find_by(id: params[:id])
   end
 
   # GET /products/new

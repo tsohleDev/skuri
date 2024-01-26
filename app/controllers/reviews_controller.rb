@@ -22,10 +22,12 @@ class ReviewsController < ApplicationController
   # POST /reviews or /reviews.json
   def create
     @review = Review.new(review_params)
+    @review.user_id = current_user.id
+    @review.product_id = params[:product_id]
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
+        format.html { redirect_to product_url(@review.product_id), notice: "Review was successfully created." }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +67,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:customer_id, :product_id, :rating, :message, :image)
+      params.require(:review).permit(:user_id, :product_id, :rating, :message, :image)
     end
 end

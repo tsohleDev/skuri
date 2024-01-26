@@ -19,4 +19,8 @@ class User < ApplicationRecord
   validates :state, presence: true, length: { minimum: 3, maximum: 50 }
   validates :postal_code, presence: true, length: { minimum: 3, maximum: 50 }
   validates :country, presence: true, length: { minimum: 3, maximum: 50 }
+
+  def admin?
+    role == 'admin'
+  end
 end

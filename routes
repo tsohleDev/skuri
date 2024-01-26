@@ -36,8 +36,9 @@
                                          PATCH  /users/:user_id/orders/:id(.:format)                                                              orders#update
                                          PUT    /users/:user_id/orders/:id(.:format)                                                              orders#update
                                          DELETE /users/:user_id/orders/:id(.:format)                                                              orders#destroy
-                                         GET    /users/:user_id/:wishlist(.:format)                                                               customers#wish_list
-                                         GET    /users/:user_id/:cart(.:format)                                                                   customers#cart
+                           wishlist_user GET    /users/:id/wishlist(.:format)                                                                     wishlists#show
+                               cart_user GET    /users/:id/cart(.:format)                                                                         carts#show
+                          edit_cart_user GET    /users/:id/cart/edit(.:format)                                                                    carts#edit
                                    users GET    /users(.:format)                                                                                  users#index
                                          POST   /users(.:format)                                                                                  users#create
                                 new_user GET    /users/new(.:format)                                                                              users#new
@@ -54,6 +55,8 @@
                                          PATCH  /products/:product_id/reviews/:id(.:format)                                                       reviews#update
                                          PUT    /products/:product_id/reviews/:id(.:format)                                                       reviews#update
                                          DELETE /products/:product_id/reviews/:id(.:format)                                                       reviews#destroy
+                     add_to_cart_product POST   /products/:id/add_to_cart(.:format)                                                               carts#add_to_cart
+                 add_to_wishlist_product POST   /products/:id/add_to_wishlist(.:format)                                                           wishlists#add_to_wishlist
                                 products GET    /products(.:format)                                                                               products#index
                                          POST   /products(.:format)                                                                               products#create
                              new_product GET    /products/new(.:format)                                                                           products#new

@@ -1,31 +1,25 @@
-<nav class="p-4">
-    <!-- Navigation Links -->
+<nav class="p-4 h-[5vh]"> <!-- Navigation Links -->
     <ul class="flex items-center space-x-4">
-        <!-- Search Input -->
-        <li>
-            <input type="text" placeholder="Search" class="px-2 py-1 border rounded">
-        </li>
-
-        <!-- Login Button -->
-        <li>
-            <% if user_signed_in? %>
-            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-black" %>
-            <% else %>
-            <%= link_to "Login", new_user_session_path, class: "text-black" %>
-            <% end %>
-        </li>
-
         <!-- Cart Icon -->
         <li>
-            <%= link_to root_path do %>
+            <%= link_to user_signed_in? ? '/users/' + current_user.id.to_s + '/cart' : new_user_session_path do %>
             <i class="fas fa-shopping-cart text-black"></i>
             <% end %>
         </li>
 
         <!-- Wishlist Icon -->
         <li>
-            <%= link_to root_path do %>
+            <%= link_to user_signed_in? ? '/users/' + current_user.id.to_s + '/wishlist' : new_user_session_path do %>
             <i class="fas fa-heart text-black"></i>
+            <% end %>
+        </li>
+
+        <!-- Login Button -->
+        <li>
+            <% if user_signed_in? %>
+            <%= link_to "Logout", destroy_user_session_path, 'data-turbo-method': :delete %>
+            <% else %>
+            <%= link_to "Login", new_user_session_path, class: "text-black" %>
             <% end %>
         </li>
     </ul>

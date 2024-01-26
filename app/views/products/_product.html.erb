@@ -1,37 +1,27 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
+<div class="max-w-sm rounded overflow-hidden shadow-lg m-5 transition-transform hover:scale-105 hover:z-0">
+    <!-- Product Image -->
+    <%= image_tag product.image, class: "w-full h-64 object-cover" %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
+    <div class="flex px-6 py-4">
+        <div>
+        <h3 class="font-bold text-xl mb-2"><%= product.name %></h3>
+        <p class="text-gray-700 text-base"><%= number_to_currency(product.price, precision: 2, unit: "R") %></p>
+        </div>
 
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
+        <div class="px-6 py-4">
+        <div class="px-6">
+            <!-- add to cart button icons -->
+            <%= link_to add_to_cart_product_path(product), data: { turbo_method: :post } do %>
+            <i class="fas fa-shopping-cart text-black"></i>
+            <% end %>
+        </div>
 
-  <p>
-    <strong>Image:</strong>
-    <%= product.image %>
-  </p>
-
-  <p>
-    <strong>Color:</strong>
-    <%= product.color %>
-  </p>
-
-  <p>
-    <strong>Dimensions:</strong>
-    <%= product.dimensions %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= product.category_id %>
-  </p>
-
+        <div class="px-6">
+            <!-- add to wishlist button icons -->
+            <%= link_to add_to_wishlist_product_path(product), data: { turbo_method: :post } do %>
+            <i class="fas fa-heart text-red-500"></i>
+            <% end %> 
+        </div>
+        </div>
+    </div>
 </div>

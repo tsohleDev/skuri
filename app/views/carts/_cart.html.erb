@@ -1,12 +1,15 @@
-<div id="<%= dom_id cart %>">
-  <p>
-    <strong>Product:</strong>
-    <%= cart.product_id %>
-  </p>
+<div class="flex items-between">
+  <div class="flex flex-col w-[60vw] ml-10 my-10">
+    <% @cart_products.each do |item| %>
+      <%= render "carts/item", item: item %>
+    <% end %>
+  </div>
 
-  <p>
-    <strong>Quantity:</strong>
-    <%= cart.quantity %>
-  </p>
 
+  <div class="flex flex-col items-center h-fill w-fill mx-auto my-10 border-2 border-gray-200 rounded-2xl px-20 py-10">
+    <h2 class="text-4xl font-bold border-b border-gray-200 mb-20">Cart Summary</h2>
+    <p class="text-4xl text-bold">Total Price: <%= number_to_currency(@cart.total_price) %></p>
+
+    <%= link_to "Checkout", root_path, class: "bg-gray-500" %>
+  </div>
 </div>
