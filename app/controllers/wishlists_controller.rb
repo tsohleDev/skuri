@@ -1,11 +1,6 @@
 class WishlistsController < ApplicationController
   before_action :set_wishlist, only: %i[ show edit update destroy ]
 
-  # GET /wishlists or /wishlists.json
-  def index
-    @wishlists = Wishlist.all
-  end
-
   def add_to_wishlist
     puts "add_to_wishlist"
     @wishlist = Wishlist.find_by(user_id: current_user.id)
@@ -44,19 +39,20 @@ class WishlistsController < ApplicationController
 
   # GET /wishlists/1 or /wishlists/1.json
   def show
-    wishlist = Wishlist.find_by(user_id: current_user.id)  
+    @user = current_user
+    wishlist = Wishlist.find_by(user_id: current_user.id)
+    authorize! :read, Wishlist, user_id: current_user.id, message: "You are not authorized to view this wishlist."
 
     if wishlist.nil?
-      wishlist = Cart.new
+      wishlist = Wishlist.new
       wishlist.user_id = current_user.id
 
       if not wishlist.save
-        # send error message
-        format.html { redirect_to root_path, notice: "Cart was not created, please try again." }
+        format.html { redirect_to root_path, notice: "Error creating wishlist." }
       end
     end
 
-    @wishlist_products = WishlistProduct.where(wishlist_id: @wishlist.id)
+    @wishlist_products = WishlistProduct.where(wishlist_id: wishlist.id)
     @products = @wishlist_products.map { |wishlist_product| wishlist_product.product }
   end
 

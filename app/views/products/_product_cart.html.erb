@@ -1,0 +1,27 @@
+<div class="max-w-sm rounded overflow-hidden shadow-lg m-5 transition-transform hover:scale-105 hover:z-0">
+    <!-- Product Image -->
+    <%= image_tag product.image, class: "w-full h-64 object-cover" %>
+
+    <div class="flex px-6 py-4">
+        <div>
+        <h3 class="font-bold text-xl mb-2"><%= product.name %></h3>
+        <p class="text-gray-700 text-base"><%= number_to_currency(product.price, precision: 2, unit: "R") %></p>
+        </div>
+
+        <div class="px-6 py-4">
+            <div class="px-6", data-controller="cart"
+                <!-- add to cart button icons -->
+                <%= link_to user_signed_in? ? add_to_cart_product_path(product) : new_user_session_path, data: { turbo_method: :post, action: "click->shop#addToCart" } do %>
+                <i class="fas fa-shopping-cart text-black"></i>
+                <% end %>
+            </div>
+
+            <div class="px-6", data-controller="wishlist"
+                <!-- add to wishlist button icons -->
+                <%= link_to user_signed_in? ? add_to_wishlist_product_path(product) : new_user_session_path, data: { turbo_method: :post, action: "click->shop#addToWishlist" } do %>
+                <i class="fas fa-heart text-red-500"></i>
+                <% end %> 
+            </div>
+        </div>
+    </div>
+</div>

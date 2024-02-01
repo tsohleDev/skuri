@@ -1,10 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<section class="flex min-h-[80vh]">
+  <!-- Side Panel -->
+  <div class="w-1/5 bg-secondary p-4 rounded-lg mt-2 rounded-l-none shadow-2xl shadow-black">
+    <!-- Profile Information -->
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold mb-2">Profile Information</h2>
+      <p><%= "#{@user.first_name} #{@user.last_name}" %></p>
+      <p><%= @user.email %></p>
+    </div>
 
-<%= render @user %>
+    <!-- Side Panel Links -->
+    <div>
+      <h2 class="text-lg font-semibold mb-2">Navigation</h2>
+      <ul class="list-disc pl-4">
+        <li><%= link_to "Account", user_path(@user) %></li>
+        <li><%= link_to "Orders", orders_user_path, data: { turbo_method: :post } %></li>
+        <li><%= link_to "Return & Exchanges", returns_user_path, data: { turbo_method: :post }  %></li>
+        <li><%= link_to "Help", help_user_path, data: { turbo_method: :post } %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, 'data-turbo-method': :delete %></li>
+      </ul>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-
-  <%= button_to "Destroy this user", @user, method: :delete %>
-</div>
+  <!-- Main Content -->
+  <div class="flex-1 p-4"> 
+    <%= render @user %>
+  </div>
+</section>

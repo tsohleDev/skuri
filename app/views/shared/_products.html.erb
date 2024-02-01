@@ -1,9 +1,7 @@
-<p style="color: green"><%= notice %></p>
-
 <section id="products" class="flex flex-wrap justify-between py-5 px-20">
   <% @products.each do |product| %>
     <%= link_to product_path(product) do %>
-      <% render product %>
+      <% render "products/product_cart", product: product %>
     <% end %>   
   <% end %>
 </section>

@@ -1,4 +1,4 @@
-<div class="bg-gray-200 my-2 rounded-2xl grid grid-cols-5">
+<div class="bg-gray-200 my-2 rounded-2xl grid grid-cols-5", id="item_<%= item.product.id %>">
     <!-- Product Image -->
     <%= image_tag item.product.image, class: "w-40 rounded-full m-5 py-2 col-span-1" %>
 
@@ -8,13 +8,13 @@
         <div class="flex">
             <p class="text-gray-700 text-2xl"><%= number_to_currency(item.product.price, precision: 2, unit: "R") %></p>
             <p class="text-gray-700 text-2xl"> <% if item.product.category_id == 2 %>  Size: <%= item.product.size %> <% end %> </p>
-            <%= link_to "Remove", remove_from_cart_product_path(item.product), class: "btn btn-primary mx-5 text-2xl", data: { turbo_method: :post } %>
+            <%= link_to "Remove", remove_from_cart_product_path(item.product), class: "btn btn-primary mx-5 text-2xl", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
         </div>
     </div>
 
     <div class="flex flex-col items-center justify-center">
-        <button class="btn btn-primary">+</button>
-        <p class="text-gray-700 text-2xl">Quantity: <%= item.quantity %></p>
-        <button class="btn btn-primary">-</button>
+        <%= link_to "+", increment_quantity_user_cart_path(@cart, product_id: item.product.id), class: "btn btn-primary", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+        <%= render "carts/quantity", item: item %>
+        <%= link_to "-", decrement_quantity_user_cart_path(@cart, product_id: item.product.id), class: "btn btn-primary", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
     </div>
 </div>

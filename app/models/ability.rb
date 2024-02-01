@@ -9,7 +9,8 @@ class Ability
 
     if user.admin?
       can :read, :all
-      cannot :manage, [Cart, Wishlist]
+      can :access, :admin
+      cannot :manage, [Cart, Wishlist, Order]
     else
       can :read, Product
       can :read, User, id: user.id

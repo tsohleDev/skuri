@@ -1,4 +1,28 @@
-<div>
-  <h1 class="font-bold text-4xl">Admin#index</h1>
-  <p>Find me in app/views/admin/index.html.erb</p>
-</div>
+<section class="flex min-h-[80vh]">
+  <!-- Side Panel -->
+  <div class="w-1/5 bg-secondary p-4 rounded-lg mt-2 rounded-l-none shadow-2xl shadow-black">
+    <!-- Profile Information -->
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold mb-2">Profile Information</h2>
+      <p><%= "#{@user.first_name} #{@user.last_name}" %></p>
+      <p><%= @user.email %></p>
+    </div>
+
+    <!-- Side Panel Links -->
+    <div>
+      <h2 class="text-lg font-semibold mb-2">Navigation</h2>
+      <ul class="list-disc pl-4">
+        <li><%= link_to "Summary", admin_path %></li>
+        <li><%= link_to "Orders", admin_path, data: { turbo_method: :post } %></li>
+        <li><%= link_to "Returns", admin_path, data: { turbo_method: :post } %></li>
+        <li><%= link_to "Messages", admin_path, data: { turbo_method: :post } %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, 'data-turbo-method': :delete %></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-4"> 
+    <%= render @user %>
+  </div>
+</section>

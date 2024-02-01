@@ -10,6 +10,91 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  # post /users/1/orders
+  def orders
+    @user = current_user
+    @orders = @user.orders
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/orders") }
+    end
+  end
+
+  # post /users/1/returns
+  def returns
+    @user = current_user
+    @orders = @user.orders.includes(:order_products)
+    # filter orders by status
+    @orders = @orders.select { |order| order.user_id == @user.id }
+    @orders = @orders.select { |order| order.created_at > 14.days.ago }
+    @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["returned", "exchanged"].include?(order_product.status) } }
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns_and_exchanges", locals: { orders: @orders, selected: false}) }
+    end
+  end
+
+  # post /users/1/returnables
+  def returnables
+    @user = current_user
+    @orders = @user.orders.includes(:order_products) 
+    # filter orders by status
+    @orders = @orders.select { |order| order.user_id == @user.id }
+    @orders = @orders.select { |order| order.created_at > 14.days.ago }
+    @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["returned", "exchanged"].include?(order_product.status) } }
+
+    @order = Order.find(params[:id])
+    @products = @order.order_products.select { |order_product| order_product.status unless ["returned", "exchanged"].include?(order_product.status) }
+
+    puts params[:order_id]
+    puts @products
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns_and_exchanges", locals: { orders: @orders, selected: true }), turbo_stream: turbo_stream.replace("returnables", partial: "users/returnables", locals: { products: @products }) }
+    end
+  end
+
+  def help
+    @user = current_user
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/help") }
+    end
+  end
+
+  def success
+    cart = Cart.find_by(user_id: current_user.id)
+
+    # create order
+    order = Order.new
+    order.user_id = current_user.id
+    order.cost = cart.total_price
+    order.address1 = current_user.address1
+    order.address2 = current_user.address2
+    order.city = current_user.city
+    order.state = current_user.state
+    order.postal_code = current_user.postal_code
+    order.country = current_user.country
+
+    # call the save method to save the order
+    if order.save
+      cart_products = CartProduct.where(cart_id: cart.id)
+      cart_products.each do |cart_product|
+        order_product = OrderProduct.new
+        order_product.order_id = order.id
+        order_product.status = "paid"
+        order_product.product_id = cart_product.product_id
+        order_product.quantity = cart_product.quantity
+        order_product.save
+      end
+
+      cart_products.destroy_all
+    end
+
+    #puts "success"
+    redirect_to user_url(current_user)
+  end
+
   # GET /users/new
   def new
     @user = User.new

@@ -10,6 +10,6 @@
     <h2 class="text-4xl font-bold border-b border-gray-200 mb-20">Cart Summary</h2>
     <p class="text-4xl text-bold">Total Price: <%= number_to_currency(@cart.total_price) %></p>
 
-    <%= link_to "Checkout", root_path, class: "bg-gray-500" %>
+    <%= link_to "Checkout", checkout_user_cart_path(@cart), data: { turbo_method: :post }, class: "bg-gray-500" %>
   </div>
 </div>

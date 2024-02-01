@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one :cart, dependent: :destroy
   has_one :wishlist, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :orders, dependent: :destroy
   
   validates :first_name, presence: true, length: { minimum: 3, maximum: 50 }
   validates :last_name, presence: true, length: { minimum: 3, maximum: 50 }
