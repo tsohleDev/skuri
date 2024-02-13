@@ -14,6 +14,7 @@ class Ability
     else
       can :read, Product
       can :read, User, id: user.id
+      can :manage, Order, user_id: user.id
       can :manage, Cart, user_id: user.id
       can :manage, Wishlist, user_id: user.id
     end

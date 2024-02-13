@@ -1,8 +1,8 @@
 class WishlistsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_wishlist, only: %i[ show edit update destroy ]
 
   def add_to_wishlist
-    puts "add_to_wishlist"
     @wishlist = Wishlist.find_by(user_id: current_user.id)
     @product = Product.find_by(id: params[:id])
 

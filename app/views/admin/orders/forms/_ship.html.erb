@@ -1,0 +1,41 @@
+<%= form_tag(ship_products_path, method: :post, id: 'order-action', class: 'flex flex-col my-10 h-[50vh]') do %>
+  <h2 class="text-center text-xl font-bold">Select Shipped Products</h2>
+
+  <div class="min-h-[40vh]">
+    <div class="flex flex-col p-10 mx-5">
+      <%= hidden_field_tag :order_id, order.id %>
+      
+      <% order.order_products.where(status: ['paid', 'received']).each do |item| %>
+        <% next unless ['paid', 'exchanged'].include?(item.status) %>
+  
+        <div class="flex items-center py-1 mx-5">
+          <%= check_box_tag 'shipped_products[]', item.product_color.id, false, id: "product_#{item.product_color.id}", class: 'mr-2' %>
+          <%= label_tag "product_#{item.product_color.id}", item.name, class: 'text-lg font-semibold' %>
+          <span class="text-lg font-semibold ml-2">(<%= item.product_color.color %> - <%= item.product_color.size ||  item.product_color.size_uk %>)</span>
+        </div>
+      <% end %>
+    </div>
+
+    <% if order.order_products.where(status: ['paid', 'received']).any? %>
+      <hr class="mx-5 my-2 border-2 border-gray-200" />
+
+      <!-- SHIPPING DETAILS -->
+      <div class="flex flex-col mx-5">
+        <h2 class="text-center text-xl font-bold">Shipping Details</h2>
+        <div class="flex flex-col py-1 mx-5">
+          <%= text_field_tag 'tracking_number', nil, class: 'w-1/2 p-2 my-2 border-none shadow-md shadow-b-2', placeholder: 'Tracking Number', required: true %>
+          <%= text_field_tag 'courier', nil, class: 'w-1/2 p-2 my-2 border-none shadow-md shadow-b-2', placeholder: 'Courier', required: true %>
+          <%= date_field_tag 'expected_delivery', nil, class: 'w-1/2 p-2 my-2 border-none shadow-md shadow-b-2', placeholder: 'Expected Delivery', required: true %>
+        </div>
+      </div>
+    <% else %>
+      <div class="flex flex-col items-center justify-center h-[40vh]">
+        <p class="text-4xl font-bold text-green-500">No products to ship</p>
+      </div>
+    <% end %>
+  </div>
+    
+  <div class="flex justify-center text-white items-center justify-center py-1 mx-5 mt-10 ">
+    <%= submit_tag 'Ship Selected Products', class: 'bg-secondary rounded-md mx-5 p-5' %>
+  </div>
+<% end %>

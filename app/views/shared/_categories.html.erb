@@ -1,45 +1,27 @@
 
   <div class="sticky top-0 flex bg-quaternary justify-around py-5 border-b-2 border-gray-200 shadow-b shadow-gray-200 items-center h-[5vh] z-10">
     <hr class="border-1 border-gray-500 w-full">
-    <% if current_page?(products_path) %>
-      <ul class="flex items-center align-middle list-bullet ml-10">
-        <!-- Link to Hair Products Category -->
-        <li data-controller="category" data-name="products-frame"><%= link_to "HAIR", products_path(category: 'hair'), class: "text-gray-500 hover:underline px-2 py-1", 'data-turbo-frame': 'products-frame' %></li>
-        <!-- Link to Accessories Category -->
-        <li data-controller="category" data-name="products-frame"><%= link_to "ACCESSORIES", products_path(category: 'accessories'), class: "text-gray-500 hover:underline px-2 py-1", 'data-turbo-frame': 'products-frame' %></li>
+    <ul class="flex items-center align-middle list-bullet ml-10">
+      <!-- Link to Hair Products Category -->
+      <li data-controller="category" ><%= link_to "HAIR", products_path(category: Category.find_by(name: 'Hair Products').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
+      <!-- Link to Accessories Category -->
+      <li data-controller="category" ><%= link_to "ACCESSORIES", products_path(category: Category.find_by(name: 'Accessories').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
 
-        <!-- Link to Medication Category -->
-        <li data-controller="category" data-name="products-frame"><%= link_to "MEDICATION", products_path(category: 'medication'), class: "text-gray-500 hover:underline px-2 py-1", 'data-turbo-frame': 'products-frame' %></li>
+      <!-- Link to Medication Category -->
+      <li data-controller="category" ><%= link_to "MEDICATION", products_path(category: Category.find_by(name: 'Supplements').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
 
-        <!-- Link to Shoes Category -->
-        <li data-controller="category" data-name="products-frame"><%= link_to "SHOES", products_path(category: 'shoes'), class: "text-gray-500 hover:underline px-2 py-1", 'data-turbo-frame': 'products-frame' %></li>
+      <!-- Link to Shoes Category -->
+      <li data-controller="category" ><%= link_to "SHOES", products_path(category: Category.find_by(name: 'Shoes').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
 
-        <!-- Search Input -->
-        <li><input type="text" placeholder="Search" class="mx-10 px-2 py-1 border rounded"></li>
-      </ul>
-    <% else %>
-      <ul class="flex items-center align-middle list-bullet ml-10">
-        <!-- Link to Hair Products Category -->
-        <li data-controller="category" data-name="products-frame"><%= link_to "HAIR", products_path(category: 'hair'), class: "text-gray-500 hover:underline px-2 py-1"%></li>
-        <!-- Link to Accessories Category -->
-        <li data-controller="category"><%= link_to "ACCESSORIES", products_path(category: 'accessories'), class: "text-gray-500 hover:underline px-2 py-1"%></li>
-
-        <!-- Link to Medication Category -->
-        <li data-controller="category"><%= link_to "MEDICATION", products_path(category: 'medication'), class: "text-gray-500 hover:underline px-2 py-1"%></li>
-
-        <!-- Link to Shoes Category -->
-        <li data-controller="category"><%= link_to "SHOES", products_path(category: 'shoes'), class: "text-gray-500 hover:underline px-2 py-1"%></li>
-
-        <!-- Search Input -->
-        <li><input type="text" placeholder="Search" class="mx-10 px-2 py-1 border rounded"></li>
-      </ul>
-    <% end %>
+      <!-- Search Input -->
+      <li><input type="text" placeholder="Search" class="mx-10 px-2 py-1 border rounded"></li>
+    </ul>
     <hr class="border-1 border-gray-500 w-full">
   </div>
 
   <div data-controller="category-modal" class="sticky top-10 flex flex-wrap justify-center items-center bg-primary py-10 border-2 border-primary w-full z-10 hidden" id="categories">
-    <%= render "categories/sub_categories", categories: @categories.where(category_id: 2), name: 'hair' %>
-    <%= render "categories/sub_categories", categories: @categories.where(category_id: 3), name: 'accessories' %>
-    <%= render "categories/sub_categories", categories: @categories.where(category_id: 1), name: 'medication' %>
-    <%= render "categories/sub_categories", categories: @categories.where(category_id: 4), name: 'shoes' %>
+    <%= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Hair Products').id), name: 'hair' %>
+    <%= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Accessories').id), name: 'accessories' %>
+    <%= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Supplements').id), name: 'medication' %>
+    <%= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Shoes').id), name: 'shoes' %>
   </div>

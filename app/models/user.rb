@@ -22,6 +22,6 @@ class User < ApplicationRecord
   validates :country, presence: true, length: { minimum: 3, maximum: 50 }
 
   def admin?
-    role == 'admin'
+    admin
   end
 end

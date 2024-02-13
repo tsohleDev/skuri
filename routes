@@ -32,6 +32,9 @@
                             returns_user POST   /users/:id/returns(.:format)                                                                      users#returns
                         returnables_user POST   /users/:id/returnables(.:format)                                                                  users#returnables
                                help_user POST   /users/:id/help(.:format)                                                                         users#help
+                      cancel_return_user POST   /users/:id/cancel(.:format)                                                                       users#cancel
+                             return_user POST   /users/:id/return(.:format)                                                                       users#return
+                           exchange_user POST   /users/:id/exchange(.:format)                                                                     users#exchange
                             success_user GET    /users/:id/success(.:format)                                                                      users#success
                                    users GET    /users(.:format)                                                                                  users#index
                                          POST   /users(.:format)                                                                                  users#create
@@ -53,14 +56,25 @@
                 remove_from_cart_product POST   /products/:id/remove_from_cart(.:format)                                                          carts#remove_from_cart
                  add_to_wishlist_product POST   /products/:id/add_to_wishlist(.:format)                                                           wishlists#add_to_wishlist
                                 products GET    /products(.:format)                                                                               products#index
-                                         POST   /products(.:format)                                                                               products#create
-                             new_product GET    /products/new(.:format)                                                                           products#new
-                            edit_product GET    /products/:id/edit(.:format)                                                                      products#edit
                                  product GET    /products/:id(.:format)                                                                           products#show
-                                         PATCH  /products/:id(.:format)                                                                           products#update
-                                         PUT    /products/:id(.:format)                                                                           products#update
-                                         DELETE /products/:id(.:format)                                                                           products#destroy
                                    admin GET    /admin(.:format)                                                                                  admin#index
+                            admin_orders POST   /admin/orders(.:format)                                                                           admin#orders
+                          admin_products POST   /admin/products(.:format)                                                                         admin#products
+                        admin_categories POST   /admin/categories(.:format)                                                                       admin#categories
+                          admin_messages POST   /admin/messages(.:format)                                                                         admin#messages
+                         admin_shipments POST   /admin/shipments(.:format)                                                                        admin#shipments
+                            manage_order POST   /admin/manage_order(.:format)                                                                     admin#manage_order
+                           ship_products POST   /admin/shipped_products(.:format)                                                                 admin#ship_products
+                       exchange_products POST   /admin/exchanged_products(.:format)                                                               admin#exchange_products
+                         refund_customer POST   /admin/refund_customer(.:format)                                                                  admin#refund_customer
+                          complete_order POST   /admin/complete_order(.:format)                                                                   admin#complete_order
+                            edit_product POST   /admin/edit_product(.:format)                                                                     admin#edit_product
+                              edit_order POST   /admin/edit_order(.:format)                                                                       admin#edit_order
+                          delete_product DELETE /admin/delete_product(.:format)                                                                   admin#delete_product
+                          update_product PATCH  /admin/update_product(.:format)                                                                   admin#update_product
+                         update_category PATCH  /admin/update_category(.:format)                                                                  admin#update_category
+                         update_shipment PATCH  /admin/update_shipment(.:format)                                                                  admin#update_shipment
+                             new_product POST   /admin/new_product(.:format)                                                                      admin#new_product
         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
        turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh

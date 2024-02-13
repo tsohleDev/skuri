@@ -4,29 +4,318 @@ require_relative '../config/environment'
 # Product data
 products_data = [
   {
-    name: 'Product 1',
-    description: 'High-quality product for various uses, with the state if the art infestation',
-    price: 19.99,
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa1T0DnrpEOPi4p8F9e7MRzSlnpuylxd8wvQ&usqp=CAU',
-    color: 'red',
-    category_id: 1,
-    stock: 10,
-    dimensions: '10 x 10 x 10',
+    name: 'Air Max 90',
+    description: 'The Nike Air Max 90 stays true to its OG running roots with its iconic Waffle outsole, stitched overlays and classic, color-accented TPU plates. Retro colors celebrate the first generation while Max Air cushioning adds comfort to your journey.',
+    brand_id: Brand.find_by(name: 'Nike').id
   },
-  # Add more product data as needed
+  {
+    name: 'Air Force 1',
+    description: 'The Nike Air Force 1 07 LV8 incorporates the same hoops-inspired performance features of the 1982 original while adding fresh design details for a sleek look.',
+    brand_id: Brand.find_by(name: 'Nike').id
+  },
+  {
+    name: 'Forum 84 Low',
+    description: 'The adidas Forum 84 Low shoes bring back the classic look of the original with a streamlined silhouette and a low-profile design. The leather upper and suede toe cap give them a soft, supple feel.',
+    brand_id: Brand.find_by(name: 'Adidas').id
+  },
+  {
+    name: 'Stan Smith',
+    description: 'The Stan Smith has been a streetwear staple since the early 1970s. This version of the iconic shoes puts a fresh spin on the classic look with a leather upper that shows off a bold animal print.',
+    brand_id: Brand.find_by(name: 'Adidas').id
+  },
+  {
+    name: 'Shuffle',
+    description: 'The Shuffle is a classic low-top sneaker with a timeless silhouette. It features a durable canvas upper, a padded collar for comfort, and a rubber sole for grip.',
+    brand_id: Brand.find_by(name: 'Puma').id
+  }
 ]
 
-# Create products for each category and subcategory
-categories_and_subcategories_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-categories_and_subcategories_ids.each do |category_id|
-  10.times do |index|
-    products_data.each do |product_data|
-      product_data[:name] = "Product #{index + 1} - #{product_data[:name]}"
-      product_data[:category_id] = category_id
-
-      Product.create(product_data)
-    end
-  end
+# Create products
+products_data.each do |product_data|
+  Product.create!(product_data)
 end
 
 puts 'Products created successfully'
+
+# Material data
+materials_data = [
+  {
+    name: 'Leather',
+    description: 'Leather is a durable and flexible material created by tanning animal rawhide and skins. The most common raw material is cattle hide. It can be produced at manufacturing scales ranging from artisan to modern industrial scale.',
+    cleaning_instructions: 'Wipe with a damp cloth, do not wash',
+    youtube_link: 'https://www.youtube.com/shorts/ly2u6dY8FbM'
+  },
+  {
+    name: 'Suede',
+    description: 'Suede is a type of leather with a napped finish, commonly used for jackets, shoes, shirts, purses, furniture, and other items. The term comes from the French "gants de Suède", which literally means "gloves from Sweden".',
+    cleaning_instructions: 'Use a suede brush to remove dirt and debris, then use a suede eraser to remove stains',
+    youtube_link: 'https://www.youtube.com/shorts/Kz3HEN9ENiw'
+  },
+  {
+    name: 'Canvas',
+    description: 'Canvas is an extremely durable plain-woven fabric used for making sails, tents, marquees, backpacks, and other items for which sturdiness is required. It is also popularly used by artists as a painting surface, typically stretched across a wooden frame.',
+    cleaning_instructions: 'Use a soft brush to remove dirt and debris, then use a damp cloth to wipe the canvas',
+    youtube_link: 'https://www.youtube.com/shorts/m4nDkZwI8Wg'
+  },
+  {
+    name: 'Velvet',
+    description: 'Velvet is a type of woven tufted fabric in which the cut threads are evenly distributed, with a short dense pile, giving it a distinctive soft feel. By extension, the word velvety means "smooth like velvet."',
+    cleaning_instructions: 'Use a soft brush to remove dirt and debris, then use a damp cloth to wipe the velvet',
+    youtube_link: 'https://www.youtube.com/shorts/M54JeCssMM8'
+  },
+  {
+    name: 'Cotton',
+    description: 'Cotton is a soft, fluffy staple fiber that grows in a boll, or protective case, around the seeds of the cotton plants of the genus Gossypium in the mallow family Malvaceae. The fiber is almost pure cellulose.',
+    cleaning_instructions: 'Machine wash in cold water, tumble dry on low heat',
+    youtube_link: 'https://www.youtube.com/shorts/O90hKrYrBJo'
+  }
+]
+
+# Create materials
+materials_data.each do |material_data|
+  Material.create!(material_data)
+end
+
+puts 'Materials created successfully'
+
+# ProductMaterial data
+product_materials_data = [
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    material_id: Material.find_by(name: 'Leather').id
+  },
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    material_id: Material.find_by(name: 'Canvas').id
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    material_id: Material.find_by(name: 'Leather').id
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    material_id: Material.find_by(name: 'Canvas').id
+  },
+  {
+    product_id: Product.find_by(name: 'Forum 84 Low').id,
+    material_id: Material.find_by(name: 'Suede').id
+  },
+  {
+    product_id: Product.find_by(name: 'Forum 84 Low').id,
+    material_id: Material.find_by(name: 'Leather').id
+  },
+  {
+    product_id: Product.find_by(name: 'Stan Smith').id,
+    material_id: Material.find_by(name: 'Leather').id
+  },
+  {
+    product_id: Product.find_by(name: 'Stan Smith').id,
+    material_id: Material.find_by(name: 'Canvas').id
+  },
+  {
+    product_id: Product.find_by(name: 'Shuffle').id,
+    material_id: Material.find_by(name: 'Canvas').id
+  },
+  {
+    product_id: Product.find_by(name: 'Shuffle').id,
+    material_id: Material.find_by(name: 'Velvet').id
+  }
+]
+
+# Create product_materials
+product_materials_data.each do |product_material_data|
+  ProductMaterial.create!(product_material_data)
+end
+
+puts 'ProductMaterials created successfully'
+
+# CategoryProduct data
+category_products_data = [
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    category_id: Category.find_by(name: 'Shoes').id
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    category_id: Category.find_by(name: 'Shoes').id
+  },
+  {
+    product_id: Product.find_by(name: 'Forum 84 Low').id,
+    category_id: Category.find_by(name: 'Shoes').id
+  },
+  {
+    product_id: Product.find_by(name: 'Stan Smith').id,
+    category_id: Category.find_by(name: 'Shoes').id
+  },
+  {
+    product_id: Product.find_by(name: 'Shuffle').id,
+    category_id: Category.find_by(name: 'Shoes').id
+  }
+]
+
+# Create category_products
+category_products_data.each do |category_product_data|
+  CategoryProduct.create!(category_product_data)
+end
+
+puts 'CategoryProducts created successfully'
+
+# ProductSize data
+product_sizes_data = [
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    US: 7,
+    UK: 6,
+    EU: 40,
+    CM: 25,
+    price: 150
+  },
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    US: 8,
+    UK: 7,
+    EU: 41,
+    CM: 26,
+    price: 150
+  },
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    US: 9,
+    UK: 8,
+    EU: 42,
+    CM: 27,
+    price: 150
+  },
+  {
+    product_id: Product.find_by(name: 'Air Max 90').id,
+    US: 10,
+    UK: 9,
+    EU: 43,
+    CM: 28,
+    price: 150
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    US: 7,
+    UK: 6,
+    EU: 40,
+    CM: 25,
+    price: 100
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    US: 8,
+    UK: 7,
+    EU: 41,
+    CM: 26,
+    price: 100
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    US: 9,
+    UK: 8,
+    EU: 42,
+    CM: 27,
+    price: 100
+  },
+  {
+    product_id: Product.find_by(name: 'Air Force 1').id,
+    US: 10,
+    UK: 9,
+    EU: 43,
+    CM: 28,
+    price: 100
+  },
+  {
+    product_id: Product.find_by(name: 'Forum 84 Low').id,
+    US: 7,
+    UK: 6,
+    EU: 40,
+    CM: 25,
+    price: 120
+  },
+  {
+    product_id: Product.find_by(name: 'Stan Smith').id,
+    US: 9,
+    UK: 8,
+    EU: 42,
+    CM: 27,
+    price: 90
+  },
+  {
+    product_id: Product.find_by(name: 'Shuffle').id,
+    US: 7,
+    UK: 6,
+    EU: 40,
+    CM: 25,
+    price: 80
+  }
+]
+
+# Create product_sizes
+product_sizes_data.each do |product_size_data|
+  ProductSize.create!(product_size_data)
+end
+
+puts 'ProductSizes created successfully'
+
+# ProductColor data
+product_colors_data = [
+  {
+    product_size_id: ProductSize.find_by(US: 7, product_id: Product.find_by(name: 'Air Max 90').id).id,
+    color: 'White',
+    stock: 10
+  },
+  {
+    product_size_id: ProductSize.find_by(US: 8, product_id: Product.find_by(name: 'Air Max 90').id).id,
+    color: 'Navy',
+    stock: 7
+  },
+  {
+    product_size_id: ProductSize.find_by(US: 9, product_id: Product.find_by(name: 'Air Force 1').id).id,
+    color: 'Black',
+    stock: 3
+  },
+  {
+    product_size_id: ProductSize.find_by(US: 7, product_id: Product.find_by(name: 'Forum 84 Low').id).id,
+    color: 'Pink',
+    stock: 5
+  },
+  {
+    product_size_id: ProductSize.find_by(US: 9, product_id: Product.find_by(name: 'Stan Smith').id).id,
+    color: 'Green',
+    stock: 2
+  },
+  {
+    product_size_id: ProductSize.find_by(US: 7, product_id: Product.find_by(name: 'Shuffle').id).id,
+    color: 'Red',
+    stock: 8
+  },
+  {
+    product_size_id: ProductSize.find_by(US: 7, product_id: Product.find_by(name: 'Shuffle').id).id,
+    color: 'Black',
+    stock: 6
+  }
+]
+
+# Create product_colors
+product_colors_data.each do |product_color_data|
+  ProductColor.create!(product_color_data)
+end
+
+puts 'ProductColors created successfully'
+
+# ProductColorImage data
+
+ProductColor.all.each do |product_color|
+  ['data:image/jpeg;base64,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',
+  'data:image/jpeg;base64,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', 
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFRUXFxoVGBcXGBgXGBcXGBgYFxgYFxgYHSggGBolHRUXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGC0dHR0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tKy0tLS0tLS0rLS0tLSstLS0tLS0tLS0tLf/AABEIAQ4AuwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAQIEBQYHA//EAEYQAAECAwMHBwkGBQQDAQAAAAEAAgMRIQQxQQUSUWFxgfAGB1KRobHSEyI0c5Kys8HRFiRCguHxFCMyM2JTY3KiFRdD4v/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QAHxEBAQADAAMAAwEAAAAAAAAAAAECETEDEiEyQVET/9oADAMBAAIRAxEAPwDtKEIQCEIQCEIQCEIQCEIQCEIQCEIQCEIQCEIQCEIQCEIQCEIQCo+WGV4llgNiQw0kxAw5wJEi1xwIr5oV4slzl+is9c33Iil4sZ88v7V0YPsu8SPt/aujB9l3iWTTgsbrWmrHL61dGD7LvEq+3c5lsY6TWQNJm13jVITKqztpiZzidJ7Fm5VrDGWtoOdO29Cz+w/xpv8A7UtvQs/sP8axIaghT2rr6Y/xtDzq27oWf2H+NeJ52bf/AKdn9h/jWMiBecJkyntT0x/jeM51befwWf2H+NTW85dtlPMgew/xrA2aHPcrVsOg6+OtLnSYY/xroPORazeyB7LvGpln5fWpwqyD7LvEsQ1ldym2QymDfNMcrtM8JJxrzy5tXRhey7xI+3Np6ML2XeJZm5AK3uuOmn+3Np6ML2XeJJ9urT0YXsu8SzJSAJummnPLq09GF7LvEk+3dp6ML2XeJZgpJJummo+3Vp6MH2XeJWXJrlZHj2hkJ4hhrs6ea0g0Y5wvcdCwpV5yH9Nhfn+G9WWpY6ohCFtkLJ85XorfXN9yItYsnzlGVlZ65vuRFLxZ1zYBKE0PSzXNpGyrEkyWJoqQKwyw+ZAGFVBWK7YT4JJpCcvRgUbRokNNHmg7FP8AJTCr7bSQU2r1sZkrmE2bdYkqOx4K9sJnTrSkOYPOUuyi/jSvEiqlQSmPU8n4vSSSSchdXmNkkeAngJjjVAhYNCMwaEqUIGlo0K85EN++wqdP4b1SE4K85Femwvz/AA3KwrqKEIXRgLKc5HorfXN9x61ayvOOPurPXN9yIpeLHNS5OSyQuTaiysf5hGoKGCpOUXfzHbfkooWa7Y8PF+pSYbVHAUmEo1HuLlSZQf551UV24dipMoQiM13TGd2/spFyp1jcryxmh0zWdsz5FXljdpx+StIsJ0UqEKT4wUZvHG9S4YUx6nk/E7N1pZa0SShdXmIU3NqnkJJhA2SU0TpBCDzqrzkRP+Nhfn+G5UyuuRPpsL8/w3KzpXUUIQujAWU5yXSsrfXN9yItWstzjeit9a33HqXixzbOQHa04uCWQXNtnMqf3Xbu4KOFKywB5Q7AoQCxXbHj2YpUJ1yiQgpEMI1Ei0f06zQbTQJuXbIBBacWyG65ekFuc5jdczu4CsMo2bOYWjEES7u1JPjGd+xjISu8nYFUUO9W9jddoUrcXjCpbGKJZGzdPqU4gzpK5Mep5PxEksqJM12kdR+qA12lvaujzjOQF5tcdAvlT9k+ugIFKC5NbMi4df6JSTo7UCq55FemwtMn/DcqOertV7yKJ/jYVOn8NysK6ghCF0YCy3OL6Kz1zfcetSsrzj+it9a33HqXixziaQ1uTS/BPhU+a5NqTLTJPGtvzKrmq2y8POZrBVXJZvXXHj0hqTCCjQr1LgiqjabkpnnOccAANpqfkrXNB4xUXJ0OTJ6ST9OwKU54FCtuGV3WRiZJil7s1sxMyILbiaYq3ydyejm8NbtezuBn+6sZed2q8yeZYccNC74+HGzaXy2EydyYqC+KNjATOnSMu4r1y/YYcIQgwGudMms/6ak77ldWaMBiBvmcBcFA5WCbYRlcXasG4blcvHjjj8Z/0yyv1nRpSRDROBXjGE6dy4KGNkAOtehSTpW/i5DkADSSWSaGnRLFK0oFkrnkV6bD/P8ADcqSVceNSvORfpsP8/w3KwdOQhC6MBZTnJH3Vnrm+5EWrWU5yfRW+ub7j1LxZ1zXMnSa9MyRnikGpNBoubSvy+2jDLSO4qoK1UWG2IC14pqvB0hV0XID/wD5ua8aJ5p6jTtS4W/Y6Y5TlVUEVVhBb18SUizcnbTP+0etsuuav8n5BMJr4saVGOkwHOMy0iZIoJTmpMLf01c5J1DhjNAAuA605xxXgLQzpBP8s26Y1VVcjIwqCrCwMBvHadH/AOlDiSMpSUuxmXG/5BenxcYrSWISukNm36BP5Qw5wM7ouB6/N+YTbEKcah8yrKNAz4T2dJpA24dslvKbmmf2whPXx9V5NqZndsSxXkA0rdo60lwA3fNeN0Pzqgb9GpEtaQ7J7ErTpHzQAwqEG6hS4JAD9AgOJ3q65Gt++wvz/DcqQXfqrzkWT/GQp6H/AA3KzpXTUIQujAWU5yPRWeub7j1q1kec5wFkZP8A1m+5EUvFjm7/ANUByYIk6JzCRwVzaegMtKlQXcdShtXpBvoZLv4+JWisLeN/6KRlcygEdKQ46lDyawmU3Huw/VSOULZQmy6XyK6Z/jWJ1ncwaBTVOe9ODGzuHYE3PA69s56E0xDKkt8xTvmvI6vQsE6AX3/JTYLeN/6KPCgONwJAvpdive7jWvT4vxYq/wAlOpxrP0V3BMuONCx9gtZa4aDTuWisloniOJfRdGdKy3ZDZ5ck5xDznNbMBszfW++dNa9eUHJkNYHwZzA85syZi8kE13cF+WrU4ObIGTazAnKd+76K3ybanOEnX6Vm4TXE3XPA01841wIu2ST63CSt+UuThBjTAIa8Zw0Tn5wFMKU1qmz5VM6nAE303BeWzV06wnnX0I03BBJxApxNFZyFJSld8t1E/O+lFA3yZ4NyuORMxbYQI6dZ/wC2/wCipnzp5xEjgAZjEXdyvuRr/vkIann/AKOVg6YhCF0YCxnOsfubPXt9yItmsTzt+hM9e33IilI5hCiDE96lsiT1qoD5J2esNrqEa8d29erVByMC5x1DjuVsINV38c+JVpkp13GI+ilcpG/yWH/MdxXlkyz8dZ+atsq2bPszxiBnD8tVvObxY/bDvHbs4/dK40N/dTevLPEtMtmi7akZKVwloXkdF3ydtwZErQOpfdtwkr/KGTM4Z0PeNHHGhZGzsJ4qVe2HKTmUIJ3y+S9c+OVeAyc4mRB3gz7VcWGEWCo3fpwU3/y4IucO7sK8xbAT5rm9o+Suz6uGWumjHCR1A3VUg2g3tluqSOySo4JOcTMSOgi9T4EWU57lEWbwyO0siNaROUpzIuIM8Dcsnlfk06GS6FN7KmX4hif+WlX8GKTPEgUBoJicjOU9E9isIZdeB213A0WcpL1ZdOXBhnU/topsSgV3cHaulWnJUKL/AFwhtMp9bSq6PySgG7ObsP1BXK+Ot+zDAmt2oy4pervkYPvsL8++UN6flvIDoDS9rs5glPSJ0rpGvWm8jT99h/n+G9Z1Zfq7+OmoQhbZCx3OnDzrIwf77fciLYrI85x+6Mu/vN9yIpeLHJIlkOlLZ7EXuAGPVtU4DvK97GQIjSRjLrosz7Vqw/hxDkxoEgN50k6UvlhPjjQvTKUE+UBwI7R+68rPZZr16Yi8yU8Hj5LUWWzTaQRQiVcZ6lRZE8mwUNe5aKzxpolc75d5DFmzIsEfyyc1zTXNdeDM1zSAerWsn/5WWHUu1ZZye20QXwXXPEp4g4OGsGq4hl/I0SBFfDcD5poZSDm4OG0SXnzx03jWoyNFzmghzRMTrT5K6dY4huAOsObLrmsvyetbIjALntADm4zFJgYgrV2d5AFCJdo2YHXRdJxmo0TJ0XQPaCixLJGH4Z7x81YxGWouOa6zNZgXeULpYTkAJrwjWaPKTrbBYT0YfdnoIItURl4d3/opMDLUj5wO/gIs8eDDbKJbYcQk0JLG10AApkTKdku/iIOzPaLr5fRBb2bKzD+L67laQreekO/uWPbbbI4yFogT/wCbZ9hmpkPyAmPLQwQJmUSRAF5ImZImmvh5QPS7vmnHKIxrvWNs2WbGWMf/ABLS14JbNzgTK+lCNhTLTyms7APJQnxiWuLZNIbnCWaxznzzSSdBlI7C3DTU5Uyg10GJSgac7QJ3V0zuWc5Femwtj/hvVbacqxo3muaIcOcwwbv6iKEzBNBirTka377B/P8ADeuOWW63JqOoIQhaQLI857pWRkv9ZvuRFrljOdeLm2Nh/wB9o/6RFLxY5q7OmCLp3UI4r2L2som6ZFw6zNVZyhLDtUrJFsz3uaRKbSZ6CCJd6zj1a2sC0Q3wxnCeIrIg7ZGvenWNwmQJaruqetZpkQtJBFNvaFOhRCJGcxp+uteiZOemjg2WG6Z/ofORLTTVMHGUjLg3GToDgJEg31FaLOwHF484C+/G7VqVnk60uhuDfNDC4iVdE6aDS5aiVoYQrKVNPyVLyxyZ5WFnfiZVtJkj8Q6q7ldQogkJXYBexuvkpZuaI4rEgVqGgXTlMn6dq9GwpAkNM9Gc4X61peVmSPJvMZjzJzvOEgA15AlLUarORWOweQb6gHcvNZZdO0+mxbOHSmAazrWXXinMsrAR5rZ7BPSV5woj3YDqP1pgnMfEF7RM4TlQHWs7XR7oAzSM3ddTcnQ4UqEa9O2W9I2K/odv0CcI5vLToQK6E2Vzb8eNqVsBvRHUvI2qVM09VErLcKXyxmCiPUwhL+mmIkJkGkjNOzxdxO6SjG1sN4lWmcNFxuXo2O3pC/HZJUezD9VccjvToX5/hv8AqFRCK3Bw0iu2d+1XPIuJO3QROf8Ac+G9IV1RCELowFied0fcmevb7kRbZZLnMH3Rnrm+5EUvFjiMVq9clRgyKJmUxmz0EkX7bupWFrseIwwuqqqNBph1LMrTViKCcxwlOo162nTqXpBiGG4TuwOBWYsOVCweTigvh4H8Tdhx79q0djfnADOESGf6XfiB0HXrXWXbDSZOjtnqNCrexvJ3GusEU7e5ZCyxCxwa40wd9VqsmEEXywK3GatLFaJBtS4HGUpAzNRTYrSFEBqqwWYaTPXXrFykQDK9pmdFQfortEi0wWPBa5gc1wk6YvlcsBypyI6BN0MEwzj0NIM8L5EroAnsSuaCJETGhYyns1LpyWE2lQBxjrT2itTfdRaPlLyczJxIQm3FnR1jUsy1+iV01wssdJdniJQnrn80rZbN6Kz/AEXm4OndPikhiop7jOWs0vSBg0HZtxKQG8ECX1Shw01+VP0QI+GMRrnxVI2C2+XGpEWf4b5/S86E9xpSV+yiDxdBbdm/tu61dchbK0W6E5ol/X8N6qngkE9Wsa5q65DgC2Q69P4bsJKzqV1FCELowFlOcr0Rt/8Aebd/xetWsrzjmVlb65u7zH1UvFjmrRPqrTjia8Y1laRUdSkDUbjUTFaJ4ZT6rm2orXk7ESMsKUUKC98B02b2m530OtaWHClOs56hLZ+6ZabK106dV6u9I9snZQZGZMX3Oabxo/Q6lc5OyhmSDqi4O0jQdYWGi2J7HB8M1Ao4YjWMRRWuTsrsLQ2M4MfRpLqNedIwmdGC6457ZsdLsWUZ6HDSD34KyhWoaxuXPGBzagy117xUKfZ8sRW3zI9odYXTbGm7EYaR1pRFGkdazdi5QsfQ0cMNOmX0UgZXYbiEF84g7FzTLTGw7TEY2gHnDBoBE5T3rZsyiDOt2OHXcshl+3siRi5hBaGhs+k6t2kYblz8nGseoAdPRKV2KQAG+Rlpqa/oSi+t+1DnaN/G9cXQhFJC8Yyw0IaAJbNtErnAECYme5JS+U8ECveBjrGnsCQm+lJjjuojR10okIMseKIFInfon8/krzkRP+MhT0P1f/N2Co3EiUgL+Nqu+RJnbYVRTP3/AMt25WdSupIQhdGAsrzj+itrL+c33XrVLKc5LSbKyX+s0/8ASIpeLHNnvumCZmVKznponub5xMzo1YYXJsAn8RndMylVBeDSvVLXMTwXNt6tP67UwVJG86ilaAKV41pkRk6jVTA7aIH5gxrXsXhabEx4qBvCkur+lN6aZUOGnC5BWRMnxQzMhR3w20kAQZSuAnUDYpTsp2prawYUVw/EHFk9ZEqdalOadOPZoSRHSFaBamViaivHKpwBz7HF8oJSDXBzSaXuNR1FSH8tI4n5CxkVoYma2QliGg1nruTYTgNEzQfUKR5KtFf9KesQjGtdodnWmNeP7bfNYKY4nYSRVTYbJXEbz1yGJvqleaUH6YY6kyHOYBAkJGd5nUHeVje109nuMrsDiiC2k5SpI4Hj6JoNbqSHywkiJEqL7pHDsxQK666e8C6oSQXCRnQmsht2JQTuH7VSQxKdTXf+yBXmdLzJGm8DH6hNE53A78NN3YkDp4SwwrxJA/aFe8ifTYV1z/huWfdEwu47FechSTbYRJwf1+TfNWdS8dWQhC6MBZXnI9FZ65vuRFqllucYfdW+tb7j1LxY5tU6eq7eEZh6XZXsQ1pDj50wQJCshv39yR1DxowXNs5wuF23tTobpjTW4i7R8l5sOzaEGdABdVA8NkLgO7sQATQil4r3hAkZDRXYntHHG1AF2Erho+aj2o0ljOVNt69yaTBoKqI7+saAJ9+hB6zAlKXV9dy8w+YEhPQdGu9OzuJJzWSup9SgDW40neNS9GsvE5ip/Si83NBpv+lRuTnuIwN2q9A5xFNP7ddyaNOdp13nVVKdf1KCSK38aED3PpMDjGia2ZbM8bdckxs8ZJZoFL7uKHFeMV9+F4nVejooAzrgNlyTygIvxpxuKDysoFa6PpctFyH9Ogy/z+G9UbzhWo0d6u+Qp+/Qvz10/wApyRK6whCF1YCyvOP6K31rfciLVKBlrJLLTDEOIXABwd5pAMwCMQaecVKRxrPukaG7vQxgAvN+2pOtdK+wVl6Ub2m+BB5A2Xpxvab4Fj1rW45qxsqzMtFEsR2+5dJ+wVl6Uan+TfAl+wlm6cb2m+BX1ptzU1vx7U4Cezq3di6QOQdl6Ub2m+HWmROb+yn8ccXGj2i4z6CetXbm8RwHUo9mqJldRdyAspEs6NX/ACb4EN5v7KABnRqf5N8CetNxzUVuoSN6VzZ6fmulDkDZenG9pvgSnkHZulG0f1N8CetNxzOGCKHC6pJNMSlLiQD2D5nUulnkHZulG9pvhTfsDZZk58av+TfAnrTbmzr+OpK/Gs6bJro3/r2yTmXRicJubT/onnkHZpSzo3tN8CetNuZuOmexFxpv+i6YeQVl6Ub2m+BA5BWXpRfab4E9abjmcWoJldSXyQ10sNAoumDkFZelG9pvhSfYCy9ON7TfAnrU25q40NZbuJq+5C+nQdj/AIblrfsFZelG9pvgUnJPI+BZ4ojMdFLhOQc5pbVpbcGjApMS1oUIQtshCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIP/9k='].each do |view|
+    ProductColorImage.create!(
+      product_color_id: product_color.id,
+      image_url: view
+    )
+  end
+end
+
+puts 'Product color images created successfully'

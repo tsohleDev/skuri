@@ -1,0 +1,94 @@
+<%= form_tag(update_product_path(product), method: :patch, class: "flex flex-col w-full", data: { turbo_method: :patch }) do %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="hidden">
+    <%= label_tag "id", nil, style: "display: block" %>
+    <%= text_field_tag "id", product.id %>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "name", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <%= text_field_tag "name", product.name, class: "w-full", required: true %>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "description", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <%= text_area_tag "description", product.description, class: "w-full min-h-32", required: true %>
+  </div>
+
+  <div class="flex w-full justify-between">
+    <div class="w-full ml-2">
+      <%= label_tag "brand", nil, style: "display: block", class: "font-bold w-full text-center" %>
+      <%= select_tag 'brand', options_for_select(Brand.all.map { |brand| [brand.name, brand.id] }, product.brand_id), class: "w-full", required: true %>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "colors", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <div class="flex flex-col items-center w-full border border-gray-200 rounded-md p-2 my-2">
+      <% product.colors.each do |color| %>
+        <%= hidden_field_tag "color_ids[]", color.id %>
+        <div class="grid grid-cols-4 gap-2 px-2 flex items-center justify-center">
+          <div class="flex  flex-col items-center">
+            <%= label_tag "color", nil, style: "display: block", class: "font-bold" %>
+            <%= text_field_tag "colors[]", color.color, class: "mx-4 w-40", required: true %>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <%= label_tag "size", nil, style: "display: block", class: "font-bold" %>
+            <% if !color.size.nil? %>
+              <%= text_field_tag "sizes[]", color.size , class: "mx-2 w-40", placeholder: "Size", required: true %> 
+            <% else %>
+              <%= number_field_tag "size_uks[]", color.size_uk, class: "mx-2 w-40", placeholder: "Size", type: "number", step: "1", min: "0", max: "1000000", required: true %>
+            <% end %> 
+          </div>
+
+          <div class="flex flex-col items-center">
+            <%= label_tag "price", nil, style: "display: block", class: "font-bold w-full text-center" %>
+            <%= number_field_tag "prices[]", color.price, class: "mx-2 w-40", placeholder: "0.00", type: "number", step: "0.01", min: "0.00", max: "1000000", required: true %>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <%= label_tag "stock", nil, style: "display: block", class: "font-bold" %>
+            <%= number_field_tag "stocks[]", color.stock, class: "mx-2 w-40", placeholder: "0", type: "number", step: "1", min: "0", max: "1000000", required: true %>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center w-full justify-center">
+          <% color.image_urls.each do |image| %>
+            <div class="p-2">
+              <%= image_tag image, class: "w-20" %>
+              <%= text_area_tag "color_images[]", image, class: "w-full h-10", required: true %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "category", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <div class="flex flex-wrap items-center w-full">
+      <% Category.all.each do |category| %>
+        <div class="p-2">
+          <%= label_tag category.name, nil %>
+          <%= check_box_tag "categories[]", category.name, product.categories.include?(category)%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex bg-secondary p-2 justify-center items-center my-5 mx-auto rounded-md" > 
+    <%= submit_tag "Update" %>
+  </div>
+<% end %>

@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     # filter orders by status
     @orders = @orders.select { |order| order.user_id == @user.id }
     @orders = @orders.select { |order| order.created_at > 14.days.ago }
-    @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["returned", "exchanged"].include?(order_product.status) } }
+    #@orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["ret"].include?(order_product.status) } }
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns_and_exchanges", locals: { orders: @orders, selected: false}) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns/returns_and_exchanges", locals: { orders: @orders, selected: false}) }
     end
   end
 
@@ -41,18 +41,110 @@ class UsersController < ApplicationController
     # filter orders by status
     @orders = @orders.select { |order| order.user_id == @user.id }
     @orders = @orders.select { |order| order.created_at > 14.days.ago }
+    @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["complete"].include?(order_product.status) } }
+
+    @order = Order.find(params[:id])
+    @products = @order.order_products.select { |order_product| order_product.status unless ["complete"].include?(order_product.status) }
+    authorize! :manage, @order
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns/returns_and_exchanges", locals: { orders: @orders, selected: true }), 
+        turbo_stream: turbo_stream.replace("returnables", partial: "users/returns/returnables", locals: { products: @products }) }
+    end
+  end
+
+  # post /users/1/return
+  def return
+   @order = Order.find(params[:id])
+    @product = OrderProduct.find(params[:item_id])
+    authorize! :manage, @order
+
+    # Update the order product status
+    @product.update(status: 'returned')
+
+    # asserts for the view
+    @user = current_user
+    @orders = @user.orders.includes(:order_products) 
+    # filter orders by status
+    @orders = @orders.select { |order| order.user_id == @user.id }
+    @orders = @orders.select { |order| order.created_at > 14.days.ago }
     @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["returned", "exchanged"].include?(order_product.status) } }
 
     @order = Order.find(params[:id])
-    @products = @order.order_products.select { |order_product| order_product.status unless ["returned", "exchanged"].include?(order_product.status) }
-
-    puts params[:order_id]
-    puts @products
+    @products = @order.order_products.select { |order_product| order_product.status unless ["complete"].include?(order_product.status) }
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns_and_exchanges", locals: { orders: @orders, selected: true }), turbo_stream: turbo_stream.replace("returnables", partial: "users/returnables", locals: { products: @products }) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns/returns_and_exchanges", locals: { orders: @orders, selected: true }), 
+        turbo_stream: turbo_stream.replace("returnables", partial: "users/returns/returnables", locals: { products: @products }) }
     end
   end
+
+  # post /users/1/exchange
+  def exchange
+    @order = Order.find(params[:id])
+    @order_product = OrderProduct.find(params[:item_id])
+    @product = Product.find(@order_product.product_id)
+    authorize! :manage, @order
+
+    puts '#' * 100
+    puts params.inspect
+
+    # Update the order product status
+    if params[:size]
+      @order_product.update(status: 'exchanged', exchange_size: params[:size])
+      puts @order_product.inspect
+    end
+
+    # asserts for the view
+    @user = current_user
+    @orders = @user.orders.includes(:order_products) 
+    # filter orders by status
+    @orders = @orders.select { |order| order.user_id == @user.id }
+    @orders = @orders.select { |order| order.created_at > 14.days.ago }
+    @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["complete"].include?(order_product.status) } }
+
+    @order = Order.find(params[:id])
+    @products = @order.order_products.select { |order_product| order_product.status unless ["complete"].include?(order_product.status) }
+
+    if params[:size]
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns/returns_and_exchanges", locals: { orders: @orders, selected: true }), 
+          turbo_stream: turbo_stream.replace("returnables", partial: "users/returns/returnables", locals: { products: @products }) }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns/returns_and_exchanges", locals: { orders: @orders, selected: true }), 
+          turbo_stream: turbo_stream.replace("returnables", partial: "users/returns/returnables", locals: { products: @products }),
+          turbo_stream: turbo_stream.replace("exchange", partial: "users/returns/exchange", locals: { product: @product, item: @order_product }) }
+      end
+    end
+  end
+
+  def cancel
+    @order = Order.find(params[:id])
+    @order_product = OrderProduct.find(params[:item_id])
+
+    # Update the order product status
+    @order_product.update(status: 'paid')
+
+    # asserts for the view
+    @user = current_user
+    @orders = @user.orders.includes(:order_products)
+    # filter orders by status
+    @orders = @orders.select { |order| order.user_id == @user.id }
+    @orders = @orders.select { |order| order.created_at > 14.days.ago }
+    @orders = @orders.select { |order| order.order_products.any? { |order_product| order_product.status unless ["complete"].include?(order_product.status) } }
+
+    @order = Order.find(params[:id])
+    @products = @order.order_products.select { |order_product| order_product.status unless ["complete"].include?(order_product.status) }
+    authorize! :manage, @order
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/returns/returns_and_exchanges", locals: { orders: @orders, selected: true }), 
+        turbo_stream: turbo_stream.replace("returnables", partial: "users/returns/returnables", locals: { products: @products }) }
+    end
+  end
+
 
   def help
     @user = current_user
@@ -83,9 +175,16 @@ class UsersController < ApplicationController
         order_product = OrderProduct.new
         order_product.order_id = order.id
         order_product.status = "paid"
-        order_product.product_id = cart_product.product_id
+        order_product.product_color_id = cart_product.product_color_id
         order_product.quantity = cart_product.quantity
-        order_product.save
+      
+        if order_product.save
+          puts "success"
+        else
+          puts "failed"
+          puts order_product.errors.full_messages
+          puts order_product.inspect
+        end
       end
 
       cart_products.destroy_all

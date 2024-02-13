@@ -1,67 +1,122 @@
-<turbo-frame id="products-frame">
 <div class="mt-8">
   <!-- Product Details -->
-  <div class="flex max-w-6xl mx-auto">
+  <div class="grid grid-cols-6 mx-40 p-8">
+    <!-- Product Images -->
+    <div class="flex flex-col col-span-1 align-center items-end h-auto">
+      <% @image_urls.each_with_index do |image, index| %>
+        <%= link_to product_path(@product, color: @color, size: @size, size_uk: @size_uk, quantity: @quantity, selected: 'image', image_index: index), class: "hover:shadow-lg hover:shadow-black m-2" do %>
+          <%= image_tag image, class: "w-[8vw]" %>
+        <% end %>
+      <% end %>
+    </div>
+
     <!-- Product Image -->
-    <div class="w-1/2 pr-8">
-      <%= image_tag @product.image, class: "w-full h-auto rounded-lg" %>
+    <div class="pr-8 col-span-2">
+      <%= image_tag @image_url,  class: "w-full h-[60vh] rounded-lg m-2" %>
     </div>
 
     <!-- Product Information -->
-    <div class="w-1/2">
+    <div class="border-2 border-black rounded-2xl h-auto col-span-3">
       <div class="p-8">
         <h1 class="text-3xl font-bold mb-4"><%= @product.name %></h1>
+        <h2 class="text-xl font-bold mb-4"><%= @product.brand_name %></h2>
         <p class="text-gray-700 mb-4"><%= @product.description %></p>
-        <p class="text-gray-700 mb-4">In stock: <%= @product.stock %></p>
-        <p class="text-gray-700 mb-4">Color: <%= @product.color %></p>
-        <p class="text-gray-700 mb-4">Dimensions: <%= @product.dimensions %></p>
-        <p class="text-3xl text-green-500 font-bold mb-4"><%= number_to_currency(@product.price, precision: 2, unit: "R") %></p>
+        
+        <div class="grid grid-cols-4 gap-4 mb-4">
+          <div class="col-span-3">
+            <!-- Product Colors -->
+            <h2 class="text-xl font-bold py-4">Available Colors</h2>
+       
+            <% @product_colors.each do |color_object| %>
+              <% if @available_colors.include?(color_object) %>
+                <%= link_to '', product_path(@product, color: color_object.color, size: @size, size_uk: @size_uk, quantity: @quantity, selected: 'color'), class: "w-10 h-10 rounded-full inline-block border-2 border-black mr-2 my-2 hover:shadow-lg hover:shadow-black #{color_object.color == @color ? 'border-4 border-green-500' : ''}", style: "background-color: #{color_object.color}" %>
+              <% else %>
+                <%= link_to '', product_path(@product, color: color_object.color, size: @size, size_uk: @size_uk, quantity: @quantity, selected: 'color'), class: "w-10 h-10 rounded-full inline-block border-2 border-black mr-2 my-2 hover:shadow-lg hover:shadow-black opacity-50 cursor-not-allowed", style: "background-color: #{color_object.color}" %>
+              <% end %>
+            <% end %>
+          
+            <!-- Product Sizes -->
+            <h2 class="text-xl font-bold py-4 border-t-2 border-secondary">Available Sizes</h2>
+            <div class="flex my-2">
+              <% @product_sizes.each do |size| %>
+                <% if @available_sizes.include?(size) %>
+                  <div class="mr-2 flex justify-center items-center py-2 px-4 bg-gray-800 text-white rounded-xl hover:shadow-lg hover:shadow-black <%= size.size == @size && size.UK.to_i == @size_uk.to_i ? 'border-4 border-green-500' : '' %> ">
+                    <%= link_to "UK #{size.UK}", product_path(@product, color: @color, size: size.size, size_uk: size.UK, quantity: @quantity, selected: 'size') %>
+                  </div>
+                <% else %>
+                  <div class="mr-2 flex justify-center items-center py-2 px-4 bg-gray-800 text-white rounded-xl hover:shadow-lg hover:shadow-black opacity-50 cursor-not-allowed">
+                    <%= link_to "UK #{size.UK}", product_path(@product, color: @color, size: size.size, size_uk: size.UK, quantity: @quantity, selected: 'size'), class: "opacity-50 cursor-not-allowed" %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="flex flex-col items-center justify-center">
+            <h2 class="text-xl font-bold py-4">Quantity</h2>
+            <%= link_to "+", product_path(@product, color: @color, size: @size, size_uk: @size_uk, quantity: @quantity + 1, selected: 'quantity'), class: "btn btn-primary p-4 bg-gray-800 text-white text-xl rounded-xl rounded-full hover:shadow-lg hover:shadow-black" %>
+            <p class="text-2xl font-bold p-4"><%= @quantity %></p>
+            <%= link_to "-", product_path(@product, color: @color, size: @size, size_uk: @size_uk, quantity: @quantity - 1, selected: 'quantity'), class: "btn btn-primary p-4 bg-gray-800 text-white text-xl rounded-xl rounded-full hover:shadow-lg hover:shadow-black" %>
+          </div>
+      </div>
       </div>
 
       <div class="flex items-center justify-between px-8 py-4 bg-gray-200">
         <!-- Add to Cart Button -->
-        <%= link_to "Add to Cart", add_to_cart_product_path(@product), method: :post, class: "bg-green-500 text-white px-4 py-2 rounded-md", data: { turbo_method: :post } %>
-        
+        <% if @product.stock > 0 %>
+          <%= form_tag add_to_cart_product_path(@product), method: :post, class: "bg-green-500 text-white px-4 py-2 rounded-md", data: { turbo_method: :post } do %>
+            <%= hidden_field_tag :product_id, @product.id %>
+            <%= hidden_field_tag :quantity, @quantity %>
+            <%= hidden_field_tag :size, @size %>
+            <%= hidden_field_tag :size_uk, @size_uk %>
+            <%= hidden_field_tag :color, @color %>  
+
+            <%= submit_tag "Add to Cart" %>
+          <% end %>
+          <p class="text-3xl text-green-500 font-bold mb-4"><%= number_to_currency(@product.price, precision: 2, unit: "R") %></p>
+        <% else %>
+          <p class="text-red-500 font-bold">Out of Stock</p>
+        <% end %>
+
         <!-- Add to Wishlist Button -->
-        <%= link_to "Add to Wishlist", add_to_wishlist_product_path(@product), class: "bg-gray-500 text-white px-4 py-2 rounded-md" %>
+        <%= link_to "Add to Wishlist", add_to_wishlist_product_path(@product), class: "bg-gray-500 text-white px-4 py-2 rounded-md", data: { turbo_method: :post } %>
       </div>
     </div>
   </div>
 
   <!-- Reviews Section -->
-  <div class="flex flex-col justify-center items-center mx-auto mt-8">
-  <h2 class="text-2xl font-bold mb-4">Customer Reviews</h2>
+  <div class="flex flex-col justify-center mt-8 mx-[20vw]">
+    <h2 class="text-2xl font-bold mb-4 text-center">Customer Reviews</h2>
 
-  <!-- Display Reviews -->
-  <% if @product.reviews.any? %>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <% @product.reviews.each do |review| %>
-        <div class="bg-white p-4 rounded-lg shadow-md">
-          <h3 class="text-lg font-bold mb-2"><%= review.rating %> Stars</h3>
-          <p class="text-gray-700 mb-4"><%= review.message %></p>
-          <!-- Additional review information can be added here -->
-        </div>
-      <% end %>
+    <!-- Display Reviews -->
+    <% if @product.reviews.any? %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <% @product.reviews.each do |review| %>
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <h3 class="text-lg font-bold mb-2"><%= review.rating %> Stars</h3>
+            <p class="text-gray-700 mb-4"><%= review.message %></p>
+            <!-- Additional review information can be added here -->
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-center text-gray-700 mt-4">No reviews yet. Be the first to leave a review!</p>
+    <% end %>
+
+    <!-- Add a Review Form -->
+    <div class="mt-8 w-[60vw] flex flex-col space-y-4 my-10">
+      <h2 class="text-2xl font-bold mb-4 text-center">Add Your Review</h2>
+      <%= render "reviews/form", review: @product.reviews.build %>
     </div>
-  <% else %>
-    <p>No reviews yet. Be the first to leave a review!</p>
-  <% end %>
-
-  <!-- Add a Review Form -->
-  <div class="mt-8">
-    <h2 class="text-2xl font-bold mb-4">Add Your Review</h2>
-    <%= render "reviews/form", review: @product.reviews.build %>
   </div>
 </div>
 
-</div>
-
 <% if can? :manage, Product %>
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
+  <div>
+    <%= link_to "Edit this product", edit_product_path(@product) %> |
+    <%= link_to "Back to products", products_path %>
 
-  <%= button_to "Destroy this product", @product, method: :delete %>
-</div>
-</turbo-frame>
+    <%= button_to "Destroy this product", @product, method: :delete %>
+  </div>
 <% end %>

@@ -1,19 +1,20 @@
-<div>
+<div id="returnables">
 <div class="flex items-center mb-4">
     <!-- Left Column: Product Image -->
     <div class="flex-shrink-0 border border-gray-200 rounded-md overflow-hidden p-10">
-        <%= image_tag item.product.image, class: "w-16 h-16 object-cover rounded" %>
+        <%= image_tag item.image_url, class: "w-16 h-16 object-cover rounded" %>
     </div>
 
     <!-- Right Column: Product Details -->
     <div class="ml-4">
-        <h3 class="text-lg font-semibold"><%= item.product.name %></h3>
+        <h3 class="text-lg font-semibold"><%= item.name %></h3>
         <p>Quantity: <%= item.quantity %></p>
-        <% if item.product.category_id == 2 %>
-            <p>Size: <%= item.product.size %></p>
+
+        <% if item.size? %>
+            <p>Size: <%= item.size %></p>
         <% end %>
         
-        <p>Price: <%= number_to_currency(item.product.price, precision: 2, unit: "R") %></p>
+        <p>Price: <%= number_to_currency(item.total_price, precision: 2, unit: "R") %></p>
         <% if not returnable %>
             <p>Item Status: <%= item.status %></p>
             <p>Return Policy: Return within 14 days </p>
@@ -22,9 +23,21 @@
 </div>
 
 <% if returnable %>
+  <% if item.status == 'returned' || item.status == 'exchanged' %>
+  <div class="ml-4 bg-green-500 flex flex-col items-center justify-center rounded-lg p-4">
+    <% if item.status == 'returned' %>
+      <p class="text-center"> Return has been requested </p>
+    <% else %>
+      <p class="text-center"> Exchange has been requested </p>
+    <% end %>
+    <p class="text-center"> Courier will come collect within 3-5 working days </p>
+    <%= link_to "Cancel", cancel_return_user_path(item_id: item.id), class: "bg-black text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700 mt-2", data: { turbo_method: :post } %>
+  </div>
+  <% else %>
     <div class="ml-4">
-        <%= link_to "Return", '/', class: "bg-black text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700", data: { turbo_method: :post } %>
-        <%= link_to "Exchange", '/', class: "bg-black text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700", data: { turbo_method: :post } %>
+      <%= link_to "Return", return_user_path(item_id: item.id), class: "bg-black text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700", data: { turbo_method: :post } %>
+      <%= link_to "Exchange", exchange_user_path(item_id: item.id), class: "bg-black text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700", data: { turbo_method: :post } %>
     </div>
+  <% end %>
 <% end %>
 </div>

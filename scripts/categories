@@ -3,34 +3,105 @@ require_relative '../config/environment'
 
 # Category data
 categories_data = [
-{
-name: 'Hair Products',
-description: 'High-quality hair products for all hair types, from curly to straight.',
-image_url: 'https://d2cbg94ubxgsnp.cloudfront.net/Pictures/1024x536/4/4/2/527442_gettyimages554999647_138537_crop.jpg'
-},
-{
-name: 'Accessories',
-description: 'Stylish accessories to complement your look, from head to toe.',
-image_url:
-'https://imageengine.victorinox.com/medias/?context=bWFzdGVyfHJvb3R8MTAyMTY1fGltYWdlL2pwZWd8aDZlL2g4My8xMzYwMjg3NjI5MzE1MC9zYWstcG91Y2hlc181MC1yZWN0LVMtNjQweDMyMC5qcGd8NmYyMDhiZDEwNTE1OGU2NDZhOGFmYWUyOTQzMTRmYjViYzg2NzUwNjQwNGVjMmY5NGYzOGNmMmJmZTViYTZhMg'
-},
-{
-name: 'Supplements',
-description: 'Nutritional supplements to support a healthy lifestyle.',
-image_url:
-'https://media.allure.com/photos/5bae64165f58e72d02829668/16:9/w_2560%2Cc_limit/Bright-young-things-supplements.png'
-},
-{
-name: 'Shoes',
-description: 'Comfortable shoes for all occasions and seasons, from heels to sneakers and everything in between.',
-image_url:
-'https://hips.hearstapps.com/netdoctor.cdnds.net/16/49/4000x2000/landscape-1480936823-partyshoes.jpg?resize=640:*'
-}
+  {
+  name: 'Hair Products',
+  description: 'High-quality hair products for all hair types, from curly to straight.',
+  image_url: 'https://d2cbg94ubxgsnp.cloudfront.net/Pictures/1024x536/4/4/2/527442_gettyimages554999647_138537_crop.jpg'
+  },
+  {
+  name: 'Accessories',
+  description: 'Stylish accessories to complement your look, from head to toe.',
+  image_url:
+  'https://imageengine.victorinox.com/medias/?context=bWFzdGVyfHJvb3R8MTAyMTY1fGltYWdlL2pwZWd8aDZlL2g4My8xMzYwMjg3NjI5MzE1MC9zYWstcG91Y2hlc181MC1yZWN0LVMtNjQweDMyMC5qcGd8NmYyMDhiZDEwNTE1OGU2NDZhOGFmYWUyOTQzMTRmYjViYzg2NzUwNjQwNGVjMmY5NGYzOGNmMmJmZTViYTZhMg'
+  },
+  {
+  name: 'Supplements',
+  description: 'Nutritional supplements to support a healthy lifestyle.',
+  image_url:
+  'https://media.allure.com/photos/5bae64165f58e72d02829668/16:9/w_2560%2Cc_limit/Bright-young-things-supplements.png'
+  },
+  {
+  name: 'Shoes',
+  description: 'Comfortable shoes for all occasions and seasons, from heels to sneakers and everything in between.',
+  image_url:
+  'https://hips.hearstapps.com/netdoctor.cdnds.net/16/49/4000x2000/landscape-1480936823-partyshoes.jpg?resize=640:*'
+  }
 ]
 
 # Create categories
-# categories_data.each do |category|
-# Category.create!(category)
-# end
+categories_data.each do |category|
+  Category.create!(category)
+end
 
 puts 'Categories created successfully'
+
+# Subcategory data
+subcategories_data = [
+  {
+    name: 'Wash',
+    description: 'High-quality hair wash products for all hair types. Keep your hair clean and healthy.',
+    image_url: 'https://hellogiggles.com/wp-content/uploads/sites/7/2016/10/25/hairwash.jpg?quality=82&strip=1&resize=640%2C360',
+    category_id: Category.find_by(name: 'Hair Products').id
+  },
+  {
+    name: 'Extensions',
+    description: 'Explore a variety of hair extensions to add length and volume to your hair.',
+    image_url: 'https://divadivinehair.com/cdn/shop/articles/What_are_Weave_Hair_Extensions_Pros_and_Cons.jpg?v=1626356692&width=2048',
+    category_id: Category.find_by(name: 'Hair Products').id
+  },
+  {
+    name: 'Jewellery',
+    description: 'Discover the latest trends in fashionable jewelry to enhance your style.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnqcVkZI9rqb8uE54YHYm6Jl8vo5FjIiOgyg&usqp=CAU',
+    category_id: Category.find_by(name: 'Accessories').id
+  },
+  {
+    name: 'Hats',
+    description: 'Stay stylish with a wide range of hats for different occasions and seasons.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfhchnH7d25dJauyBjMiLeayNg7T7aIBn_3Q&usqp=CAU',
+    category_id: Category.find_by(name: 'Accessories').id
+  },
+  {
+    name: 'Bags',
+    description: 'Explore our collection of trendy and functional bags for all your needs.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOu1kJeB9iRMlJAQ2I1TOfBbbMDPaPxdhS9w&usqp=CAU',
+    category_id: Category.find_by(name: 'Accessories').id
+  },
+  {
+    name: 'Heels',
+    description: 'Elevate your style with a stunning range of high heels for various occasions.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMlp1fqkh6F7f90tBm05YiQpV1dHxOsSZ1cA&usqp=CAU',
+    category_id: Category.find_by(name: 'Shoes').id
+  },
+  {
+    name: 'Sneakers',
+    description: 'Stay comfortable and trendy with our collection of stylish sneakers for men and women.',
+    image_url: 'https://img.etimg.com/thumb/width-640,height-480,imgsize-6214,resizemode-75,msid-103256086/top-trending-products/lifestyle/sneakers-for-men-under-5000/images-.jpg_',
+    category_id: Category.find_by(name: 'Shoes').id
+  },
+  {
+    name: 'Nutrients',
+    description: 'Support your health with essential nutrients and vitamins. Choose from a variety of supplements.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzuEbXdZN2-adkYlDf38ajKjEugbP_dMXF_w&usqp=CAU',
+    category_id: Category.find_by(name: 'Supplements').id
+  },
+  {
+    name: 'Diet',
+    description: 'Explore dietary supplements to help you achieve your health and fitness goals.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTC80yuZxDYodjVUqb5iWRXNDsCOeye7JGsg&usqp=CAU',
+    category_id: Category.find_by(name: 'Supplements').id
+  },
+  {
+    name: 'Body',
+    description: 'Discover supplements for overall body health and well-being.',
+    image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmmrX6Ug24V-cLl673d0h076v0DEY2BoDvtg&usqp=CAU',
+    category_id: Category.find_by(name: 'Supplements').id
+  }
+]
+
+# Create subcategories
+subcategories_data.each do |subcategory|
+  Category.create!(subcategory)
+end
+
+puts 'Subcategories created successfully'

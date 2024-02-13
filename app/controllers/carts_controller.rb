@@ -10,38 +10,31 @@ class CartsController < ApplicationController
   def add_to_cart
     @user = current_user
     @cart = Cart.find_by(user_id: current_user.id) || Cart.new(user_id: current_user.id)
-    @product = Product.find_by(id: params[:id])
 
-    # check if product is already in cart
-    @cart_item = CartProduct.find_by(cart_id: @cart.id, product_id: @product.id)
-
-    if @cart_item.nil?  
-      @cart_item = CartProduct.new
-      @cart_item.cart_id = @cart.id
-      @cart_item.product_id = @product.id
-      @cart_item.quantity = 1
+    if params[:size_uk].nil?
+      @product_size = ProductSize.find_by(product_id: params[:product_id], size: params[:size])
     else
-      @cart_item.quantity += 1
+      @product_size = ProductSize.find_by(product_id: params[:product_id], UK: params[:size_uk])
     end
 
-    if @cart_item.save 
-      # send success message
-       respond_to do |format|
-          format.turbo_stream { render turbo_stream: turbo_stream.replace("cart-count", partial: "carts/cart_count", locals: { cart: @cart }),
-                                              turbo_stream: turbo_stream.replace("cart-modal", partial: "carts/cart_pop_up", locals: { cart: @cart }) }
-        end
+    @product_color = ProductColor.find_by(product_size_id: @product_size.id, color: params[:color])
+    @cart_product = CartProduct.find_by(cart_id: @cart.id, product_color_id: @product_color.id)
+
+    if @cart_product.nil?
+      @cart_product = CartProduct.new(cart_id: @cart.id, product_color_id: @product_color.id, quantity: params[:quantity])
     else
-      puts "not saved"
+      @cart_product.quantity += params[:quantity].to_i
     end
+
+    @cart_product.save
   end
   
   def remove_from_cart
-    puts "remove_from_cart"
     @cart = Cart.find_by(user_id: current_user.id)
-    @product = Product.find_by(id: params[:id])
+    @product = ProductColor.find_by(id: params[:id])
 
     # find and destroy cart item
-    @cart_item = CartProduct.find_by(cart_id: @cart.id, product_id: @product.id).destroy
+    @cart_item = CartProduct.find_by(cart_id: @cart.id, product_color_id: @product.id).destroy
 
     # no redirect just notify user
     respond_to do |format|
@@ -125,7 +118,7 @@ class CartsController < ApplicationController
       @cart = Cart.new
       @cart.user_id = current_user.id
 
-      @cart.total_price = @cart.products.sum(:price)
+      @cart.set_total_price
 
       if not @cart.save
         # send error message
@@ -134,7 +127,7 @@ class CartsController < ApplicationController
     end
 
     @cart_products = CartProduct.where(cart_id: @cart.id)
-    @products = @cart_products.map { |cart_product| cart_product.product }
+    @products = @cart_products.map { |cart_product| cart_product.product_color }
   end
 
   # GET /carts/new

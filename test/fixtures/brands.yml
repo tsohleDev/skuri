@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  image_url: MyText
+  founders: MyString
+  country: MyString
+  established_at: 2024-02-03
+
+two:
+  name: MyString
+  description: MyText
+  image_url: MyText
+  founders: MyString
+  country: MyString
+  established_at: 2024-02-03
