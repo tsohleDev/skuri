@@ -59,7 +59,139 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }),
-        turbo_stream: turbo_stream.replace('product-modal', partial: 'admin/products/edit_product', locals: { product: @product }) }
+        turbo_stream: turbo_stream.replace('product-modal', partial: 'admin/products/edit_product', locals: { product: @product, is_new: true }) }
+    end
+  end
+
+  def create_product
+    puts "PARAMS: #{product_params.inspect}"
+    @product = Product.new(product_params)
+
+    puts '#' * 100
+    puts params.inspect
+
+    if @product.save
+      params[:categories].each do |category|
+        @product.categories << Category.find_by(name: category)
+      end
+
+      params[:colors].each_with_index do |color, index|
+        if params[:sizes][index].to_i && params[:sizes][index].to_i > 0 && params[:sizes][index].to_i < 16
+          size = ProductSize.new(price: params[:prices][index], UK: params[:sizes][index], EU: params[:sizes][index].to_i + 32, US: params[:sizes][index].to_i - 1, CM: params[:sizes][index].to_i * 2.54, product_id: @product.id)
+        else
+          size = ProductSize.new(size: params[:sizes][index], price: params[:prices][index], UK: params[:sizes][index], product_id: @product.id)
+        end
+        if size.save
+          color = ProductColor.new(color: color, stock: params[:stocks][index], product_size_id: size.id)
+          if color.save
+            params[:images][index*3..index*3+2].each do |image|
+              color.product_color_images.create(image_url: image)
+            end
+          else
+            puts "ERROR: #{color.errors.full_messages}"
+          end
+        else
+          puts "ERROR: #{size.errors.full_messages}"
+        end
+      end
+
+      params[:materials].each do |material|
+        @product.product_materials.create(material_id: Material.find_by(name: material).id)
+      end
+
+      @products = Product.all
+      authorize! :access, :admin
+
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }) }
+      end
+    else
+      puts "ERROR: #{@product.errors.full_messages}"
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('alerts', partial: 'shared/alerts', locals: { alert: "Product could not be created" }) }
+      end
+    end
+  end
+
+  def new_color
+    @product = Product.find(params[:product_id])
+    @color = ProductColor.new
+    authorize! :access, :admin
+
+    respond_to do |format|
+      @products = Product.all
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }),
+        turbo_stream: turbo_stream.replace('product-modal', partial: 'admin/products/forms/add_color', locals: { color: @color }) }
+    end
+  end
+
+  def create_color
+    @product = Product.find(params[:product_id])
+    authorize! :access, :admin
+    
+    if params[:size].to_i && params[:size].to_i > 0 && params[:size].to_i < 16
+      size = ProductSize.new(price: params[:price], UK: params[:size], EU: params[:size].to_i + 32, US: params[:size].to_i - 1, CM: params[:size].to_i * 2.54, product_id: @product.id)
+    else
+      size = ProductSize.new(size: params[:size], price: params[:price], UK: params[:size], product_id: @product.id)
+    end
+
+    puts "SIZE: #{size.inspect}"
+   
+    if size.save
+      puts "SIZE SAVED: #{size.inspect}"
+      color = ProductColor.new(color: params[:color], stock: params[:stock], product_size_id: size.id)
+    
+    else
+      puts "SIZE ERROR: #{size.errors.full_messages}"
+    end
+
+    puts '#' * 100
+    puts params.inspect
+
+    if color.save
+      params[:images].each do |image|
+        color.product_color_images.create(image_url: image)
+      end
+      @products = Product.all
+
+      puts "Success: #{color.inspect}"
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }) }
+      end
+    else
+      puts "ERROR: #{color.errors.full_messages}"
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('alerts', partial: 'shared/alerts', locals: { alert: "Color could not be created" }) }
+      end
+    end
+  end  
+
+  def new_category
+    @category = Category.new
+    authorize! :access, :admin
+
+    respond_to do |format|
+      @products = Product.all
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }),
+        turbo_stream: turbo_stream.replace('product-modal', partial: 'admin/products/forms/add_category', locals: { category: @category }) }
+    end
+  end
+
+  def create_category
+    puts "CATEGORY PARAMS: #{category_params.inspect}"
+    @category = Category.new(category_params)
+    authorize! :access, :admin
+
+    if @category.save
+      @products = Product.all
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }) }
+      end
+    else
+      puts "ERROR: #{@category.errors.full_messages}"
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('alerts', partial: 'shared/alerts', locals: { alert: "Category could not be created" }) }
+      end
     end
   end
 
@@ -71,7 +203,7 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }),
-        turbo_stream: turbo_stream.replace('product-modal', partial: 'admin/products/edit_product', locals: { product: @product }) }
+        turbo_stream: turbo_stream.replace('product-modal', partial: 'admin/products/edit_product', locals: { product: @product, is_new: false }) }
     end
   end
 
@@ -149,11 +281,19 @@ class AdminController < ApplicationController
       @product.categories << Category.find_by(name: category)
     end
 
+    #Update Materials
+    @product.product_materials.destroy_all
+    params[:materials].each do |material|
+      @product.product_materials.create(material_id: Material.find_by(name: material).id)
+    end
+
     @products = Product.all
     
-    # respond_to do |format|
-    #   format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }) }
-    # end
+    respond_to do |format|
+      # format.html { redirect_to products_path } # Redirect for HTML format
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-content', partial: 'admin/products/products', locals: { products: @products }) } # Turbo Stream response
+      format.any { head :not_acceptable } # Handle other formats gracefully
+    end
   end
 
   def update_category
@@ -249,7 +389,7 @@ class AdminController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:id, :name, :price, :description, :stock, :image, :category_id)
+      params.permit(:name,:description, :brand_id)
     end
 
     def manage_order_params
@@ -257,6 +397,10 @@ class AdminController < ApplicationController
     end
 
     def update_product_params
-      params.permit(:id, :name, :description)
+      params.permit(:id, :name, :description, :brand_id)
+    end
+
+    def category_params
+      params.permit(:name, :description, :image_url, :category_id)
     end
 end

@@ -2,7 +2,7 @@
 
 <h1 class="text-3xl font-bold px-80 mb-20">HELP</h1>
 
-<%= form_with(model: @help_message, url: help_messages_path, method: :post) do |form| %>
+<%= form_with(model: @help_message, url: help_messages_user_path, method: :post) do |form| %>
   <div>
     <%= form.text_field :name, required: true, autofocus: true, autocomplete: "name", placeholder: "Enter your name", class: "mb-4 min-w-[30vw] " %>
   </div>

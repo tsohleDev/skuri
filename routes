@@ -32,6 +32,7 @@
                             returns_user POST   /users/:id/returns(.:format)                                                                      users#returns
                         returnables_user POST   /users/:id/returnables(.:format)                                                                  users#returnables
                                help_user POST   /users/:id/help(.:format)                                                                         users#help
+                      help_messages_user POST   /users/:id/help_messages(.:format)                                                                users#help_messages
                       cancel_return_user POST   /users/:id/cancel(.:format)                                                                       users#cancel
                              return_user POST   /users/:id/return(.:format)                                                                       users#return
                            exchange_user POST   /users/:id/exchange(.:format)                                                                     users#exchange
@@ -67,7 +68,7 @@
                            ship_products POST   /admin/shipped_products(.:format)                                                                 admin#ship_products
                        exchange_products POST   /admin/exchanged_products(.:format)                                                               admin#exchange_products
                          refund_customer POST   /admin/refund_customer(.:format)                                                                  admin#refund_customer
-                          complete_order POST   /admin/complete_order(.:format)                                                                   admin#complete_order
+                        collect_products POST   /admin/collect_products(.:format)                                                                 admin#collect_products
                             edit_product POST   /admin/edit_product(.:format)                                                                     admin#edit_product
                               edit_order POST   /admin/edit_order(.:format)                                                                       admin#edit_order
                           delete_product DELETE /admin/delete_product(.:format)                                                                   admin#delete_product

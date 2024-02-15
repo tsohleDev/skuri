@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     post 'returns', to: 'users#returns', on: :member, as: :returns
     post 'returnables', to: 'users#returnables', on: :member, as: :returnables
     post 'help', to: 'users#help', on: :member, as: :help
+    post 'help_messages', to: 'users#help_messages', on: :member, as: :help_messages
     # For payfast payment gateway integration
     post 'cancel', to: 'users#cancel', on: :member, as: :cancel_return
     post 'return', to: 'users#return', on: :member, as: :return
@@ -60,12 +61,17 @@ Rails.application.routes.draw do
   delete 'admin/delete_product', to: 'admin#delete_product', as: :delete_product
 
   # PATCH
-  patch 'admin/update_product', to: 'admin#update_product', as: :update_product
+  post 'admin/update_product', to: 'admin#update_product', as: :update_product
   patch 'admin/update_category', to: 'admin#update_category', as: :update_category
   patch 'admin/update_shipment', to: 'admin#update_shipment', as: :update_shipment
   
   # NEW
   post 'admin/new_product', to: 'admin#new_product', as: :new_product
+  post 'admin/create_product', to: 'admin#create_product', as: :create_product
+  post 'admin/new_category', to: 'admin#new_category', as: :new_category
+  post 'admin/new_color', to: 'admin#new_color', as: :new_color
+  post 'admin/create_category', to: 'admin#create_category', as: :create_category
+  post 'admin/create_color', to: 'admin#create_color', as: :create_color
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

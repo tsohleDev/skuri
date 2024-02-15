@@ -145,12 +145,30 @@ class UsersController < ApplicationController
     end
   end
 
-
   def help
     @user = current_user
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/help") }
+    end
+  end
+
+  def help_messages
+    @user = current_user
+    @help_message = HelpMessage.new(help_message_params)
+
+    puts '#' * 100
+    puts help_message_params.inspect
+
+    respond_to do |format|
+      if @help_message.save
+        puts "success"
+        redirect_to user_url(current_user)
+      else
+        puts "failed"
+        puts @help_message.errors.full_messages
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "users/help") }
+      end
     end
   end
 
@@ -195,13 +213,13 @@ class UsersController < ApplicationController
   end
 
   # GET /users/new
-  def new
-    @user = User.new
-  end
+  # def new
+  #   #@user = User.new
+  # end
 
   # GET /users/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /users or /users.json
   def create
@@ -250,5 +268,11 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :gender, :date_of_birth, :email, :phone, :address1, :address2, :city, :state, :postal_code, :country, :password, :password_confirmation)
+    end
+
+    def help_message_params
+      permitted_params = params.permit(:name, :message)
+      permitted_params[:user_id] ||= current_user.id if current_user
+      permitted_params
     end
 end

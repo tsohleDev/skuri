@@ -7,6 +7,16 @@
         <% end %>
     <% end %>
 
+    <!-- number of orders -->
+    <p class="text-center text-lg font-semibold">You have <%= Order.count %> orders</p>
+
+    <!-- number of products -->
+    <p class="text-center text-lg font-semibold">You have <%= Product.count %> products in your store</p>
+
+    <!--  colors with low stock -->
+    <p class="text-center text-lg font-semibold">Colors with low stock</p>
+
+
     <!-- Chart -->
     <%= line_chart @orders_data %>
 

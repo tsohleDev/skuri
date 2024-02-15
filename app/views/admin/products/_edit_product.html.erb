@@ -5,7 +5,7 @@
             <button id="close" class="text-xl font-bold hover:text-gray-400">&times;</button>
         </div>
         <div class="px-4 py-2 w-full h-[80vh] overflow-y-auto">
-            <%= render "admin/products/forms/form", product: @product %>
+            <%= render "admin/products/forms/form", product: @product, is_new: is_new %>
         </div>
     </div>
 </div>
@@ -13,5 +13,9 @@
 <script>
     document.getElementById("close").addEventListener("click", function() {
         document.getElementById("product-modal").classList.add("hidden");
+    });
+
+    document.getElementById('close-add-modal').addEventListener('click', function() {
+        document.getElementById('add-modal').classList.add('hidden');
     });
 </script>

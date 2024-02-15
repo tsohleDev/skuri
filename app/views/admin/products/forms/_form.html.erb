@@ -1,4 +1,4 @@
-<%= form_tag(update_product_path(product), method: :patch, class: "flex flex-col w-full", data: { turbo_method: :patch }) do %>
+<%= form_tag( is_new ? create_product_path : update_product_path, class: "flex flex-col w-full", data: { turbo_method: :patch }) do %>
   <% if product.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -29,52 +29,91 @@
   <div class="flex w-full justify-between">
     <div class="w-full ml-2">
       <%= label_tag "brand", nil, style: "display: block", class: "font-bold w-full text-center" %>
-      <%= select_tag 'brand', options_for_select(Brand.all.map { |brand| [brand.name, brand.id] }, product.brand_id), class: "w-full", required: true %>
+      <%= select_tag 'brand_id', options_for_select(Brand.all.map { |brand| [brand.name, brand.id] }, product.brand_id), class: "w-full", required: true %>
     </div>
   </div>
 
-  <div class="w-full">
-    <%= label_tag "colors", nil, style: "display: block", class: "font-bold w-full text-center" %>
-    <div class="flex flex-col items-center w-full border border-gray-200 rounded-md p-2 my-2">
-      <% product.colors.each do |color| %>
-        <%= hidden_field_tag "color_ids[]", color.id %>
+  <% if !is_new %>
+    <div class="w-full">
+      <%= label_tag "colors", nil, style: "display: block", class: "font-bold w-full text-center" %>
+      <div class="flex flex-col items-center w-full border border-gray-200 rounded-md p-2 my-2">
+        <% product.colors.each do |color| %>
+          <%= hidden_field_tag "color_ids[]", color.id %>
+          <div class="grid grid-cols-4 gap-2 px-2 flex items-center justify-center">
+            <div class="flex  flex-col items-center">
+              <%= label_tag "color", nil, style: "display: block", class: "font-bold" %>
+              <%= text_field_tag "colors[]", color.color, class: "mx-4 w-40", required: true %>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <%= label_tag "size", nil, style: "display: block", class: "font-bold" %>
+              <% if !color.size.nil? %>
+                <%= text_field_tag "sizes[]", color.size , class: "mx-2 w-40", placeholder: "Size", required: true %> 
+              <% else %>
+                <%= number_field_tag "size_uks[]", color.size_uk, class: "mx-2 w-40", placeholder: "Size", type: "number", step: "1", min: "0", max: "1000000", required: true %>
+              <% end %> 
+            </div>
+
+            <div class="flex flex-col items-center">
+              <%= label_tag "price", nil, style: "display: block", class: "font-bold w-full text-center" %>
+              <%= number_field_tag "prices[]", color.price, class: "mx-2 w-40", placeholder: "0.00", type: "number", step: "0.01", min: "0.00", max: "1000000", required: true %>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <%= label_tag "stock", nil, style: "display: block", class: "font-bold" %>
+              <%= number_field_tag "stocks[]", color.stock, class: "mx-2 w-40", placeholder: "0", type: "number", step: "1", min: "0", max: "1000000", required: true %>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center w-full justify-center">
+            <% color.image_urls.each do |image| %>
+              <div class="p-2">
+                <%= image_tag image, class: "w-20" %>
+                <%= text_area_tag "color_images[]", image, class: "w-full h-10", required: true %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="w-full">
+      <%= label_tag "colors", nil, style: "display: block", class: "font-bold w-full text-center" %>
+      <div class="flex flex-col items-center w-full border border-gray-200 rounded-md p-2 my-2">
         <div class="grid grid-cols-4 gap-2 px-2 flex items-center justify-center">
           <div class="flex  flex-col items-center">
             <%= label_tag "color", nil, style: "display: block", class: "font-bold" %>
-            <%= text_field_tag "colors[]", color.color, class: "mx-4 w-40", required: true %>
+            <%= text_field_tag "colors[]", nil, class: "mx-4 w-40", placeholder: "Color", required: true %>
           </div>
 
           <div class="flex flex-col items-center">
             <%= label_tag "size", nil, style: "display: block", class: "font-bold" %>
-            <% if !color.size.nil? %>
-              <%= text_field_tag "sizes[]", color.size , class: "mx-2 w-40", placeholder: "Size", required: true %> 
-            <% else %>
-              <%= number_field_tag "size_uks[]", color.size_uk, class: "mx-2 w-40", placeholder: "Size", type: "number", step: "1", min: "0", max: "1000000", required: true %>
-            <% end %> 
+            <%= text_field_tag "sizes[]", nil, class: "mx-2 w-40", placeholder: "Size", required: true %>
           </div>
 
           <div class="flex flex-col items-center">
             <%= label_tag "price", nil, style: "display: block", class: "font-bold w-full text-center" %>
-            <%= number_field_tag "prices[]", color.price, class: "mx-2 w-40", placeholder: "0.00", type: "number", step: "0.01", min: "0.00", max: "1000000", required: true %>
+            <%= number_field_tag "prices[]", nil, class: "mx-2 w-40", placeholder: "0.00", type: "number", step: "0.01", min: "0.00", max: "1000000", required: true %>
           </div>
 
           <div class="flex flex-col items-center">
             <%= label_tag "stock", nil, style: "display: block", class: "font-bold" %>
-            <%= number_field_tag "stocks[]", color.stock, class: "mx-2 w-40", placeholder: "0", type: "number", step: "1", min: "0", max: "1000000", required: true %>
+            <%= number_field_tag "stocks[]", nil, class: "mx-2 w-40", placeholder: "0", type: "number", step: "1", min: "0", max: "1000000", required: true %>
           </div>
         </div>
 
         <div class="flex flex-wrap items-center w-full justify-center">
-          <% color.image_urls.each do |image| %>
+          <% [1, 2, 3].each do |i| %>
             <div class="p-2">
-              <%= image_tag image, class: "w-20" %>
-              <%= text_area_tag "color_images[]", image, class: "w-full h-10", required: true %>
+              <%= image_tag "https://via.placeholder.com/150", class: "w-20" %>
+              <%= text_area_tag "images[]", nil, class: "w-full h-10", required: true %>
             </div>
           <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
+
 
   <div class="w-full">
     <%= label_tag "category", nil, style: "display: block", class: "font-bold w-full text-center" %>
@@ -87,6 +126,25 @@
       <% end %>
     </div>
   </div>
+
+   <div class="w-full">
+    <%= label_tag "category", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <div class="flex flex-wrap items-center w-full">
+      <% Material.all.each do |material| %>
+        <div class="p-2">
+          <%= label_tag material.name, nil %>
+          <%= check_box_tag "materials[]", material.name, product.materials.include?(material)%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex w-full justify-between">
+    <div class="w-full ml-2">
+    </div>
+  </div>
+
+  <div id="add-modal"></div>
 
   <div class="flex bg-secondary p-2 justify-center items-center my-5 mx-auto rounded-md" > 
     <%= submit_tag "Update" %>
