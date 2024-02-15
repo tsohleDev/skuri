@@ -2,9 +2,13 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
 
   # GET /orders or /orders.json
-  def index
-    @orders = Order.all
-  end
+  # def index
+  #   @orders = Order.all
+
+  #   respond_to do |format|
+  #     format.turbo_stream { render turbo_stream: turbo_stream.replace("user-content", partial: "orders/order", locals: { order: @orders.first }) }
+  #   end
+  # end
 
   # GET /orders/1 or /orders/1.json
   def show

@@ -1,0 +1,20 @@
+<div class="bg-gray-200 my-2 rounded-2xl grid grid-cols-5", id="item_<%= item.product_color.id %>">
+    <!-- Product Image -->
+    <%= image_tag item.product_color.image_urls.first, class: "w-40 rounded-full m-5 py-2 col-span-1" %>
+
+    <div class="flex flex-col justify-around py-5 col-span-3">
+        <h2 class="text-4xl font-bold"><%= item.product_color.name %></h2>
+
+        <div class="flex">
+            <p class="text-gray-700 text-2xl"><%= number_to_currency(item.product_color.price, precision: 2, unit: "R") %></p>
+            <p class="text-gray-700 text-2xl"> Size: <%= item.product_color.size %> </p>
+            <%= link_to "Remove", remove_from_cart_product_path(item.product_color), class: "btn btn-primary mx-5 text-2xl", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center">
+        <%= link_to "+", increment_quantity_user_cart_path(@cart, product_id: item.product_color.id), class: "btn btn-primary", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+        <%= render "carts/quantity", item: item %>
+        <%= link_to "-", decrement_quantity_user_cart_path(@cart, product_id: item.product_color.id), class: "btn btn-primary", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+    </div>
+</div>

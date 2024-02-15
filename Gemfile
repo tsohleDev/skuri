@@ -83,3 +83,7 @@ gem "letter_opener", "~> 1.8"
 gem "cancancan", "~> 3.5"
 
 gem "font-awesome-sass", "~> 6.5"
+
+gem "chartkick", "~> 5.0"
+
+gem "groupdate", "~> 6.4"

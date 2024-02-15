@@ -1,0 +1,26 @@
+<div id="admin-content" class="flex flex-col">
+    <h1> Summary </h1>
+    <!-- If today is the day of any of expected_delivery, show a notification -->
+    <% @shipments.each do |shipment| %>
+        <% if shipment.expected_delivery <= Date.today %>
+            <p class="text-center text-lg font-semibold text-red-500">Expected delivery for order <%= shipment.order_id %> expected <%= shipment.expected_delivery %></p>
+        <% end %>
+    <% end %>
+
+    <!-- number of orders -->
+    <p class="text-center text-lg font-semibold">You have <%= Order.count %> orders</p>
+
+    <!-- number of products -->
+    <p class="text-center text-lg font-semibold">You have <%= Product.count %> products in your store</p>
+
+    <!--  colors with low stock -->
+    <p class="text-center text-lg font-semibold">Colors with low stock</p>
+
+
+    <!-- Chart -->
+    <%= line_chart @orders_data %>
+
+    <%= column_chart Order.group_by_day_of_week(:created_at, format: "%a").count %>
+
+    <%= pie_chart OrderProduct.group(:product_color.name).count %>
+</div>

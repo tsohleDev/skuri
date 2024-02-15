@@ -1,4 +1,6 @@
                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
+                       help_messages_new GET    /help_messages/new(.:format)                                                                      help_messages#new
+                    help_messages_create GET    /help_messages/create(.:format)                                                                   help_messages#create
                         new_user_session GET    /users/sign_in(.:format)                                                                          devise/sessions#new
                             user_session POST   /users/sign_in(.:format)                                                                          devise/sessions#create
                     destroy_user_session DELETE /users/sign_out(.:format)                                                                         devise/sessions#destroy
@@ -17,27 +19,24 @@
                    new_user_confirmation GET    /users/confirmation/new(.:format)                                                                 devise/confirmations#new
                        user_confirmation GET    /users/confirmation(.:format)                                                                     devise/confirmations#show
                                          POST   /users/confirmation(.:format)                                                                     devise/confirmations#create
-                              home_index GET    /home/index(.:format)                                                                             home#index
-                             home_search GET    /home/search(.:format)                                                                            home#search
                                     root GET    /                                                                                                 home#index
-                               shipments GET    /shipments(.:format)                                                                              shipments#index
-                                         POST   /shipments(.:format)                                                                              shipments#create
-                            new_shipment GET    /shipments/new(.:format)                                                                          shipments#new
-                           edit_shipment GET    /shipments/:id/edit(.:format)                                                                     shipments#edit
-                                shipment GET    /shipments/:id(.:format)                                                                          shipments#show
-                                         PATCH  /shipments/:id(.:format)                                                                          shipments#update
-                                         PUT    /shipments/:id(.:format)                                                                          shipments#update
-                                         DELETE /shipments/:id(.:format)                                                                          shipments#destroy
-                             user_orders GET    /users/:user_id/orders(.:format)                                                                  orders#index
-                                         POST   /users/:user_id/orders(.:format)                                                                  orders#create
-                          new_user_order GET    /users/:user_id/orders/new(.:format)                                                              orders#new
-                         edit_user_order GET    /users/:user_id/orders/:id/edit(.:format)                                                         orders#edit
-                              user_order GET    /users/:user_id/orders/:id(.:format)                                                              orders#show
-                                         PATCH  /users/:user_id/orders/:id(.:format)                                                              orders#update
-                                         PUT    /users/:user_id/orders/:id(.:format)                                                              orders#update
-                                         DELETE /users/:user_id/orders/:id(.:format)                                                              orders#destroy
-                                         GET    /users/:user_id/:wishlist(.:format)                                                               customers#wish_list
-                                         GET    /users/:user_id/:cart(.:format)                                                                   customers#cart
+                           help_messages POST   /help_messages(.:format)                                                                          help_messages#create
+                        new_help_message GET    /help_messages/new(.:format)                                                                      help_messages#new
+                           wishlist_user GET    /users/:id/wishlist(.:format)                                                                     wishlists#show
+                               cart_user GET    /users/:id/cart(.:format)                                                                         carts#show
+            increment_quantity_user_cart POST   /users/:user_id/carts/:id/increment_quantity/:product_id(.:format)                                carts#increment_quantity
+            decrement_quantity_user_cart POST   /users/:user_id/carts/:id/decrement_quantity/:product_id(.:format)                                carts#decrement_quantity
+                      checkout_user_cart POST   /users/:user_id/carts/:id/checkout(.:format)                                                      carts#checkout
+                               user_cart GET    /users/:user_id/carts/:id(.:format)                                                               carts#show
+                             orders_user POST   /users/:id/orders(.:format)                                                                       users#orders
+                            returns_user POST   /users/:id/returns(.:format)                                                                      users#returns
+                        returnables_user POST   /users/:id/returnables(.:format)                                                                  users#returnables
+                               help_user POST   /users/:id/help(.:format)                                                                         users#help
+                      help_messages_user POST   /users/:id/help_messages(.:format)                                                                users#help_messages
+                      cancel_return_user POST   /users/:id/cancel(.:format)                                                                       users#cancel
+                             return_user POST   /users/:id/return(.:format)                                                                       users#return
+                           exchange_user POST   /users/:id/exchange(.:format)                                                                     users#exchange
+                            success_user GET    /users/:id/success(.:format)                                                                      users#success
                                    users GET    /users(.:format)                                                                                  users#index
                                          POST   /users(.:format)                                                                                  users#create
                                 new_user GET    /users/new(.:format)                                                                              users#new
@@ -54,22 +53,29 @@
                                          PATCH  /products/:product_id/reviews/:id(.:format)                                                       reviews#update
                                          PUT    /products/:product_id/reviews/:id(.:format)                                                       reviews#update
                                          DELETE /products/:product_id/reviews/:id(.:format)                                                       reviews#destroy
+                     add_to_cart_product POST   /products/:id/add_to_cart(.:format)                                                               carts#add_to_cart
+                remove_from_cart_product POST   /products/:id/remove_from_cart(.:format)                                                          carts#remove_from_cart
+                 add_to_wishlist_product POST   /products/:id/add_to_wishlist(.:format)                                                           wishlists#add_to_wishlist
                                 products GET    /products(.:format)                                                                               products#index
-                                         POST   /products(.:format)                                                                               products#create
-                             new_product GET    /products/new(.:format)                                                                           products#new
-                            edit_product GET    /products/:id/edit(.:format)                                                                      products#edit
                                  product GET    /products/:id(.:format)                                                                           products#show
-                                         PATCH  /products/:id(.:format)                                                                           products#update
-                                         PUT    /products/:id(.:format)                                                                           products#update
-                                         DELETE /products/:id(.:format)                                                                           products#destroy
-                              categories GET    /categories(.:format)                                                                             categories#index
-                                         POST   /categories(.:format)                                                                             categories#create
-                            new_category GET    /categories/new(.:format)                                                                         categories#new
-                           edit_category GET    /categories/:id/edit(.:format)                                                                    categories#edit
-                                category GET    /categories/:id(.:format)                                                                         categories#show
-                                         PATCH  /categories/:id(.:format)                                                                         categories#update
-                                         PUT    /categories/:id(.:format)                                                                         categories#update
-                                         DELETE /categories/:id(.:format)                                                                         categories#destroy
+                                   admin GET    /admin(.:format)                                                                                  admin#index
+                            admin_orders POST   /admin/orders(.:format)                                                                           admin#orders
+                          admin_products POST   /admin/products(.:format)                                                                         admin#products
+                        admin_categories POST   /admin/categories(.:format)                                                                       admin#categories
+                          admin_messages POST   /admin/messages(.:format)                                                                         admin#messages
+                         admin_shipments POST   /admin/shipments(.:format)                                                                        admin#shipments
+                            manage_order POST   /admin/manage_order(.:format)                                                                     admin#manage_order
+                           ship_products POST   /admin/shipped_products(.:format)                                                                 admin#ship_products
+                       exchange_products POST   /admin/exchanged_products(.:format)                                                               admin#exchange_products
+                         refund_customer POST   /admin/refund_customer(.:format)                                                                  admin#refund_customer
+                        collect_products POST   /admin/collect_products(.:format)                                                                 admin#collect_products
+                            edit_product POST   /admin/edit_product(.:format)                                                                     admin#edit_product
+                              edit_order POST   /admin/edit_order(.:format)                                                                       admin#edit_order
+                          delete_product DELETE /admin/delete_product(.:format)                                                                   admin#delete_product
+                          update_product PATCH  /admin/update_product(.:format)                                                                   admin#update_product
+                         update_category PATCH  /admin/update_category(.:format)                                                                  admin#update_category
+                         update_shipment PATCH  /admin/update_shipment(.:format)                                                                  admin#update_shipment
+                             new_product POST   /admin/new_product(.:format)                                                                      admin#new_product
         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
        turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh

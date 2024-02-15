@@ -1,4 +1,4 @@
-<%= form_with(model: review) do |form| %>
+<%= form_tag product_reviews_path(@product), class: "flex flex-col space-y-4" do %>
   <% if review.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -11,32 +11,24 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :customer_id, style: "display: block" %>
-    <%= form.text_field :customer_id %>
+  <div class="flex justify-center items-center">
+    <% (1..5).each do |i| %>
+      <input type="radio" id="star<%= i %>" class="hidden" name="rating" value="<%= i %>" />
+      <label for="star<%= i %>" class="text-2xl cursor-pointer", data-controller="rating">
+        <i id="star-<%=i%>" class="fa fa-star text-gray-400"></i>
+      </label>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :product_id, style: "display: block" %>
-    <%= form.text_field :product_id %>
+  <div class="m-4">
+    <%= text_area_tag :message, nil, placeholder: "Write a review", class: "w-full h-24 p-2 border-2 border-gray-300" %>
   </div>
 
-  <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.number_field :rating %>
+  <div class="mt-4 flex items-center justify-around">
+    <%= file_field_tag :image, class: "mt-4 p-2" %>
   </div>
 
-  <div>
-    <%= form.label :message, style: "display: block" %>
-    <%= form.text_area :message %>
-  </div>
-
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.text_field :image %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mt-4 flex justify-around">
+    <%= submit_tag "Create Review", class: "btn btn-secondary w-40 bg-tertiary text-white p-2 rounded-md hover:shadow-lg hover:shadow-black" %>
   </div>
 <% end %>

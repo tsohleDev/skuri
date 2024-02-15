@@ -1,0 +1,16 @@
+<div id="exchange" class="flex items-center justify-center m-4 w-full">
+    <%= form_tag exchange_user_path, method: :post, data: { turbo_method: :post } do %>
+        <%= hidden_field_tag :item_id, item.id %>
+        <%= hidden_field_tag :product_id, product.id %>
+
+        <%= label_tag :size, "Select a size", class: "block text-sm font-medium text-gray-700 text-left text-2xl font-semibold" %>
+
+        <% if product.sizes_in_stock.length > 1 %>
+            <%= select_tag "size", options_for_select(product.sizes_in_stock.reject { |size| size.UK == item.size }.map { |size| [size.UK, size.UK] }), class: "mt-1 block pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" %>
+        <% else %>
+            <p class="text-red-500">No sizes available</p>
+        <% end %>
+
+        <%= submit_tag "Submit", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded" %>
+    <% end %>
+</div>

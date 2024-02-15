@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+<div id="products-header" class="col-span-1 relative flex flex-col items-center relative h-2/3 overflow-hidden rounded-lg shadow-lg py-5 h-[25vh]">
+  <%= link_to root_path(@category), class: "inset-0 w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
+    <%= image_tag @category.image_url, class: "w-full h-full object-cover" %>
+    <h2 class="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold text-quaternary font-bold">
+      <%= @category.name %>
+    </h2>
   <% end %>
 </div>
 
-<%= link_to "New product", new_product_path %>
+<%= render "shared/categories" %>
+
+<%= render "shared/products" %>

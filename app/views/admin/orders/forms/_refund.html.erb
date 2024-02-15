@@ -1,0 +1,27 @@
+<%= form_tag(refund_customer_path, method: :post, id: 'order-action', class: 'flex flex-col my-10 h-[50vh]') do %>
+  <h2 class="text-center text-xl font-bold">Refund Customer</h2>
+
+  <div class="min-h-[40vh]">
+    <div class="flex flex-col p-10 mx-5">
+      <%= hidden_field_tag :order_id, order.id %>
+      
+      <% order.order_products.where(status: ['returned', 'collected']).each do |item| %>
+        <div class="flex items-center py-1 mx-5">
+          <%= check_box_tag 'shipped_products[]', item.product_color.id, false, id: "product_#{item.product_color.id}", class: 'mr-2' %>
+          <%= label_tag "product_#{item.product_color.id}", item.name, class: 'text-lg font-semibold' %>
+          <span class="text-lg font-semibold ml-2">(<%= number_to_currency(item.price, unit:'R', precision: 2) %>)</span>
+        </div>
+      <% end %>
+    </div>
+
+    <% if !order.order_products.where(status: ['returned', 'collected']).any? %>
+      <div class="flex flex-col items-center justify-center h-[40vh]">
+        <p class="text-4xl font-bold text-green-500">No products to Refund</p>
+      </div>
+    <% end %>
+  </div>
+    
+  <div class="flex justify-center text-white items-center justify-center py-1 mx-5 mt-10 ">
+    <%= submit_tag 'Refund Selected Products', class: 'bg-secondary rounded-md mx-5 p-5' %>
+  </div>
+<% end %>

@@ -1,0 +1,58 @@
+<%= form_tag(update_product_path, class: "flex flex-col w-full", data: { turbo_method: :patch }) do %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="hidden">
+    <%= label_tag "id", nil, style: "display: block" %>
+    <%= text_field_tag "id", product.id %>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "name", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <%= text_field_tag "name", product.name, class: "w-full", required: true %>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "description", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <%= text_area_tag "description", product.description, class: "w-full min-h-32", required: true %>
+  </div>
+
+  <div class="flex w-full justify-between">
+    <div class="w-full ml-2">
+      <%= label_tag "brand", nil, style: "display: block", class: "font-bold w-full text-center" %>
+      <%= select_tag 'brand', options_for_select(Brand.all.map { |brand| [brand.name, brand.id] }, product.brand_id), class: "w-full", required: true %>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <%= label_tag "category", nil, style: "display: block", class: "font-bold w-full text-center" %>
+    <div class="flex flex-wrap items-center w-full">
+      <% Category.all.each do |category| %>
+        <div class="p-2">
+          <%= label_tag category.name, nil %>
+          <%= check_box_tag "categories[]", category.name, product.categories.include?(category)%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex w-full justify-between">
+    <div class="w-full ml-2">
+    </div>
+  </div>
+
+  <div id="add-modal"></div>
+
+  <div class="flex bg-secondary p-2 justify-center items-center my-5 mx-auto rounded-md" > 
+    <%= submit_tag "Update" %>
+  </div>
+<% end %>

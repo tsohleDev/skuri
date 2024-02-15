@@ -1,16 +1,7 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Products</h1>
-
-<div id="products">
+<section id="products" class="flex flex-wrap justify-between py-5 px-20">
   <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+    <%= link_to product_path(product) do %>
+      <% render "products/product_cart", product: product %>
+    <% end %>   
   <% end %>
-</div>
-
-<% # if can? :create, Product %>
-  <%= link_to "New product", new_product_path %>
-<% # end %>
+</section>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  return: one
+  product_color: one
+  reason: MyText
+  direction: MyString
+
+two:
+  return: two
+  product_color: two
+  reason: MyText
+  direction: MyString

@@ -1,0 +1,11 @@
+<!-- Loop through categories and create modals for each category -->
+<% categories.each do |category| %>
+  <div id=<%= name %> class="mx-20 hidden">
+    <%= link_to products_path(category: category.id), class: "w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
+      <%#= image_tag category.image_url, class: "w-full h-full object-cover" %>
+      <h2 class="text-4xl font-semibold text-quaternary font-bold">
+        <%= category.name %>
+      </h2>
+    <% end %>
+  </div>
+<% end %>
