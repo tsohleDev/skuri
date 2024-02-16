@@ -25,6 +25,9 @@ class ProductsController < ApplicationController
     @product_size = ProductSize.find_by(product_id: params[:id])
     @product_color = ProductColor.find_by(product_size_id: @product_size.id)
 
+    #select random 3 products
+    @related_products = Product.where.not(id: @product.id).order("RANDOM()").limit(3)
+
     # colors and sizes for the product that are available
     @product_sizes = ProductSize.joins(:product_colors).where(product_id: @product.id)
     @available_sizes = @product_sizes

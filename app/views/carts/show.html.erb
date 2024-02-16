@@ -1,21 +1,3 @@
 <section class="h-min-[93vh]">
     <%= render @cart %>
-
-  <div id="payment-form"></div>
-    <script src="https://sandbox-checkout.peachpayments.com/js/checkout.js"></script>
-
-    <form action="https://sandbox.payfast.co.za​/eng/process" method="post">
-    <input type="hidden" name="merchant_id" value="10000100">
-    <input type="hidden" name="merchant_key" value="46f0cd694581a">
-    <input type="hidden" name="amount" value="100.00">
-    <input type="hidden" name="item_name" value="Test Product">
-    <input type="hidden" name="payment_method" value="cc">
-        <input type="hidden" name="return_url" value="http://127.0.0.1:3000/users/1/success">
-        <input type="hidden" name="cancel_url" value="http://127.0.0.1:3000/users/1">
-        <input type="hidden" name="notify_url" value="http://127.0.0.1:3000/users/1">
-        <input type="hidden" name="name_first" value="First Name">
-        <input type="hidden" name="name_last" value="Last Name">
-        <input type="hidden" name="email_address" value="test@test.com">
-        <input type="submit">
-    </form>
 </section>

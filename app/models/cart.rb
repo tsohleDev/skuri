@@ -29,7 +29,10 @@ class Cart < ApplicationRecord
   end
 
   def set_total_price
+    puts '#' * 100
+    puts 'Setting total price2'
     self.total_price = cart_products.to_a.sum { |item| item.total_price }
+    save
   end
 
   def total_items
