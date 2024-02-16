@@ -1,7 +1,7 @@
 
   <div class="sticky top-0 flex bg-quaternary justify-around py-5 border-b-2 border-gray-200 shadow-b shadow-gray-200 items-center h-[5vh] z-10">
     <hr class="border-1 border-gray-500 w-full">
-    <ul class="flex items-center align-middle list-bullet ml-10">
+    <ul class="hidden md:flex items-center align-middle list-bullet ml-10">
       <!-- Link to Hair Products Category -->
       <li data-controller="category" ><%= link_to "HAIR", products_path(category: Category.find_by(name: 'Hair Products').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
       <!-- Link to Accessories Category -->
@@ -12,10 +12,9 @@
 
       <!-- Link to Shoes Category -->
       <li data-controller="category" ><%= link_to "SHOES", products_path(category: Category.find_by(name: 'Shoes').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
-
-      <!-- Search Input -->
-      <li><input type="text" placeholder="Search" class="mx-10 px-2 py-1 border rounded"></li>
     </ul>
+    <!-- Search Input -->
+    <input type="text" placeholder="Search" class="mx-10 px-2 py-1 border rounded">
     <hr class="border-1 border-gray-500 w-full">
   </div>
 
