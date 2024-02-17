@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
     @categories = Category.all
     @user = current_user
 
+    @results_products = []
+    
     if params[:category].nil?
       @products = Product.all
       @category = Category.first
@@ -84,10 +86,23 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-  # GET /products/1/edit
-  def edit
-  end
+  #POST /products
+  def search
+    puts 'INSIDE SEARCH METHOD'
+    puts '#' * 100
+    puts '#' * 100
+    puts params.inspect
 
+    if params[:query].nil? || params[:query].strip.empty?
+      @results_products = []
+    else
+      @results_products = Product.ransack(name_cont: params[:query]).result(distinct: true)
+    end
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('results', partial: 'products/results') }
+    end
+  end
   # POST /products or /products.json
   def create
     category = Category.find_by(name: params[:product][:category])

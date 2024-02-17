@@ -3,8 +3,10 @@ class HomeController < ApplicationController
     @user = current_user
     @products = Product.all
     @categories = Category.all
-  end
 
-  def search
+    puts '#' * 100
+    puts params.inspect
+
+    @results_products = []
   end
 end

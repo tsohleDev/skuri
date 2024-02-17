@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     post 'add_to_cart', to: 'carts#add_to_cart', on: :member, as: :add_to_cart
     post 'remove_from_cart', to: 'carts#remove_from_cart', on: :member, as: :remove_from_cart
     post 'add_to_wishlist', to: 'wishlists#add_to_wishlist', on: :member, as: :add_to_wishlist
+    post 'search', to: 'products#search', on: :collection, as: :search
   end
 
   #resources :categories

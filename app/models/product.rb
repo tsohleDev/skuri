@@ -57,4 +57,8 @@ class Product < ApplicationRecord
   def average_rating
     reviews.average(:rating).to_f
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["brand_id", "created_at", "description", "id", "name", "updated_at"]
+  end
 end

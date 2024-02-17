@@ -13,5 +13,8 @@ application.register("hello", HelloController)
 import RatingController from "./rating_controller"
 application.register("rating", RatingController)
 
+import SearchController from "./search_controller"
+application.register("search", SearchController)
+
 import ShopController from "./shop_controller"
 application.register("shop", ShopController)

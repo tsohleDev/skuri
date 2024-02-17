@@ -56,6 +56,7 @@
                      add_to_cart_product POST   /products/:id/add_to_cart(.:format)                                                               carts#add_to_cart
                 remove_from_cart_product POST   /products/:id/remove_from_cart(.:format)                                                          carts#remove_from_cart
                  add_to_wishlist_product POST   /products/:id/add_to_wishlist(.:format)                                                           wishlists#add_to_wishlist
+                         search_products POST   /products/search(.:format)                                                                        products#search
                                 products GET    /products(.:format)                                                                               products#index
                                  product GET    /products/:id(.:format)                                                                           products#show
                                    admin GET    /admin(.:format)                                                                                  admin#index
@@ -72,10 +73,15 @@
                             edit_product POST   /admin/edit_product(.:format)                                                                     admin#edit_product
                               edit_order POST   /admin/edit_order(.:format)                                                                       admin#edit_order
                           delete_product DELETE /admin/delete_product(.:format)                                                                   admin#delete_product
-                          update_product PATCH  /admin/update_product(.:format)                                                                   admin#update_product
+                          update_product POST   /admin/update_product(.:format)                                                                   admin#update_product
                          update_category PATCH  /admin/update_category(.:format)                                                                  admin#update_category
                          update_shipment PATCH  /admin/update_shipment(.:format)                                                                  admin#update_shipment
                              new_product POST   /admin/new_product(.:format)                                                                      admin#new_product
+                          create_product POST   /admin/create_product(.:format)                                                                   admin#create_product
+                            new_category POST   /admin/new_category(.:format)                                                                     admin#new_category
+                               new_color POST   /admin/new_color(.:format)                                                                        admin#new_color
+                         create_category POST   /admin/create_category(.:format)                                                                  admin#create_category
+                            create_color POST   /admin/create_color(.:format)                                                                     admin#create_color
         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
        turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
