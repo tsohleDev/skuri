@@ -1,15 +1,33 @@
-<div class="flex items-between">
-  <div class="flex flex-col w-[60vw] ml-10 my-10">
+<div class="flex flex-col items-between">
+  <div class="flex flex-col mx-4 md:w-[60vw] md:ml-10 my-10">
     <% @cart_products.each do |item| %>
       <%= render "carts/item", item: item %>
     <% end %>
   </div>
 
 
-  <div class="flex flex-col items-center h-fill w-fill mx-auto my-10 border-2 border-gray-200 rounded-2xl px-20 py-10">
-    <h2 class="text-4xl font-bold border-b border-gray-200 mb-20">Cart Summary</h2>
-    <p class="text-4xl text-bold">Total Price: <%= number_to_currency(@cart.total_price) %></p>
+  <div class="flex flex-col items-center h-fill w-full md:mx-auto my-10 border-2 border-gray-200 rounded-2xl md:px-20 py-10">
+    <p class="text-4xl text-extra-bold">Total Price: <%= number_to_currency(@cart.total_price, unit: "R", precision: 2) %></p>
 
-    <%= link_to "Checkout", checkout_user_cart_path(@cart), data: { turbo_method: :post }, class: "bg-gray-500" %>
+    <%#= link_to "Checkout", checkout_user_cart_path(@cart), data: { turbo_method: :post }, class: "bg-gray-500" %>
+
+    <div id="payment-form"></div>
+    
+    <form action="https://sandbox.payfast.co.za​/eng/process" method="post", class="w-full">
+      <input type="hidden" name="merchant_id" value="10000100">
+      <input type="hidden" name="merchant_key" value="46f0cd694581a">
+      <input type="hidden" name="amount" value="<%= @cart.total_price %>">
+      <input type="hidden" name="item_name" value="Test Product">
+      <input type="hidden" name="payment_method" value="cc">
+      <input type="hidden" name="return_url" value="http://127.0.0.1:3000/users/1/success">
+      <input type="hidden" name="cancel_url" value="http://127.0.0.1:3000/users/1">
+      <input type="hidden" name="notify_url" value="http://127.0.0.1:3000/users/1">
+      <input type="hidden" name="name_first" value="First Name">
+      <input type="hidden" name="name_last" value="Last Name">
+      <input type="hidden" name="email_address" value="test@test.com">
+      <input type="submit" value="Pay Now", class="bg-green-500 text-white rounded-2xl p-2 mt-2 cursor-pointer rounded-2xl hover:bg-green-600 w-full text-2xl">
+      </form>
   </div>
 </div>
+
+<script src="https://sandbox-checkout.peachpayments.com/js/checkout.js"></script>

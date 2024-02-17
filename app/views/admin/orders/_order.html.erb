@@ -1,39 +1,39 @@
-<div class="grid grid-cols-3 justify-between mb-4 mt-2">
+<div class="md:grid md:grid-cols-3 justify-between mb-4 mt-2">
   <div class="flex flex-col border-r-2 border-gray-300 h-full px-2 justify-center items-center">
-    <p class="text-lg font-medium"><span class="font-bold">ORDER NUMBER :#</span><%= order.id %></p>
-    <p class="text-lg font-medium"><span class="font-bold">PAYMENT      :</span><%= number_to_currency order.cost, unit: "R" %></p>
-    <p class="text-lg font-medium"><span class="font-bold">DATE         :</span><%= order.created_at.strftime("%d %h %Y %H:%M%p") %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">ORDER NUMBER :#</span><%= order.id %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">PAYMENT      :</span><%= number_to_currency order.cost, unit: "R" %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">DATE         :</span><%= order.created_at.strftime("%d %h %Y %H:%M%p") %></p>
   </div>
 
   <div class="flex flex-col border-l-2 border-r-2 border-gray-300 h-full p-2 justify-center items-center">
     <h3 class="text-xl font-bold text-center"> Adress </h3>
 
-    <p class="text-lg font-medium"><span class="font-bold">STREET    :</span><%= order.address1 %></p>
-    <p class="text-lg font-medium"><span class="font-bold">SUBURB      :</span><%= order.address2 %></p>
-    <p class="text-lg font-medium"><span class="font-bold">CITY      :</span><%= order.city %></p>
-    <p class="text-lg font-medium"><span class="font-bold">POSTAL CODE :</span><%= order.postal_code %></p>
-    <p class="text-lg font-medium"><span class="font-bold">COUNTRY :</span><%= order.country %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">STREET    :</span><%= order.address1 %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">SUBURB      :</span><%= order.address2 %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">CITY      :</span><%= order.city %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">POSTAL CODE :</span><%= order.postal_code %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">COUNTRY :</span><%= order.country %></p>
   </div>
 
   <div class="flex flex-col border-r-2 border-gray-300 h-full p-2 justify-center items-center">
     <h3 class="text-xl font-bold text-center"> Customer </h3>
 
-    <p class="text-lg font-medium"><span class="font-bold">NAME    :</span><%= order.user.first_name +  order.user.last_name %></p>
-    <p class="text-lg font-medium"><span class="font-bold">EMAIL   :</span><%= order.user.email %></p>
-    <p class="text-lg font-medium"><span class="font-bold">PHONE   :</span><%= order.user.phone %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">NAME    :</span><%= order.user.first_name +  order.user.last_name %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">EMAIL   :</span><%= order.user.email %></p>
+    <p class="md:text-lg font-medium"><span class="font-bold">PHONE   :</span><%= order.user.phone %></p>
   </div>
 </div>
 
 <div class="flex justify-center my-10">
   <% order.order_products.each do |item| %>
-    <div class="flex flex-col bg-white border-[2px] <%= item.status == 'paid' ? 'border-tertiary' : item.status == 'shipped' ? 'border-green-500' : item.status == 'returned' ? 'border-red-500' : item.status == 'exchanged' ? 'border-blue-500' : 'opacity-20'%> p-2 rounded-xl mx-10">
+    <div class="flex flex-col bg-white border-[2px] <%= item.status == 'paid' ? 'border-tertiary' : item.status == 'shipped' ? 'border-green-500' : item.status == 'returned' ? 'border-red-500' : item.status == 'exchanged' ? 'border-blue-500' : 'opacity-20'%> p-2 rounded-xl md:mx-10">
       <%= image_tag item.image_url, class: 'w-32 h-32 object-cover m-5' %>
       <h3 class="text-xl font-bold text-center"><%= item.name %></h3>
-      <p class="text-l font-medium"><span class="font-bold">SIZE     :</span><%= item.size || item.size_uk %></p>
-      <p class="text-l font-medium"><span class="font-bold">COLOR    :</span><%= item.color %></p>
-      <p class="text-l font-medium"><span class="font-bold">QUANTITY :</span><%= item.quantity %></p>
-      <p class="text-l font-medium"><span class="font-bold">TOTAL    :</span><%= number_to_currency item.total_price, unit: "R", precision: 2 %></p>
-      <p class="text-l font-medium"><span class="font-bold">STATUS   :</span><%= item.status %></p>
+      <p class="text-sm md:text-l font-medium"><span class="font-bold">SIZE     :</span><%= item.size || item.size_uk %></p>
+      <p class="text-sm md:text-l font-medium"><span class="font-bold">COLOR    :</span><%= item.color %></p>
+      <p class="text-sm md:text-l font-medium"><span class="font-bold">QUANTITY :</span><%= item.quantity %></p>
+      <p class="text-sm md:text-l font-medium"><span class="font-bold">TOTAL    :</span><%= number_to_currency item.total_price, unit: "R", precision: 2 %></p>
+      <p class="text-sm md:text-l font-medium"><span class="font-bold">STATUS   :</span><%= item.status %></p>
     </div>
   <% end %>
 </div>

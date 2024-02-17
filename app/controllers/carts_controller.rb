@@ -27,6 +27,7 @@ class CartsController < ApplicationController
     end
 
     @cart_product.save
+    @cart.set_total_price
   end
   
   def remove_from_cart
@@ -35,6 +36,7 @@ class CartsController < ApplicationController
 
     # find and destroy cart item
     @cart_item = CartProduct.find_by(cart_id: @cart.id, product_color_id: @product.id).destroy
+    @cart.set_total_price
 
     # no redirect just notify user
     respond_to do |format|

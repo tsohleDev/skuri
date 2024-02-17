@@ -11,15 +11,18 @@
   </head>
 
   <body class="bg-quaternary">
-    <header class="h-[7vh] flex justify-between items-center py-2 px-5 border-b border-primary shadow-b shadow-primary bg-quaternary z-9">
+    <header class="h-[7vh] sticky top-0 flex justify-between items-center py-2 px-5 border-b border-primary shadow-b shadow-primary bg-quaternary z-10 md:relative">
       <%= link_to "Skuri", root_path, class: "text-4xl font-bold" %>
       <%= render "layouts/navbar" %>
     </header>
 
     <main class="bg-quaternary min-h-[80vh]">
       <p id="alerts" />
+      <!-- Mobile Menu -->
       <%= yield %>
     </main>
+
+    <%= render "layouts/mobile_menu" %>
 
     <footer class="h-[13vh] bg-gray-800 text-white py-4">
       <div class="container mx-auto text-center">
@@ -37,3 +40,16 @@
     </footer>
   </body>
 </html>
+
+<script>
+    document.querySelectorAll('#menu-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+
+            document.querySelector('header').classList.toggle('hidden');
+            document.querySelector('main').classList.toggle('hidden');
+            document.querySelector('footer').classList.toggle('hidden');
+        });
+    });
+    console.log('Hello World');
+</script>

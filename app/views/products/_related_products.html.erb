@@ -1,0 +1,15 @@
+<div class='flex w-full overflow-x-auto'>
+    <% @related_products.each do |product| %>
+        <%= link_to product_path(product) do %>
+            <div class="w-60 sm:w-80 rounded overflow-hidden shadow-lg m-5 transition-transform hover:scale-105 hover:z-0">
+                <%= image_tag product.image_urls.first, class: "w-full object-cover h-40 sm:h-60 w-60 sm:w-80 md:h-64" %>
+                <div class="px-6 py-2">
+                    <div class="flex justify-between align-center">
+                        <h3 class="font-bold text-l"><%= product.name %></h3>
+                        <p class="text-gray-700 text-xs"><%= product.brand_name %></p>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>

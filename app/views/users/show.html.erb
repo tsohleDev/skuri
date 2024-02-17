@@ -1,11 +1,10 @@
 <section class="flex min-h-[80vh]">
   <!-- Side Panel -->
-  <div class="w-1/5 bg-secondary p-4 rounded-lg mt-2 rounded-l-none shadow-2xl shadow-black">
+  <div class="w-1/4 bg-secondary p-4 rounded-lg mt-2 rounded-l-none shadow-2xl shadow-black md:w-1/5">
     <!-- Profile Information -->
     <div class="mb-4">
       <h2 class="text-lg font-semibold mb-2">Profile Information</h2>
       <p><%= "#{@user.first_name} #{@user.last_name}" %></p>
-      <p><%= @user.email %></p>
     </div>
 
     <!-- Side Panel Links -->
