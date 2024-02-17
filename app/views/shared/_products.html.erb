@@ -1,4 +1,4 @@
-<section id="products" class="grid grid-cols-2 md:flex md:flex-wrap md:justify-between md:py-5 md:px-20">
+<section id="products" class="grid grid-cols-2 md:flex md:flex-wrap md:justify-around md:py-5 md:px-20 z-9">
   <% @products.each do |product| %>
       <%= render "products/product_cart", product: product %>
     <% end %>   

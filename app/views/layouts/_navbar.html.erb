@@ -1,7 +1,8 @@
 <nav class="p-4 h-[5vh]"> <!-- Navigation Links -->
     <ul class="flex items-center space-x-4">
-        <!-- Cart Icon -->
-        <li>
+        <% if user_signed_in? && !current_user.admin? %>
+            <!-- Cart Icon -->
+            <li>
                 <%= link_to user_signed_in? ? '/users/' + current_user.id.to_s + '/cart' : new_user_session_path do %>
                     <span class="relative inline-block">
                         <!-- Cart Icon -->
@@ -11,14 +12,17 @@
                         <%= render partial: "carts/cart_count" %>
                     </span>
                 <% end %>
-        </li>
+            </li>
 
-        <!-- Wishlist Icon -->
-        <li class="hidden md:block">
-            <%= link_to user_signed_in? ? '/users/' + current_user.id.to_s + '/wishlist' : new_user_session_path do %>
-            <i class="fas fa-heart text-black"></i>
-            <% end %>
-        </li>
+            <!-- Wishlist Icon -->
+            <li class="hidden md:block">
+                <%= link_to user_signed_in? ? '/users/' + current_user.id.to_s + '/wishlist' : new_user_session_path do %>
+                <i class="fas fa-heart text-black"></i>
+                <% end %>
+            </li>
+        <% else %>
+         <h2 class="hidden md:block text-2xl text-black.italic"> Welcome <%= current_user.first_name %> </h2>
+        <% end %>
 
         <!-- Login Button -->
         <li class="hidden md:block">
