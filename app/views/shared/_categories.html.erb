@@ -14,7 +14,10 @@
       <li data-controller="category" ><%= link_to "SHOES", products_path(category: Category.find_by(name: 'Shoes').id), class: "text-gray-500 hover:underline px-2 py-1"%></li>
     </ul>
     <!-- Search Input -->
-    <input type="text" placeholder="Search" class="mx-10 px-2 py-1 border rounded">
+    <%= form_tag search_products_path, method: :post, data: { turbo_method: :post, controller: "search", action: "input->search#submit" }, class: "flex" do |f| %>
+      <%= text_field_tag "query", nil, placeholder: "Search", class: "mx-10 px-2 py-1 border rounded" %>
+      <%= submit_tag "Search it", class: "hidden btn btn-primary", id: 'submit-search'%>
+    <% end %>
     <hr class="border-1 border-gray-500 w-full">
   </div>
 

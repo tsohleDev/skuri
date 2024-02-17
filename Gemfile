@@ -87,3 +87,5 @@ gem "font-awesome-sass", "~> 6.5"
 gem "chartkick", "~> 5.0"
 
 gem "groupdate", "~> 6.4"
+
+gem "ransack", "~> 4.1"
