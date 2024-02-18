@@ -1,0 +1,3 @@
+web: bundle exec rails server -e production
+js: yarn build
+css: bundle exec rails tailwindcss:build

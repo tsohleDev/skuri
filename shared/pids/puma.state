@@ -1,0 +1,5 @@
+---
+pid: 12643
+control_url: unix:///tmp/puma-status-1708232749428-12643
+control_auth_token: 1db334792ce5cf6a430bf8009764bbbb
+running_from: "/home/tsohle/thiza/skuri"

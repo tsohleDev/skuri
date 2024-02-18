@@ -1,0 +1,466 @@
+=== puma startup: 2024-02-18 06:01:34 +0200 ===
+[2970] * Starting control server on unix:///tmp/puma-status-1708228894166-2970
+[3042] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[3035] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[3032] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[2970] - Worker 3 (PID: 3042) booted in 0.03s, phase: 0
+[3038] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[2970] - Worker 0 (PID: 3032) booted in 0.04s, phase: 0
+[2970] - Worker 2 (PID: 3038) booted in 0.04s, phase: 0
+[2970] - Worker 1 (PID: 3035) booted in 0.04s, phase: 0
+Started GET "/" for 127.0.0.1 at 2024-02-18 06:01:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+####################################################################################################
+#<ActionController::Parameters {"controller"=>"home", "action"=>"index"} permitted: false>
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/home/_hero.html.erb:11
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/views/home/_hero.html.erb:21
+  Rendered home/_hero.html.erb (Duration: 13.9ms | Allocations: 8016)
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Hair Products"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:6
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Accessories"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:8
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Supplements"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:11
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Shoes"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:14
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Hair Products"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:25
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 13]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 1.2ms | Allocations: 1063)
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Accessories"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:26
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 14]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 1.0ms | Allocations: 871)
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Supplements"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:27
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 15]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 0.7ms | Allocations: 871)
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Shoes"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:28
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 16]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 0.6ms | Allocations: 788)
+  Rendered shared/_categories.html.erb (Duration: 10.9ms | Allocations: 10639)
+  Rendered products/_results.html.erb (Duration: 0.2ms | Allocations: 150)
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/shared/_products.html.erb:2
+  [1m[36mProductColor Load (2.5ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 92]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (1.5ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 24], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 31], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (1.1ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 95], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 106], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 41.7ms | Allocations: 33956)
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 93]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.6ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.1ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 97], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 4.5ms | Allocations: 3700)
+  [1m[36mProductColor Load (0.4ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 94]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.3ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.4ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 98], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 107], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 18.8ms | Allocations: 4984)
+  [1m[36mProductColor Load (0.1ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 95]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.4ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.4ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.1ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 99], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mCACHE ProductSize Load (0.0ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 99], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 5.7ms | Allocations: 4981)
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 91]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.4ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.3ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 23], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 89], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 90], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 6.2ms | Allocations: 5016)
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 100]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 33], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 108], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 4.7ms | Allocations: 3437)
+  Rendered shared/_products.html.erb (Duration: 87.4ms | Allocations: 59548)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 24], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 31], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 2.0ms | Allocations: 1668)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.2ms | Allocations: 964)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.4ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.3ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 23], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.6ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 33], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.3ms | Allocations: 964)
+  Rendered shared/_products.html.erb (Duration: 9.6ms | Allocations: 8921)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 24], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 31], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.7ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.0ms | Allocations: 964)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.4ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.4ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 23], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.4ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 33], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 0.7ms | Allocations: 964)
+  Rendered shared/_products.html.erb (Duration: 8.0ms | Allocations: 8909)
+  Rendered home/index.html.erb within layouts/application (Duration: 131.4ms | Allocations: 97245)
+  Rendered carts/_cart_count.html.erb (Duration: 0.2ms | Allocations: 98)
+  Rendered layouts/_navbar.html.erb (Duration: 1.0ms | Allocations: 883)
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/layouts/_mobile_menu.html.erb:17
+  Rendered layouts/_mobile_menu.html.erb (Duration: 2.7ms | Allocations: 1884)
+  Rendered layout layouts/application.html.erb (Duration: 136.9ms | Allocations: 101532)
+Completed 200 OK in 153ms (Views: 110.2ms | ActiveRecord: 28.5ms | Allocations: 114939)
+
+
+Started GET "/products/91" for 127.0.0.1 at 2024-02-18 06:01:41 +0200
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"91"}
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 91], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:148:in `set_product'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."product_id" = $1 LIMIT $2[0m  [["product_id", 91], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:28:in `show'
+  [1m[36mProductColor Load (0.1ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" WHERE "product_colors"."product_size_id" = $1 LIMIT $2[0m  [["product_size_id", 92], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:29:in `show'
+  [1m[36mProductSize Pluck (0.4ms)[0m  [1m[34mSELECT "product_sizes"."id" FROM "product_sizes" INNER JOIN "product_colors" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 91]]
+  ↳ app/controllers/products_controller.rb:37:in `show'
+  [1m[36mProductColor Load (0.3ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 91]]
+  ↳ app/models/product.rb:26:in `map'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 89], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 90], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductColor Load (0.3ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" WHERE "product_colors"."product_size_id" IN ($1, $2) ORDER BY "product_colors"."id" ASC LIMIT $3[0m  [["product_size_id", 89], ["product_size_id", 90], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:48:in `show'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1[0m  [["product_color_id", 22]]
+  ↳ app/controllers/products_controller.rb:48:in `map'
+  Rendering layout layouts/application.html.erb
+  Rendering products/show.html.erb within layouts/application
+  [1m[36mBrand Load (0.2ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" WHERE "product_colors"."product_size_id" IN ($1, $2)[0m  [["product_size_id", 89], ["product_size_id", 90]]
+  ↳ app/views/products/show.html.erb:38
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" INNER JOIN "product_colors" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 91]]
+  ↳ app/views/products/show.html.erb:49
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" != $1 ORDER BY RANDOM() LIMIT $2[0m  [["id", 91], ["LIMIT", 3]]
+  ↳ app/views/products/_related_products.html.erb:2
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 95]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.1ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 93]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.2ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductColor Load (0.1ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 94]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  Rendered products/_related_products.html.erb (Duration: 11.4ms | Allocations: 10062)
+  [1m[36mReview Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "reviews" WHERE "reviews"."product_id" = $1 LIMIT $2[0m  [["product_id", 91], ["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:107
+  Rendered reviews/_form.html.erb (Duration: 1.3ms | Allocations: 901)
+  Rendered products/show.html.erb within layouts/application (Duration: 57.8ms | Allocations: 40133)
+  Rendered carts/_cart_count.html.erb (Duration: 0.0ms | Allocations: 10)
+  Rendered layouts/_navbar.html.erb (Duration: 0.4ms | Allocations: 305)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/layouts/_mobile_menu.html.erb:17
+  Rendered layouts/_mobile_menu.html.erb (Duration: 6.9ms | Allocations: 1705)
+  Rendered layout layouts/application.html.erb (Duration: 70.1ms | Allocations: 43027)
+Completed 200 OK in 86ms (Views: 63.4ms | ActiveRecord: 10.0ms | Allocations: 52729)
+
+
+Started GET "/" for 127.0.0.1 at 2024-02-18 06:01:43 +0200
+Processing by HomeController#index as HTML
+####################################################################################################
+#<ActionController::Parameters {"controller"=>"home", "action"=>"index"} permitted: false>
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/home/_hero.html.erb:11
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/views/home/_hero.html.erb:21
+  Rendered home/_hero.html.erb (Duration: 2.2ms | Allocations: 1624)
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Hair Products"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:6
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Accessories"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:8
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Supplements"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:11
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Shoes"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:14
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Hair Products"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:25
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 13]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 1.2ms | Allocations: 795)
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Accessories"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:26
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 14]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 1.5ms | Allocations: 871)
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Supplements"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:27
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 15]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 1.3ms | Allocations: 871)
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."name" = $1 LIMIT $2[0m  [["name", "Shoes"], ["LIMIT", 1]]
+  ↳ app/views/shared/_categories.html.erb:28
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."category_id" = $1[0m  [["category_id", 16]]
+  ↳ app/views/categories/_sub_categories.html.erb:2
+  Rendered categories/_sub_categories.html.erb (Duration: 1.0ms | Allocations: 788)
+  Rendered shared/_categories.html.erb (Duration: 10.6ms | Allocations: 8489)
+  Rendered products/_results.html.erb (Duration: 0.0ms | Allocations: 8)
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/shared/_products.html.erb:2
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 92]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 24], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 31], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.1ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 95], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 106], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 5.6ms | Allocations: 5126)
+  [1m[36mProductColor Load (0.1ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 93]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.1ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 97], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 3.5ms | Allocations: 3482)
+  [1m[36mProductColor Load (0.1ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 94]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.3ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 98], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.2ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 107], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 6.2ms | Allocations: 4980)
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 95]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mBrand Load (0.2ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 99], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mCACHE ProductSize Load (0.0ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 99], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 4.5ms | Allocations: 4981)
+  [1m[36mProductColor Load (0.1ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 91]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mProductColorImage Load (0.2ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 23], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 89], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 90], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 4.2ms | Allocations: 5016)
+  [1m[36mProductColor Load (0.2ms)[0m  [1m[34mSELECT "product_colors".* FROM "product_colors" INNER JOIN "product_sizes" ON "product_colors"."product_size_id" = "product_sizes"."id" WHERE "product_sizes"."product_id" = $1[0m  [["product_id", 100]]
+  ↳ app/models/product.rb:22:in `map'
+  [1m[36mProductColorImage Load (0.1ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 33], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE Brand Load (0.0ms)[0m  [1m[34mSELECT "brands".* FROM "brands" WHERE "brands"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:50:in `brand_name'
+  [1m[36mProductSize Load (0.1ms)[0m  [1m[34mSELECT "product_sizes".* FROM "product_sizes" WHERE "product_sizes"."id" = $1 LIMIT $2[0m  [["id", 108], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:22:in `price'
+  Rendered products/_product_cart.html.erb (Duration: 3.9ms | Allocations: 3437)
+  Rendered shared/_products.html.erb (Duration: 29.2ms | Allocations: 28019)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 24], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 31], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.6ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 0.7ms | Allocations: 964)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.3ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.4ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 23], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.3ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 33], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 0.7ms | Allocations: 964)
+  Rendered shared/_products.html.erb (Duration: 7.3ms | Allocations: 8909)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 24], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 31], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.8ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 25], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 0.8ms | Allocations: 964)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 26], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 32], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.3ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 27], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 28], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.4ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 23], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 1.7ms | Allocations: 1656)
+  [1m[36mCACHE ProductColorImage Load (0.0ms)[0m  [1m[34mSELECT "product_color_images".* FROM "product_color_images" WHERE "product_color_images"."product_color_id" = $1 ORDER BY "product_color_images"."id" ASC LIMIT $2[0m  [["product_color_id", 33], ["LIMIT", 1]]
+  ↳ app/models/product_color.rb:50:in `image_url'
+  Rendered products/_product_cart.html.erb (Duration: 0.8ms | Allocations: 964)
+  Rendered shared/_products.html.erb (Duration: 8.2ms | Allocations: 8909)
+  Rendered home/index.html.erb within layouts/application (Duration: 58.0ms | Allocations: 56313)
+  Rendered carts/_cart_count.html.erb (Duration: 0.1ms | Allocations: 8)
+  Rendered layouts/_navbar.html.erb (Duration: 0.5ms | Allocations: 280)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  ↳ app/views/layouts/_mobile_menu.html.erb:17
+  Rendered layouts/_mobile_menu.html.erb (Duration: 1.5ms | Allocations: 1604)
+  Rendered layout layouts/application.html.erb (Duration: 60.8ms | Allocations: 58911)
+Completed 200 OK in 62ms (Views: 55.7ms | ActiveRecord: 5.4ms | Allocations: 59532)
+
+
+[2970] - Gracefully shutting down workers...
+[2970] === puma shutdown: 2024-02-18 06:01:51 +0200 ===
+[2970] - Goodbye!
+Exiting
+=== puma startup: 2024-02-18 07:05:30 +0200 ===
+[12524] * Starting control server on unix:///tmp/puma-status-1708232730920-12524
+[12556] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12524] - Worker 0 (PID: 12556) booted in 0.02s, phase: 0
+[12562] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12567] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12559] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12524] - Worker 2 (PID: 12562) booted in 0.02s, phase: 0
+[12524] - Worker 3 (PID: 12567) booted in 0.02s, phase: 0
+[12524] - Worker 1 (PID: 12559) booted in 0.02s, phase: 0
+[12524] === puma shutdown: 2024-02-18 07:05:31 +0200 ===
+[12524] - Goodbye!
+[12524] - Gracefully shutting down workers...
+Exiting
+=== puma startup: 2024-02-18 07:05:49 +0200 ===
+[12643] * Starting control server on unix:///tmp/puma-status-1708232749428-12643
+[12677] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12643] - Worker 0 (PID: 12677) booted in 0.02s, phase: 0
+[12680] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12643] - Worker 1 (PID: 12680) booted in 0.02s, phase: 0
+[12683] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12643] - Worker 2 (PID: 12683) booted in 0.02s, phase: 0
+[12688] WARNING hook before_worker_boot failed with exception (Psych::AliasesNotEnabled) Alias parsing was not enabled. To enable it, pass `aliases: true` to `Psych::load` or `Psych::safe_load`.
+[12643] - Worker 3 (PID: 12688) booted in 0.02s, phase: 0
+[12643] === puma shutdown: 2024-02-18 07:05:49 +0200 ===
+[12643] - Goodbye!
+[12643] - Gracefully shutting down workers...
+Exiting

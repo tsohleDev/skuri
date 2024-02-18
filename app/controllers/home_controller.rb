@@ -6,6 +6,11 @@ class HomeController < ApplicationController
 
     puts '#' * 100
     puts params.inspect
+    puts @user.inspect
+    puts @products.inspect
+    puts @categories.inspect
+    puts '#' * 100
+
 
     @results_products = []
   end
