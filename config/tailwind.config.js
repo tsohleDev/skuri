@@ -24,6 +24,13 @@ module.exports = {
         'nonary': '#f7fafc',
         'denary': '#ffffff',
       },
+      spacing: {
+        '25': '6.25rem',
+        '30': '7.5rem',
+        '72': '18rem',
+        '80': '20rem',
+        '96': '24rem',
+      },
     },
   },
   plugins: [
