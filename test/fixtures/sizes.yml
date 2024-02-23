@@ -2,10 +2,10 @@
 
 one:
   size: MyString
-  cm: 9.99
   UK: 1
+  cm: 9.99
 
 two:
   size: MyString
-  cm: 9.99
   UK: 1
+  cm: 9.99

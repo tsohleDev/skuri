@@ -4,7 +4,7 @@ one:
   first_name: MyString
   last_name: MyString
   gender: MyString
-  date_of_birth: 2024-02-21
+  date_of_birth: 2024-02-22
   email: MyString
   phone: MyString
   address1: MyString
@@ -12,13 +12,12 @@ one:
   city: MyString
   state: MyString
   postal_code: MyString
-  admin: false
 
 two:
   first_name: MyString
   last_name: MyString
   gender: MyString
-  date_of_birth: 2024-02-21
+  date_of_birth: 2024-02-22
   email: MyString
   phone: MyString
   address1: MyString
@@ -26,4 +25,3 @@ two:
   city: MyString
   state: MyString
   postal_code: MyString
-  admin: false

@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  vitamin: one
-  stock_product: one
-
-two:
-  vitamin: two
-  stock_product: two

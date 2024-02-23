@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_21_025348) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,35 +52,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_025348) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "carts", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.decimal "total_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.bigint "category_id", null: false
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_on_category_id"
-  end
-
-  create_table "category_products", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_category_products_on_category_id"
-    t.index ["product_id"], name: "index_category_products_on_product_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
   create_table "colours", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.string "hex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,16 +76,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_025348) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "materials", force: :cascade do |t|
+  create_table "fragrances", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.text "cleaning_instructions"
-    t.string "youtube_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "nutrients", force: :cascade do |t|
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "source"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "youtube_link"
+    t.string "cleaning_instructions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nutritions", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.decimal "amount_per_serving"
@@ -110,10 +109,77 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_025348) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
+  end
+
+  create_table "product_colour_sizes", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "size_id", null: false
+    t.bigint "colour_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["colour_id"], name: "index_product_colour_sizes_on_colour_id"
+    t.index ["product_id"], name: "index_product_colour_sizes_on_product_id"
+    t.index ["size_id"], name: "index_product_colour_sizes_on_size_id"
+  end
+
+  create_table "product_flavours", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "flavour_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavour_id"], name: "index_product_flavours_on_flavour_id"
+    t.index ["product_id"], name: "index_product_flavours_on_product_id"
+  end
+
+  create_table "product_fragrances", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "fragrance_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fragrance_id"], name: "index_product_fragrances_on_fragrance_id"
+    t.index ["product_id"], name: "index_product_fragrances_on_product_id"
+  end
+
+  create_table "product_ingredients", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_product_ingredients_on_ingredient_id"
+    t.index ["product_id"], name: "index_product_ingredients_on_product_id"
+  end
+
+  create_table "product_materials", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_product_materials_on_material_id"
+    t.index ["product_id"], name: "index_product_materials_on_product_id"
+  end
+
+  create_table "product_nutritions", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "nutrition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nutrition_id"], name: "index_product_nutritions_on_nutrition_id"
+    t.index ["product_id"], name: "index_product_nutritions_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
+    t.bigint "brand_id", null: false
     t.string "name"
     t.text "description"
-    t.bigint "brand_id", null: false
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
@@ -121,58 +187,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_025348) do
 
   create_table "sizes", force: :cascade do |t|
     t.string "size"
-    t.decimal "cm"
     t.integer "UK"
+    t.decimal "cm"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "stock_product_colours", force: :cascade do |t|
-    t.bigint "colour_id", null: false
-    t.bigint "stock_product_id", null: false
-    t.boolean "dominant_colour"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["colour_id"], name: "index_stock_product_colours_on_colour_id"
-    t.index ["stock_product_id"], name: "index_stock_product_colours_on_stock_product_id"
-  end
-
-  create_table "stock_product_flavours", force: :cascade do |t|
-    t.bigint "flavour_id", null: false
-    t.bigint "stock_product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["flavour_id"], name: "index_stock_product_flavours_on_flavour_id"
-    t.index ["stock_product_id"], name: "index_stock_product_flavours_on_stock_product_id"
-  end
-
-  create_table "stock_product_materials", force: :cascade do |t|
-    t.bigint "material_id", null: false
-    t.bigint "stock_product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["material_id"], name: "index_stock_product_materials_on_material_id"
-    t.index ["stock_product_id"], name: "index_stock_product_materials_on_stock_product_id"
-  end
-
-  create_table "stock_product_nutrients", force: :cascade do |t|
-    t.bigint "nutrient_id", null: false
-    t.bigint "stock_product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["nutrient_id"], name: "index_stock_product_nutrients_on_nutrient_id"
-    t.index ["stock_product_id"], name: "index_stock_product_nutrients_on_stock_product_id"
-  end
-
-  create_table "stock_products", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "size_id", null: false
-    t.integer "stock"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_stock_products_on_product_id"
-    t.index ["size_id"], name: "index_stock_products_on_size_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -187,34 +205,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_025348) do
     t.string "city"
     t.string "state"
     t.string "postal_code"
-    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "wishlists", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "carts", "users"
-  add_foreign_key "categories", "categories"
-  add_foreign_key "category_products", "categories"
-  add_foreign_key "category_products", "products"
+  add_foreign_key "categories", "categories", column: "parent_id"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
+  add_foreign_key "product_colour_sizes", "colours"
+  add_foreign_key "product_colour_sizes", "products"
+  add_foreign_key "product_colour_sizes", "sizes"
+  add_foreign_key "product_flavours", "flavours"
+  add_foreign_key "product_flavours", "products"
+  add_foreign_key "product_fragrances", "fragrances"
+  add_foreign_key "product_fragrances", "products"
+  add_foreign_key "product_ingredients", "ingredients"
+  add_foreign_key "product_ingredients", "products"
+  add_foreign_key "product_materials", "materials"
+  add_foreign_key "product_materials", "products"
+  add_foreign_key "product_nutritions", "nutritions"
+  add_foreign_key "product_nutritions", "products"
   add_foreign_key "products", "brands"
-  add_foreign_key "stock_product_colours", "colours"
-  add_foreign_key "stock_product_colours", "stock_products"
-  add_foreign_key "stock_product_flavours", "flavours"
-  add_foreign_key "stock_product_flavours", "stock_products"
-  add_foreign_key "stock_product_materials", "materials"
-  add_foreign_key "stock_product_materials", "stock_products"
-  add_foreign_key "stock_product_nutrients", "nutrients"
-  add_foreign_key "stock_product_nutrients", "stock_products"
-  add_foreign_key "stock_products", "products"
-  add_foreign_key "stock_products", "sizes"
-  add_foreign_key "wishlists", "users"
 end
