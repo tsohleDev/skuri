@@ -1,0 +1,12 @@
+<div class="flex flex-col w-[60vw] ml-10 my-10">
+  <h1 class="text-3xl font-bold">Your Wishlist</h1>
+
+  <% if @wishlist_products.empty? %>
+    <p class="mt-5">Your wishlist is empty</p>
+  <% end %>
+
+  <% @wishlist_products.each do |item| %>
+    <%= render "wishlist/item", item: item %>
+  <% end %>
+</div>
+

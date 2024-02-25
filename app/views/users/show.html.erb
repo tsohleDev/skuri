@@ -1,0 +1,67 @@
+<section class="flex flex-col md:flex-row min-h-[93vh]">
+  <!-- Side Panel -->
+  <div class="sticky top-[7vh] w-full bg-secondary pt-4 md:p-4 md:rounded-lg md:mt-2 md:rounded-l-none md:shadow-2xl md:shadow-black md:w-1/5">
+    <!-- Profile Information -->
+    <div class="mb-4 hidden md:block">
+      <h2 class=" text-lg font-semibold mb-2">Profile Information</h2>
+      <p><%= "#{@user.first_name} #{@user.last_name}" %></p>
+    </div>
+
+    <!-- Side Panel Links -->
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold mb-2 hidden md:block">Navigation</h2>
+      <ul class="flex justify-around md:flex-col md:list-disc pl-4">
+        <li>
+          <%= link_to user_path(@user) do %>
+            <div class="mr-2">
+              <span class="mr-2 hidden md:block">Profile</span>
+              <i class="fas fa-user"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to orders_user_path, data: { turbo_method: :post } do %>
+            <div class="mr-2">
+              <span class="mr-2 hidden md:block">Orders</span>
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to returns_user_path, data: { turbo_method: :post }  do %>
+            <div class="mr-2">
+              <span class="mr-2 hidden md:block">Returns</span>
+              <i class="fas fa-undo"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to help_user_path, data: { turbo_method: :post } do %>
+            <div class="mr-2">
+              <span class="mr-2 hidden md:block">Help</span>
+              <i class="fas fa-question-circle"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to destroy_user_session_path, 'data-turbo-method': :delete do %>
+            <div class="mr-2">
+              <span class="mr-2 hidden md:block">Logout</span>
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-4"> 
+    <%= render @user %>
+  </div>
+</section>
+

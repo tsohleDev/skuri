@@ -1,0 +1,21 @@
+<div class="mt-8">
+  <!-- Product Name And Brand For Mobile Version-->
+  <div class="flex justify-center items-center md:hidden">
+    <div class="w-[60vw]">
+      <h1 class="text-4xl font-bold text-center mb-4"><%= @product.name %></h1>
+      <p class="text-gray-700 text-center mb-4"><%= @product.brand_name %></p>
+    </div>
+  </div>
+
+  <!-- Product Details -->
+  <%= render "products/show/card" %>
+
+  <!-- Product Description -->
+  <%#= render "products/show/description" %>
+
+  <!-- Related Products -->
+  <%= render "products/show/related_products" %>
+
+  <!-- Product Reviews -->
+  <%= render "products/show/reviews" %>
+</div>

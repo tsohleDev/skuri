@@ -1,0 +1,82 @@
+<div id="user-content" class="h-full rounded-lg md:shadow-2xl md:shadow-black flex flex-col justify-center items-center">
+  <h1 class="text-3xl font-bold mb-20">USER INFORMATION</h1>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <p>
+        <strong>First Name:</strong>
+        <%= user.first_name %>
+      </p>
+
+      <p>
+        <strong>Last Name:</strong>
+        <%= user.last_name %>
+      </p>
+
+      <p>
+        <strong>Gender:</strong>
+        <%= user.gender %>
+      </p>
+
+      <p>
+        <strong>Date of Birth:</strong>
+        <%= user.date_of_birth %>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <strong>Email:</strong>
+        <%= user.email %>
+      </p>
+
+      <p>
+        <strong>Phone:</strong>
+        <%= user.phone %>
+      </p>
+
+      <p>
+        <strong>Country:</strong>
+        <%#= user.country %>
+      </p>
+
+      <!-- Add more details as needed -->
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <h3 class="text-xl font-semibold text-center mb-2">Address Details</h3>
+
+    <p>
+      <strong>Street Address:</strong>
+      <%= user.address1 %>
+    </p>
+
+    <p>
+      <strong>Suburb:</strong>
+      <%= user.address2 %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= user.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= user.state %>
+    </p>
+
+    <p>
+      <strong>Postal Code:</strong>
+      <%= user.postal_code %>
+    </p>
+  </div>
+
+  <div class="mt-10">
+    <%= link_to "Edit Details", edit_user_path(user), class: "bg-tertiary mr-4 text-white px-5  py-2 rounded-lg md:px-10 md:mr-10" %>
+
+    <%= link_to "Delete Account", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-tertiary mr-4 text-white px-5 py-2 rounded-lg md:px-10 md:ml-10" %>
+  </div>
+</div>
+

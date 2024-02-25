@@ -1,0 +1,25 @@
+<div class="flex flex-col justify-center mt-8 mx-[20vw]">
+  <h2 class="text-2xl font-bold mb-4 text-center">Customer Reviews</h2>
+
+  <!-- Display Reviews -->
+  <% if @product.reviews.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% @product.reviews.each do |review| %>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="text-lg font-bold mb-2"><%= review.rating %> Stars</h3>
+          <p class="text-gray-700 mb-4"><%= review.message %></p>
+          <!-- Additional review information can be added here -->
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-gray-700 mt-4">No reviews yet. Be the first to leave a review!</p>
+  <% end %>
+
+  <!-- Add a Review Form -->
+  <div class="mt-8 w-[60vw] flex flex-col space-y-4 my-10">
+    <h2 class="text-2xl font-bold mb-4 text-center">Add Your Review</h2>
+    <%= render "products/show/review/form", review: @product.reviews.build %>
+  </div>
+</div>
+

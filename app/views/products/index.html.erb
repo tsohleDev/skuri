@@ -1,0 +1,14 @@
+<div id="products-header" class="col-span-1 relative flex flex-col items-center relative h-2/3 overflow-hidden rounded-lg shadow-lg py-5 h-[25vh]">
+  <%= link_to root_path, class: "inset-0 w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
+    <%= image_tag @category.image, class: "w-full h-full object-cover" %>
+    <h2 class="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold text-quaternary font-bold">
+      <%= @category.name %>
+    </h2>
+  <% end %>
+</div>
+
+<!-- Categories with Seaech bar -->
+<%= render "shared/categories" %>
+
+<!-- Products -->
+<%= render "group", products: Product.all, title: ''%>

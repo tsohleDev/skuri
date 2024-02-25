@@ -1,0 +1,10 @@
+<div class="mx-2 grid grid-col-3 md:grid-cols-6 md:py-10 md:mx-40 md:p-8">
+  <!-- Side Images -->
+  <%= render 'products/show/side_images' %>
+
+  <!-- Main Image -->
+  <%= render 'products/show/main_image', image: @product.image %>
+
+  <!-- Information -->
+  <%= render 'products/show/information' %>
+</div>

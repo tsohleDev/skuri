@@ -1,0 +1,19 @@
+<div class="mt-10 border-t-2 md:border-2 md:mt-0 border-black md:rounded-2xl h-auto col-span-3">
+  <div class="p-8">
+    <h1 class="hidden text-3xl font-bold mb-4 md:block"><%= @product.name %></h1>
+    <h2 class="hidden text-xl font-bold mb-4 md:block"><%= @product.brand_name %></h2>
+    <p class="text-gray-700 text-center mb-4 md:text-start"><%= @product.description %></p>
+
+    <div class="grid grid-cols-4 gap-4 mb-4">
+      <!-- Colours and Sizes -->
+      <%= render "products/show/information/colours_sizes" %>
+
+      <!-- Quantity -->
+      <%= render "products/show/information/quantity" %>
+    </div>
+  </div>
+
+  <!-- Add to Cart With Price and Add to Wishlist -->
+  <%= render "products/show/information/add_price_wish" %>
+</div>
+

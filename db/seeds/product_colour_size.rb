@@ -186,9 +186,7 @@ product_colour_size_data = [
 ]
 
 product_colour_size_data.each do |product_colour_size|
-  pcs = ProductColourSize.find_or_create_by!(product_id: product_colour_size[:product_id], size_id: product_colour_size[:size_id], colour_id: product_colour_size[:colour_id])
-  pcs.quantity = product_colour_size[:quantity]
-    
+  pcs = ProductColourSize.find_or_create_by!(product_id: product_colour_size[:product_id], size_id: product_colour_size[:size_id], colour_id: product_colour_size[:colour_id], quantity: product_colour_size[:quantity])    
   product_colour_size[:images].each do |image|
     pcs.images.attach(io: File.open(Rails.root.join('app/data/products/', image)), filename: image)
   end

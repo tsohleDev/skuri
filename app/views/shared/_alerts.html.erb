@@ -1,0 +1,13 @@
+<% if notice %>
+    <p id="alerts" class="absolute top-30 left-1/2 w-1/3 h-10 bg-green bg-opacity-50 flex justify-center items-center"> <%= notice %> </p>
+<% end %>
+
+<% if alert %>
+    <p id="alerts" class="absolute top-30 left-1/2 w-1/3 h-10 bg-red-500 mx-auto bg-opacity-50 flex justify-center items-center"> <%= alert %> </p>
+<% end %>
+
+<script>
+    setTimeout(function() {
+        document.getElementById('alerts').classList.add('hidden');
+    }, 2000);
+</script>

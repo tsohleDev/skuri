@@ -98,7 +98,7 @@ product_data = [{
 }]
 
 product_data.each do |product|
-  Product.find_or_create_by!(product)
+  Product.find_or_create_by!(product).image.attach(io: File.open('app/data/products/white-air-max-90-1.jpg'), filename: 'white-air-max-90.jpg')
 end
 
 puts 'Products created successfully'

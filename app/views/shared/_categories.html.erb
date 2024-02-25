@@ -1,0 +1,29 @@
+<div class="sticky top-[5vh] md:relative md:top-0 flex bg-quaternary justify-around py-5 border-b-2 border-gray-200 shadow-b shadow-gray-200 items-center h-[5vh] z-10">
+  <hr class="border-1 border-gray-500 w-full">
+  <ul class="hidden md:flex items-center align-middle list-bullet ml-10">
+    <!-- Link to Hair Products Category -->
+    <li><%= link_to "HAIR", "products_path(category: Category.find_by(name: 'Hair Products').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
+    <!-- Link to Accessories Category -->
+    <li><%= link_to "ACCESSORIES", "products_path(category: Category.find_by(name: 'Accessories').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
+
+    <!-- Link to Medication Category -->
+    <li><%= link_to "MEDICATION", "products_path(category: Category.find_by(name: 'Supplements').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
+
+    <!-- Link to Shoes Category -->
+    <li><%= link_to "SHOES", "products_path(category: Category.find_by(name: 'Shoes').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
+  </ul>
+  <!-- Search Input -->
+  <%= form_tag "search_products_path", method: :post, data: { turbo_method: :post, controller: "search", action: "input->search#submit" }, class: "flex" do |f| %>
+    <%= text_field_tag "query", nil, placeholder: "Search", class: "mx-10 px-2 py-1 border rounded" %>
+    <%= submit_tag "Search it", class: "hidden btn btn-primary", id: 'submit-search'%>
+  <% end %>
+  <hr class="border-1 border-gray-500 w-full">
+</div>
+
+<div class="sticky top-10 flex flex-wrap justify-center items-center bg-primary py-10 border-2 border-primary w-full z-10 hidden" id="categories">
+  <%#= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Hair Products').id), name: 'hair' %>
+  <%#= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Accessories').id), name: 'accessories' %>
+  <%#= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Supplements').id), name: 'medication' %>
+  <%#= render "categories/sub_categories", categories: @categories.where(category_id: Category.find_by(name: 'Shoes').id), name: 'shoes' %>
+</div>
+

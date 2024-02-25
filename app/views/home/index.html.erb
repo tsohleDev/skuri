@@ -1,2 +1,8 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<%= render 'home/hero' %>
+
+<!-- Author's Recommendations -->
+<%= render 'products/group', products: Product.first(4), title: "author's recommendations" %>
+<%= render 'products/group', products: Product.last(4), title: "New Arrivals" %>
+
+<!-- Link to the all products page -->
+<%= link_to 'All Products', products_path, class: 'btn btn-primary' %>

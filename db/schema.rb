@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_070024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cart_products", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "product_flavour_id"
+    t.bigint "product_colour_size_id"
+    t.integer "quantity", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_products_on_cart_id"
+    t.index ["product_colour_size_id"], name: "index_cart_products_on_product_colour_size_id"
+    t.index ["product_flavour_id"], name: "index_cart_products_on_product_flavour_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "total_price", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -185,6 +205,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
     t.index ["brand_id"], name: "index_products_on_brand_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "rating"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "sizes", force: :cascade do |t|
     t.string "size"
     t.integer "UK"
@@ -198,7 +229,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
     t.string "last_name"
     t.string "gender"
     t.date "date_of_birth"
-    t.string "email"
     t.string "phone"
     t.string "address1"
     t.string "address2"
@@ -207,10 +237,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
     t.string "postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.boolean "admin"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "wishlist_products", force: :cascade do |t|
+    t.bigint "wishlist_id", null: false
+    t.bigint "product_flavour_id"
+    t.bigint "product_colour_size_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_colour_size_id"], name: "index_wishlist_products_on_product_colour_size_id"
+    t.index ["product_flavour_id"], name: "index_wishlist_products_on_product_flavour_id"
+    t.index ["wishlist_id"], name: "index_wishlist_products_on_wishlist_id"
+  end
+
+  create_table "wishlists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_products", "carts"
+  add_foreign_key "cart_products", "product_colour_sizes"
+  add_foreign_key "cart_products", "product_flavours"
+  add_foreign_key "carts", "users"
   add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
@@ -228,4 +288,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_144218) do
   add_foreign_key "product_nutritions", "nutritions"
   add_foreign_key "product_nutritions", "products"
   add_foreign_key "products", "brands"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "wishlist_products", "product_colour_sizes"
+  add_foreign_key "wishlist_products", "product_flavours"
+  add_foreign_key "wishlist_products", "wishlists"
+  add_foreign_key "wishlists", "users"
 end
