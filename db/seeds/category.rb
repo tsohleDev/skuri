@@ -15,6 +15,10 @@ category_data = [{
   name: 'Accessories',
   description: 'An accessory is a person who assists in the commission of a crime, but who does not actually participate in the commission of the crime as a joint principal. The distinction between an accessory and a principal is a question of fact and degree: a person may be held to be an accessory even though he did not know that a crime was being committed.',
   image: 'accessories-category.jpg'
+}, {
+  name: 'All',
+  description: 'All products',
+  image: 'all-category.jpg'
 }]
 
 category_data.each do |category|

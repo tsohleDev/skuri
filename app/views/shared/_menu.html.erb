@@ -1,0 +1,24 @@
+<section id="mobile-menu" class="w-full hidden h-screen md:hidden" data-mobile-menu-target="menu">
+  <div class="flex justify-between p-5">
+    <% if user_signed_in? && current_user.admin? %>
+        <%= link_to "Dashboard", '/admin' %>
+    <% elsif user_signed_in? %>
+        <%= link_to "Profile", current_user, class: "text-2xl" %>
+    <% else %>
+        <%= link_to "Login", new_user_session_path %>
+    <% end %>
+
+    <button id="menu-btn" class="text-3xl" data-action="click->mobile-menu#toggle">
+        <i class="fas fa-times"></i>
+    </button>
+  </div>
+    
+  <ul class="flex flex-col items-center list-none w-full">
+    <% Category.all.each do |category| %>
+        <li class="font-bold border-b border-t mt-0 border-grey-500 w-full text-center py-2" data-controller="category">
+            <%= link_to category.name, products_path(category: category.name) %>
+        </li>
+    <% end %>
+  </ul>
+</section>
+

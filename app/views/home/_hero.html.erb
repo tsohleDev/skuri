@@ -1,48 +1,28 @@
-<section class="container mx-auto py-10 flex flex-col justify-center md:grid md:grid-cols-3 gap-8 h-[97dvh] items-base">
+<section class="container mx-auto sm:py-10 flex flex-col justify-between md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-8 h-[90vh] sm:h-[93vh] l:h-[85vh] items-base" >
   <!-- First Column -->
-  <div class="flex flex-col items-center h-full md:col-span-1 mx-4 md:my-20 md:items-start">
-    <h1 class="text-6xl text-center font-bold md:mb-40 text-primary md:text-start md:text-7xl">Elegance is good taste, plus a dash of daring </h1>
-    <div class="bg-red-500 w-20 h-40 m-auto md:hidden"></div>
-    <%= link_to "Shop With Us", products_path, class: "px-4 py-5 bg-primary text-quaternary rounded-md hover:bg-secondary text-3xl" %>
+  <div class="flex flex-col justify-around items-center h-full md:col-span-1 mx-4 xl:my-20 md:items-start">
+    <h1 class="text-4xl xs:text-5xl text-center font-bold md:mb-20 text-primary md:text-start md:text-7xl">Elegance <span class="hidden xs:inline-block"> is good taste, plus a dash of daring </span> </h1>
+    <%= image_tag 'hero.png', alt: "Shop with us", class: "w-80 xs:w-full h-40 sm:hidden" %>
+    <%= link_to "Shop With Us", products_path, class: "px-4 py-2 xs:py-5 bg-primary text-quaternary rounded-md hover:bg-secondary text-xl xs:text-3xl md:mb-4" %>
   </div>
 
   <!-- Second Column -->
-  <div class="col-span-1  h-0 relative flex flex-col items-center overflow-hidden rounded-lg shadow-lg md:relative md:h-2/3 md:my-20 mx-20">
-    <%= link_to 'products_path(category: @categories.first.id)', class: "absolute inset-0 w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
+  <div class="col-span-1  h-0 relative flex flex-col items-center overflow-hidden rounded-lg shadow-lg md:relative md:h-2/3 md:my-20 lg:mx-20">
+    <%= link_to products_path(category: 'Hair Products'), class: "absolute inset-0 w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
       <%= image_tag Category.second.image, class: "w-full h-full object-cover" %>
       <h2 class="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold text-quaternary font-bold">Hair</h2>
     <% end %>
   </div>
 
   <!-- Third Column -->
-  <div class="md:col-span-1 hidden h-0 flex-col items-center md:relative md:h-full overflow-hidden rounded-lg shadow-lg mx-10 md:flex">
-    <%= link_to 'products_path(category: @categories.second.id)', class: "absolute inset-0 w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
+  <div class="md:col-span-1 hidden h-0 flex-col items-center xl:relative xl:h-full overflow-hidden rounded-lg shadow-lg mx-10 xl:flex">
+    <%= link_to products_path(category: 'Shoes'), class: "absolute inset-0 w-full h-full hover:opacity-75 transition-opacity duration-300 transition-transform hover:scale-105" do %>
       <%= image_tag Category.first.image, class: "w-full h-full object-cover" %>
       <h2 class="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-semibold text-quaternary font-bold">Shoes</h2>
     <% end %>
   </div>
 
   <!-- Categories -->
-  <div class="sticky top-[5vh] md:relative md:top-0 flex bg-quaternary justify-around py-5 border-b-2 border-gray-200 shadow-b shadow-gray-200 items-center h-[5vh] md:col-span-3 z-10">
-    <hr class="border-1 border-gray-500 w-full">
-    <ul class="hidden md:flex items-center align-middle list-bullet ml-10">
-      <!-- Link to Hair Products Category -->
-      <li><%= link_to "HAIR", "products_path(category: Category.find_by(name: 'Hair Products').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
-      <!-- Link to Accessories Category -->
-      <li><%= link_to "ACCESSORIES", "products_path(category: Category.find_by(name: 'Accessories').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
-
-      <!-- Link to Medication Category -->
-      <li><%= link_to "MEDICATION", "products_path(category: Category.find_by(name: 'Supplements').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
-
-      <!-- Link to Shoes Category -->
-      <li><%= link_to "SHOES", "products_path(category: Category.find_by(name: 'Shoes').id)", class: "text-gray-500 hover:underline px-2 py-1"%></li>
-    </ul>
-    <!-- Search Input -->
-    <%= form_tag "search_products_path", method: :post, data: { turbo_method: :post, controller: "search", action: "input->search#submit" }, class: "flex" do |f| %>
-      <%= text_field_tag "query", nil, placeholder: "Search", class: "mx-10 px-2 py-1 border rounded" %>
-      <%= submit_tag "Search it", class: "hidden btn btn-primary", id: 'submit-search'%>
-    <% end %>
-    <hr class="border-1 border-gray-500 w-full">
-  </div>
+  <%= render "shared/categories" %>
 </section>
 

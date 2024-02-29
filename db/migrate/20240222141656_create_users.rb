@@ -6,11 +6,6 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :gender
       t.date :date_of_birth
       t.string :phone
-      t.string :address1
-      t.string :address2
-      t.string :city
-      t.string :state
-      t.string :postal_code
 
       t.timestamps
     end

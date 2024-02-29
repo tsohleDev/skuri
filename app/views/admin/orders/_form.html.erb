@@ -1,0 +1,16 @@
+<div class="flex justify-between">
+    <!-- Ship Product -->
+    <%= link_to 'Ship Products', manage_order_path(id: @order.id, do: 'ship'), data: { turbo_method: :post }, class: 'flex bg-secondary text-white items-center justify-center py-1 rounded-md md:mx-5w-40' %>
+
+    <!-- Complete Order -->
+    <%= link_to 'Collect Products', manage_order_path(id: @order.id, do: 'collect'), data: { turbo_method: :post }, class: 'flex bg-secondary text-white items-center justify-center py-1 rounded-md md:mx-5w-40' %>
+
+    <!-- Exchange Product -->
+    <%= link_to 'Exchange Products', manage_order_path(id: @order.id, do: 'exchange'), data: { turbo_method: :post }, class: 'flex bg-secondary text-white items-center justify-center py-1 rounded-md md:mx-5 w-40' %>
+
+    <!-- Refund Customer -->
+    <%= link_to 'Refund Customer', manage_order_path(id: @order.id, do: 'refund'), data: { turbo_method: :post }, class: 'flex bg-secondary text-white items-center justify-center py-1 rounded-md md:mx-5w-40' %>
+</div>
+
+<div id='order-action'class="flex justify-center my-10 h-[50vh]"></>
+

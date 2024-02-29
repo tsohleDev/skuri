@@ -10,5 +10,8 @@
 <!-- Categories with Seaech bar -->
 <%= render "shared/categories" %>
 
+<!-- Search Results -->
+<%= render "products/results" %>
+
 <!-- Products -->
-<%= render "group", products: Product.all, title: ''%>
+<%= render "group", products: @products, title: ''%>

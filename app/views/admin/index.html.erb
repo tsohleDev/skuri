@@ -1,0 +1,68 @@
+<section class="flex flex-col md:flex-row min-h-[93vh]">
+  <!-- Side Panel -->
+  <div class="sticky top-[7vh] w-full bg-secondary pt-4 md:p-4 md:rounded-lg md:mt-2 md:rounded-l-none md:shadow-2xl md:shadow-black md:w-1/5">
+    <!-- Profile Information -->
+    <div class="mb-4 hidden md:block">
+      <h2 class=" text-lg font-semibold mb-2">Profile Information</h2>
+      <p><%= "#{@user.first_name} #{@user.last_name}" %></p>
+    </div>
+
+    <!-- Side Panel Links -->
+    <div class="mb-4 flex flex-col">
+      <h2 class="text-lg font-semibold mb-2 hidden md:block">Navigation</h2>
+      <ul class="flex justify-around md:flex-col pl-4 md:pl-0 md:w-full grow">
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
+        <%= link_to admin_path, data: { turbo_method: :post } do %>
+            <div class="mr-2 flex items-center">
+              <span class="mr-2 hidden md:block">Dashboard</span>
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
+        <%= link_to admin_products_path, data: { turbo_method: :post } do %>
+            <div class="mr-2 flex items-center">
+              <span class="mr-2 hidden md:block">Products</span>
+              <i class="fas fa-box"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
+        <%= link_to admin_orders_path, data: { turbo_method: :post } do %>
+            <div class="mr-2 flex items-center">
+              <span class="mr-2 hidden md:block">Orders</span>
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
+        <%= link_to admin_messages_path, data: { turbo_method: :post } do %>
+            <div class="mr-2 flex items-center">
+              <span class="mr-2 hidden md:block">Messages</span>
+              <i class="fas fa-envelope"></i>
+            </div>
+          <% end %>
+        </li>
+
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
+        <%= link_to destroy_user_session_path, method: :delete do %>
+            <div class="mr-2 flex items-center">
+              <span class="mr-2 hidden md:block">Logout</span>
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+          <% end %>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-4"> 
+    <%= render 'admin/summary' %>
+  </div>
+</section>
+

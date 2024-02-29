@@ -2,9 +2,13 @@
   <!-- Product Colors -->
   <h2 class="text-xl font-bold py-4">Available Colors</h2>
 
-  <div class="flex my-2">
-  <% Colour.includes(:product_colour_sizes).where(product_colour_sizes: {id: @product_stock.map(&:id)}).uniq.each do |colour_object| %>
-    <button class="w-10 h-10 rounded-full inline-block border-2 border-black mr-2 my-2 hover:shadow-lg hover:shadow-black" style="background-color: <%= colour_object.name.downcase %>"></button>
+  <div id='colours' class="flex my-2">
+  <% @product.colours.uniq.each do |colour_object| %>
+    <% if @selected.colour == colour_object %>
+      <%= link_to '', change_colour_product_path(@product, colour: colour_object.name), class: "w-10 h-10 rounded-full inline-block border-2 border-black mr-2 my-2 hover:shadow-lg hover:shadow-black shadow-lg shadow-green-500", data: { action: 'click->shop#change_colour', shop_target: 'colour', colour: colour_object.name }, data: { turbo_method: :post }, style: "background-color: #{colour_object.name.downcase}" %>
+    <% else %>
+      <%= link_to '', change_colour_product_path(@product, colour: colour_object.name), class: "w-10 h-10 rounded-full inline-block border-2 border-black mr-2 my-2 hover:shadow-lg hover:shadow-black", data: { action: 'click->shop#change_colour', shop_target: 'colour', colour: colour_object.name }, data: { turbo_method: :post }, style: "background-color: #{colour_object.name.downcase}" %>
+      <% end %>
   <% end %>
   </div>
 
@@ -12,8 +16,14 @@
   <h2 class="text-xl font-bold py-4 border-t-2 border-secondary">Available Sizes</h2>
 
   <div class="flex flex-wrap my-2">
-    <% Size.includes(:product_colour_sizes).where(product_colour_sizes: {id: @product_stock.map(&:id)}).uniq.each do |size| %>
-      <button class="mr-2 flex justify-center items-center py-2 px-4 my-2 bg-gray-800 text-white rounded-xl hover:shadow-lg hover:shadow-black"><%= size.get_size %></button>
+    <% @product.sizes.uniq.each do |size| %>
+      <% if ProductColourSize.find_by(product: @product, colour: @selected.colour, size: size) %>
+        <% if @selected.size == size %>
+          <button class="mr-2 flex justify-center items-center py-2 px-4 my-2 bg-gray-800 text-white rounded-xl border-2 border-green-500 shadow-lg shadow-green-500" data-action="click->shop#change_size" data-shop-target="size" data-id="<%= size.id %>"><%= size.get_size %></button>
+        <% else %>
+          <button class="mr-2 flex justify-center items-center py-2 px-4 my-2 bg-gray-800 text-white rounded-xl hover:shadow-lg hover:shadow-black <% @selected.size == size ? 'border-2 border-green-500 shadow-lg shadow-green-500' : 'hidden' %>" data-action="click->shop#change_size" data-shop-target="size" data-id="<%= size.id %>"><%= size.get_size %></button>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>

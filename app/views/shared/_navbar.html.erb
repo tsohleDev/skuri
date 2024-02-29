@@ -1,4 +1,4 @@
-<nav class="p-4 h-[5vh]"> <!-- Navigation Links -->
+<nav class="p-4 h-full"> <!-- Navigation Links -->
     <ul class="flex items-center space-x-4">
         <% if user_signed_in? && current_user.admin? %>
             <!-- Admin Link -->
@@ -48,7 +48,7 @@
 
         <!-- Hambuger Menu -->
         <li class="md:hidden">
-            <button id="menu-btn" class="text-black">
+            <button class="text-black"  data-action="click->mobile-menu#toggle">
                 <i class="fas fa-bars"></i>
             </button>
         </li>

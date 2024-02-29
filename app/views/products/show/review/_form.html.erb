@@ -1,4 +1,4 @@
-<%= form_tag 'product_reviews_path(@product)', class: "flex flex-col space-y-4" do %>
+<%= form_tag review_product_path(@product, user_id: user_signed_in? ? current_user.id : 0), class: "flex flex-col space-y-4", method: :post, data: { controller: "rating" } do %>
   <% if review.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -18,6 +18,8 @@
         <i id="star-<%=i%>" class="fa fa-star text-gray-400"></i>
       </label>
     <% end %>
+
+    <%= hidden_field_tag :rating, 1, data: { rating_target: "rating" } %>
   </div>
 
   <div class="m-4">
@@ -25,7 +27,7 @@
   </div>
 
   <div class="mt-4 flex items-center justify-around">
-    <%= file_field_tag :image, class: "mt-4 p-2" %>
+    <%= file_field_tag :images, multiple: true, class: "w-40", placeholder: "Upload images" %>
   </div>
 
   <div class="mt-4 flex justify-around">

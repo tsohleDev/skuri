@@ -10,20 +10,22 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class='bg-quaternary min-h-screen'>
-    <header class="h-[7vh] sticky top-0 flex justify-between items-center py-2 px-5 border-b border-primary shadow-b shadow-primary bg-quaternary z-10 md:relative">
+  <body class='bg-quaternary min-h-screen' data-controller="mobile-menu">
+    <%= render "shared/menu" %>
+
+    <header class="h-[10vh] sm:h-[7vh] sticky top-0 flex justify-between items-center py-2 px-5 border-b border-primary shadow-b shadow-primary bg-quaternary z-10 md:relative" data-mobile-menu-target="header">
       <%= link_to "Skuri", root_path, class: "text-4xl font-bold" %>
       <%= render "shared/navbar" %>
     </header>
 
-    <main class="min-h-[93vh]">
+    <main class="min-h-[93vh]" data-mobile-menu-target="main">
       <%= render "shared/alerts" %>
       <%= yield %>
     </main>
 
 
-    <footer class="h-[13vh] bg-gray-800 text-white py-4">
-      <div class="container mx-auto text-center">
+    <footer class="sm:h-[13vh] bg-gray-800 text-white py-4" data-mobile-menu-target="footer">
+      <div class="container h-full mx-auto text-center">
         <!-- Footer Content -->
         <p>&copy; 2014 Skuri. All rights reserved.</p>
         <p>Address | Phone | Email</p>
@@ -36,6 +38,5 @@
         </div>
       </div>
     </footer>
-
   </body>
 </html>

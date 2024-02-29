@@ -1,7 +1,7 @@
-<div id='side-images' class="flex flex-col col-span-1 align-center items-end justify-center h-auto w-25 sm:w-60">
+<div id='side-images' class="flex flex-col col-span-1 justify-around align-center items-end md:items-center justify-center h-80 w-25 m-2 xs:mx-4 xl:w-40 xl:h-full">
   <% @selected.images.each_with_index do |image, index| %>
-      <button class="hover:shadow-lg hover:shadow-black md:m-2">
-        <%= image_tag image, class: "w-20 sm:w-32 m-2 md:w-[8vw]" %>
+    <button class="md:flex md:justify-center hover:shadow-lg hover:shadow-black md:m-2", data-shop-target="image" data-action="click->shop#change_image">
+        <%= image_tag image, class: "w-20 h-20 sm:w-20 sm:h-20 m-2 xl:h-40 xl:w-40" %>
       </button>
   <% end %>
 </div>

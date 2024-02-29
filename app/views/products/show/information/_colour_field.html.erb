@@ -1,0 +1,5 @@
+<% if cart %>
+  <%= hidden_field_tag :colour_id, @selected.colour.id, required: true, id: "cart-colour" %>
+<% else %>
+  <%= hidden_field_tag :colour_id, @selected.colour.id, required: true, id: "wishlist-colour" %>
+<% end %>

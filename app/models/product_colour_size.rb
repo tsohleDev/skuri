@@ -1,5 +1,7 @@
 class ProductColourSize < ApplicationRecord
   belongs_to :product
+  has_one :colour
+  has_one :size
   belongs_to :size
   belongs_to :colour
 

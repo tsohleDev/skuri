@@ -15,12 +15,27 @@
                                          DELETE /users(.:format)                                                                                  devise/registrations#destroy
                                          POST   /users(.:format)                                                                                  devise/registrations#create
                       rails_health_check GET    /up(.:format)                                                                                     rails/health#show
+                         search_products POST   /products/search(.:format)                                                                        products#search
+                   change_colour_product POST   /products/:id/change_colour(.:format)                                                             products#change_colour
+                          review_product POST   /products/:id/review(.:format)                                                                    products#review
                                 products GET    /products(.:format)                                                                               products#index
                                  product GET    /products/:id(.:format)                                                                           products#show
                          user_cart_index GET    /users/:user_id/cart(.:format)                                                                    cart#index
                      user_wishlist_index GET    /users/:user_id/wishlist(.:format)                                                                wishlist#index
+                             orders_user POST   /users/:id/orders(.:format)                                                                       users#orders
+                            returns_user POST   /users/:id/returns(.:format)                                                                      users#returns
+                        returnables_user POST   /users/:id/returnables(.:format)                                                                  users#returnables
+                               help_user POST   /users/:id/help(.:format)                                                                         users#help
+                      help_messages_user POST   /users/:id/help_messages(.:format)                                                                users#help_messages
+                      cancel_return_user POST   /users/:id/cancel(.:format)                                                                       users#cancel
+                             return_user POST   /users/:id/return(.:format)                                                                       users#return
+                           exchange_user POST   /users/:id/exchange(.:format)                                                                     users#exchange
+                            success_user GET    /users/:id/success(.:format)                                                                      users#success
+                               edit_user GET    /users/:id/edit(.:format)                                                                         users#edit
                                     user GET    /users/:id(.:format)                                                                              users#show
                                 cart_add POST   /cart/add(.:format)                                                                               cart#add
+                          cart_increment POST   /cart/inrement(.:format)                                                                          cart#increment
+                          cart_decrement POST   /cart/decrement(.:format)                                                                         cart#decrement
                              cart_remove DELETE /cart/remove(.:format)                                                                            cart#remove
                             wishlist_add POST   /wishlist/add(.:format)                                                                           wishlist#add
                          wishlist_remove DELETE /wishlist/remove(.:format)                                                                        wishlist#remove

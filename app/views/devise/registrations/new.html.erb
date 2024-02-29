@@ -11,29 +11,31 @@
     <%= f.text_field :phone, autofocus: true, autocomplete: "phone", id: "phone", required: true, placeholder: "Enter your phone number", class: "w-full" %>
   </div>
 
-  <div class="my-2">
-    <%= f.text_field :address1, autofocus: true, autocomplete: "address1", id: "address1", required: true, placeholder: "Street address", class: "w-full" %>
-  </div>
+  <%= f.fields_for :adress do |address| %>
+    <div class="my-2">
+      <%= address.text_field :street, autofocus: true, autocomplete: "street", id: "street", required: true, placeholder: "Street address", class: "w-full" %>
+    </div>
 
-  <div class="my-2">
-    <%= f.text_field :address2, autofocus: true, autocomplete: "address2", id: "address2", required: true, placeholder: "Suburb address", class: "w-full" %>
-  </div>
+    <div class="my-2">
+      <%= address.text_field :apartment, autofocus: true, autocomplete: "apartment", id: "apartment", required: true, placeholder: "Apartment address", class: "w-full" %>
+    </div>
 
-  <div class="my-2">
-    <%= f.text_field :city, autofocus: true, autocomplete: "city", id: "city", required: true, placeholder: "City", class: "w-full" %>
-  </div>
+    <div class="my-2">
+      <%= address.text_field :city, autofocus: true, autocomplete: "city", id: "city", required: true, placeholder: "City", class: "w-full" %>
+    </div>
 
-  <div class="my-2">
-    <%= f.text_field :state, autofocus: true, autocomplete: "state", id: "state", required: true, placeholder: "Province", class: "w-full" %>
-  </div>
+    <div class="my-2">
+      <%= address.text_field :state, autofocus: true, autocomplete: "state", id: "state", required: true, placeholder: "Province", class: "w-full" %>
+    </div>
 
-  <div class="my-2">
-    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", id: "postal_code", required: true, placeholder: "Postal code", class: "w-full" %>
+    <div class="my-2">
+      <%= address.text_field :postal_code, autofocus: true, autocomplete: "postal_code", id: "postal_code", required: true, placeholder: "Postal code", class: "w-full" %>
+    </div>
+
+    <div class="my-2">
+    <%= address.text_field :country, autofocus: true, autocomplete: "country", id: "country", required: true, placeholder: "Country", class: "w-full" %>
   </div>
-  
-  <div class="my-2">
-    <%#= f.text_field :country, autofocus: true, autocomplete: "country", id: "country", required: true, placeholder: "Country", class: "w-full" %>
-  </div>
+  <% end %>
 
   <div class="my-2">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "email", required: true, placeholder: "Enter your email", class: "w-full" %>

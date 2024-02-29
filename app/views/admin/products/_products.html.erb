@@ -1,0 +1,18 @@
+<div id="admin-content" class="flex flex-col">
+    <p id="alerts" />
+   
+    <div class="flex flex-col max-h-[70vh] overflow-y-auto">
+        <% products.each do |product| %>
+            <%= render 'admin/products/item', item: product %>
+        <% end %>
+
+        <div id="product-modal">
+        </div>
+    </div>
+
+    <div class="flex justify-around my-4 w-full">
+        <%= link_to 'New Product', new_product_path, class: 'bg-primary text-white px-4 py-2 rounded-md w-40 text-center hover:bg-grey-200', data: { turbo_method: :post } %>
+        <%= link_to "Add Category", new_category_path , class: 'bg-primary text-white px-4 py-2 rounded-md w-40 text-center hover:opacity-80', data: { turbo_method: :post } %>
+    </div>
+</div>
+

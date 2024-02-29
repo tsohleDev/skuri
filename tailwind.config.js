@@ -31,6 +31,9 @@ module.exports = {
         '80': '20rem',
         '96': '24rem',
       },
+      screens: {
+        'xs': '375px',
+      },
     },
   },
 }

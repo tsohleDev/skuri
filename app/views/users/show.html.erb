@@ -8,48 +8,48 @@
     </div>
 
     <!-- Side Panel Links -->
-    <div class="mb-4">
+    <div class="mb-4 flex flex-col">
       <h2 class="text-lg font-semibold mb-2 hidden md:block">Navigation</h2>
-      <ul class="flex justify-around md:flex-col md:list-disc pl-4">
-        <li>
+      <ul class="flex justify-around md:flex-col pl-4 md:pl-0 md:w-full grow">
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
           <%= link_to user_path(@user) do %>
-            <div class="mr-2">
+            <div class="mr-2 flex items-center">
               <span class="mr-2 hidden md:block">Profile</span>
               <i class="fas fa-user"></i>
             </div>
           <% end %>
         </li>
 
-        <li>
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
           <%= link_to orders_user_path, data: { turbo_method: :post } do %>
-            <div class="mr-2">
+            <div class="mr-2 flex items-center">
               <span class="mr-2 hidden md:block">Orders</span>
               <i class="fas fa-shopping-bag"></i>
             </div>
           <% end %>
         </li>
 
-        <li>
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
           <%= link_to returns_user_path, data: { turbo_method: :post }  do %>
-            <div class="mr-2">
+            <div class="mr-2 flex items-center">
               <span class="mr-2 hidden md:block">Returns</span>
               <i class="fas fa-undo"></i>
             </div>
           <% end %>
         </li>
 
-        <li>
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
           <%= link_to help_user_path, data: { turbo_method: :post } do %>
-            <div class="mr-2">
+            <div class="mr-2 flex items-center">
               <span class="mr-2 hidden md:block">Help</span>
               <i class="fas fa-question-circle"></i>
             </div>
           <% end %>
         </li>
 
-        <li>
+        <li class="mb-2 md:rounded-md md:shadow-md md:shadow-black md:py-2 md:px-4 md:mb-2">
           <%= link_to destroy_user_session_path, 'data-turbo-method': :delete do %>
-            <div class="mr-2">
+            <div class="mr-2 flex items-center">
               <span class="mr-2 hidden md:block">Logout</span>
               <i class="fas fa-sign-out-alt"></i>
             </div>

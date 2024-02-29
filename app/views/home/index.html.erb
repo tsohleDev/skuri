@@ -1,8 +1,13 @@
 <%= render 'home/hero' %>
 
+<!-- Search Results -->
+<%= render "products/results" %>
+
 <!-- Author's Recommendations -->
-<%= render 'products/group', products: Product.first(4), title: "author's recommendations" %>
+<%= render 'products/group', products: Product.first(4), title: "Author's Recommendations" %>
 <%= render 'products/group', products: Product.last(4), title: "New Arrivals" %>
 
 <!-- Link to the all products page -->
-<%= link_to 'All Products', products_path, class: 'btn btn-primary' %>
+<div class='flex justify-center my-8'>
+  <%= link_to 'All Products', products_path, class: 'bg-blue-500 text-white px-4 py-2 rounded-lg' %>
+</div>

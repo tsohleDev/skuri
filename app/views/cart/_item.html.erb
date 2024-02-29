@@ -15,11 +15,11 @@
     </div>
 
     <div class="grid grid-cols-3 items:center justify-center">
-        <%= link_to "-", 'decrement_quantity_user_cart_path(@cart, product_id: item.product_color.id)', class: "flex items-center justify-center text-center text-bold text-4xl bg-gray-500 md:bg-none rounded-l-xl", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
-        <%= render "cart/quantity", quantity: item.quantity %>
-        <%= link_to "+", 'increment_quantity_user_cart_path(@cart, product_id: item.product_color.id)', class: "flex items-center justify-center text-center text-bold text-4xl bg-gray-500 md:bg-quaternary rounded-r-xl", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+        <%= link_to "-", cart_decrement_path(cart_id: @cart.id, product_id: item.id), class: "flex items-center justify-center text-center text-bold text-4xl bg-gray-500 md:bg-none rounded-l-xl", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+        <%= render "cart/quantity", item: item %>
+        <%= link_to "+", cart_increment_path(cart_id:@cart.id, product_id: item.id), class: "flex items-center justify-center text-center text-bold text-4xl bg-gray-500 md:bg-quaternary rounded-r-xl", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
     </div>
 
-    <%= link_to "Remove",'remove_from_cart_product_path(item.product_color)', class: "bg-red-400 hover:bg-red-500 text-white text-xl text-center w-full my-2 font-bold py-2 rounded", data: { turbo_method: :post }, 'data-turbo-frame': 'cart-frame' %>
+    <%= link_to "Remove", cart_remove_path(id: item.id), class: "bg-red-400 hover:bg-red-500 text-white text-xl text-center w-full my-2 font-bold py-2 rounded", data: { turbo_method: :delete }, 'data-turbo-frame': 'cart-frame' %>
 </div>
 

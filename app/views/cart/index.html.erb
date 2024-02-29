@@ -7,7 +7,7 @@
 
 
   <div class="flex-none h-40 flex flex-col items-center h-fill w-full px-4 my-10 md:px-20 py-10">
-    <p class="text-4xl text-extra-bold">Total Price: <%= number_to_currency(@cart.total_price, unit: "R", precision: 2) %></p>
+    <p id='price' class="text-4xl text-extra-bold">Total Price: <%= number_to_currency(@cart.total_price, unit: "R", precision: 2) %></p>
 
     <%#= link_to "Checkout", checkout_user_cart_path(@cart), data: { turbo_method: :post }, class: "bg-gray-500" %>
 
@@ -20,7 +20,7 @@
         <input type="hidden" name="amount" value="<%= @cart.total_price %>">
         <input type="hidden" name="item_name" value="Test Product">
         <input type="hidden" name="payment_method" value="cc">
-        <input type="hidden" name="return_url" value="http://127.0.0.1:3000/users/1/success">
+        <input type="hidden" name="return_url" value="http://137.184.183.127:3000/users/<%= current_user.id %>/success">
         <input type="hidden" name="cancel_url" value="http://127.0.0.1:3000/users/1">
         <input type="hidden" name="notify_url" value="http://127.0.0.1:3000/users/1">
         <input type="hidden" name="name_first" value="First Name">
